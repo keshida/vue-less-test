@@ -3,7 +3,7 @@
     <img src="./assets/logo.png">
     <router-view/>
     <div id='header'>
-      555
+      
     </div>
   </div>
 </template>
