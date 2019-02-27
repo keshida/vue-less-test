@@ -2,9 +2,6 @@
   <div id="app">
     <img src="./assets/logo.png">
     <router-view/>
-    <div id='header'>
-      
-    </div>
   </div>
 </template>
 
@@ -14,7 +11,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang='less'>
+@import './less/index.less';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
