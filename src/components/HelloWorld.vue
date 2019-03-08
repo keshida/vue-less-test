@@ -20,16 +20,9 @@ export default {
     }
   },
   created () {
-    this.init();
   },
   mounted () {},
-  methods: {
-    init () {
-      let tem = 123;
-      
-      
-    }
-  }
+  methods: {}
 }
 </script>
 

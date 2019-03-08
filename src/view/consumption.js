@@ -8,6 +8,7 @@ var typeList = [
   {lebel:'movieExp',value:6,remark:'电影费用'},
   {lebel:'officeExp',value:7,remark:'办公用品'},
   {lebel:'toyExp',value:8,remark:'玩具'},
+  {lebel:'sportExp',value:8,remark:'运动'},
 ]
 // 日常费用分类介绍
 // 管理费用分为:办公费、物业管理费、邮寄费、聚餐费、电话费、购买图书、办公用品、文印费、水电费、其他。
