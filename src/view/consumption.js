@@ -8,7 +8,13 @@ var typeList = [
   {lebel:'movieExp',value:6,remark:'电影费用'},
   {lebel:'officeExp',value:7,remark:'办公用品'},
   {lebel:'toyExp',value:8,remark:'玩具'},
-  {lebel:'sportExp',value:8,remark:'运动'},
+  {lebel:'sportExp',value:9,remark:'运动'},
+  
+  {lebel:'instruinstrumentExp',value:10,remark:'医疗仪器'},
+  {lebel:'medicineExp',value:11,remark:'药费'},
+  {lebel:'hospitalizationExp',value:12,remark:'住院'},
+  
+  {lebel:'musicalInstrumentExp',value:13,remark:'乐器'},
 ]
 // 日常费用分类介绍
 // 管理费用分为:办公费、物业管理费、邮寄费、聚餐费、电话费、购买图书、办公用品、文印费、水电费、其他。
@@ -25,3 +31,16 @@ var typeList = [
 // 文印费:泛指所有打印装订及相关费用;
 // 水电费:办公室水电费;
 // 其他:以上情况均不涉及的管理费用;
+
+//Medical 医疗 instrument仪器 medicine药 Hospitalization住院
+
+//发展资料消费 用于满足德智体等方面的消费；
+
+//食品支出
+//衣着支出
+//居住支出
+//家庭设备用品及服务支出
+//医疗保健支出
+//交通和通信支出
+//教育文化娱乐服务支出
+//其他商品和服务支出
