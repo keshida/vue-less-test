@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img class="logo_C" src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
@@ -19,8 +19,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding-top: 60px;
+  // padding-top: 60px;
   height: 100%;
   width: 100%;
+}
+.logo_C {
+  height: auto;
+  width: 100px;
 }
 </style>
