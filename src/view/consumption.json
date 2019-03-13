@@ -101,8 +101,11 @@
       {"date":"2018-03-11","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-03-11","expRemark":"午餐",  "type":"foodExp","value":14.4},
       {"date":"2018-03-12","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-03-12","expRemark":"早餐",  "type":"foodExp","value":7.5},
       {"date":"2018-03-12","expRemark":"午餐",  "type":"foodExp","value":21.72},
       {"date":"2018-03-12","expRemark":"吉他",  "type":"musicalInstrumentExp","value":960},
+      {"date":"2018-03-13","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-03-13","expRemark":"早餐",  "type":"foodExp","value":6.5}
     ]
   },
   "meta" : {
