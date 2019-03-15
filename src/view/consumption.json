@@ -109,7 +109,10 @@
       {"date":"2018-03-14","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-03-14","expRemark":"早餐",  "type":"foodExp","value":9},
       {"date":"2018-03-14","expRemark":"午餐",  "type":"foodExp","value":16},
-      {"date":"2018-03-14","expRemark":"小黑盒游戏充值",  "type":"gameExp","value":10}
+      {"date":"2018-03-14","expRemark":"小黑盒游戏充值",  "type":"gameExp","value":10},
+      {"date":"2018-03-15","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-03-15","expRemark":"早餐",  "type":"foodExp","value":10},
+      {"date":"2018-03-15","expRemark":"午餐",  "type":"foodExp","value":15}
     ]
   },
   "meta" : {
