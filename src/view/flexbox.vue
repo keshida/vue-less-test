@@ -14,10 +14,23 @@ export default {
 
     }
   },
-  created () {},
+  created () {
+    this.getMyInfor();
+  },
   mounted () {},
   methods: {
-
+    getMyInfor () {
+      // this.$http.get('../../static/consumption.json').then((response) => {
+      //     console.log(response,88);//需要这样获取到数组
+      // });
+      this.$axios({
+        method: 'get',
+        url: '../../static/consumption.json',
+        dataType: 'json'
+      }).then(res => {
+        console.log(res)
+      })
+    }
   }
 }
 </script>

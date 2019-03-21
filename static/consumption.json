@@ -116,7 +116,7 @@
       {"date":"2018-03-16","expRemark":"公交",  "type":"trafficExp","value":1},
       {"date":"2018-03-16","expRemark":"早餐",  "type":"foodExp","value":6.5},
       {"date":"2018-03-16","expRemark":"高铁北京-沧州",  "type":"trafficExp","value":94.5},
-      {"date":"2018-03-16","expRemark":"公交",  "type":"trafficExp","value":0.9},
+      {"date":"2018-03-16","expRemark":"公交",  "type":"trafficExp","value":0.9}
     ]
   },
   "meta" : {
