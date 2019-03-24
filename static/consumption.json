@@ -116,7 +116,13 @@
       {"date":"2018-03-16","expRemark":"公交",  "type":"trafficExp","value":1},
       {"date":"2018-03-16","expRemark":"早餐",  "type":"foodExp","value":6.5},
       {"date":"2018-03-16","expRemark":"高铁北京-沧州",  "type":"trafficExp","value":94.5},
-      {"date":"2018-03-16","expRemark":"公交",  "type":"trafficExp","value":0.9}
+      {"date":"2018-03-16","expRemark":"公交",  "type":"trafficExp","value":0.9},
+      {"date":"2018-03-16","expRemark":"医院租床",  "type":"dailyNecesExp","value":10},
+      {"date":"2018-03-17","expRemark":"医院租床",  "type":"dailyNecesExp","value":10},
+      {"date":"2018-03-18","expRemark":"医院租床",  "type":"dailyNecesExp","value":10},
+      {"date":"2018-03-19","expRemark":"医院租床",  "type":"dailyNecesExp","value":10},
+      {"date":"2018-03-20","expRemark":"护照",  "type":"dailyNecesExp","value":160},
+      {"date":"2018-03-23","expRemark":"医疗费",  "type":"instruinstrumentExp","value":15500}
     ]
   },
   "meta" : {

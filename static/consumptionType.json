@@ -1,21 +1,29 @@
-var typeList = [
-  {lebel:'liveExp',value:0,remark:'住宿费'},
-  {lebel:'trafficExp',value:1,remark:'交通费'},
-  {lebel:'foodExp',value:2,remark:'餐饮费'},
-  {lebel:'clothesExp',value:3,remark:'衣服费用'},
-  {lebel:'dailyNecesExp',value:4,remark:'生活用品费用'},
-  {lebel:'gameExp',value:5,remark:'游戏费用'},
-  {lebel:'movieExp',value:6,remark:'电影费用'},
-  {lebel:'officeExp',value:7,remark:'办公用品'},
-  {lebel:'toyExp',value:8,remark:'玩具'},
-  {lebel:'sportExp',value:9,remark:'运动'},
-  
-  {lebel:'instruinstrumentExp',value:10,remark:'医疗仪器'},
-  {lebel:'medicineExp',value:11,remark:'药费'},
-  {lebel:'hospitalizationExp',value:12,remark:'住院'},
-  
-  {lebel:'musicalInstrumentExp',value:13,remark:'乐器'},
-]
+{
+  "data" : {
+    "typeList" : [
+      {"lebel":"liveExp","value":0,"remark":"住宿费"},
+      {"lebel":"trafficExp","value":1,"remark":"交通费"},
+      {"lebel":"foodExp","value":2,"remark":"餐饮费"},
+      {"lebel":"clothesExp","value":3,"remark":"衣服费用"},
+      {"lebel":"dailyNecesExp","value":4,"remark":"生活用品费用"},
+      {"lebel":"gameExp","value":5,"remark":"游戏费用"},
+      {"lebel":"movieExp","value":6,"remark":"电影费用"},
+      {"lebel":"officeExp","value":7,"remark":"办公用品"},
+      {"lebel":"toyExp","value":8,"remark":"玩具"},
+      {"lebel":"sportExp","value":9,"remark":"运动"},
+      
+      {"lebel":"instruinstrumentExp","value":10,"remark":"医疗仪器"},
+      {"lebel":"medicineExp","value":11,"remark":"药费"},
+      {"lebel":"hospitalizationExp","value":12,"remark":"住院"},
+      
+      {"lebel":"musicalInstrumentExp","value":13,"remark":"乐器"}
+    ]
+  },
+  "meta" : {
+    "success" : "true",
+    "message" : "ok"
+  }
+}
 // 日常费用分类介绍
 // 管理费用分为:办公费、物业管理费、邮寄费、聚餐费、电话费、购买图书、办公用品、文印费、水电费、其他。
 // 差旅费:、餐饮住宿、交通、招待费、人工费、维修费、邮递费、办公用品、通讯费、招待用烟酒、文印费、水电费、其他;

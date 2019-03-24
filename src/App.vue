@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img class="logo_C" src="./assets/logo.png">
+    <!-- <img class="logo_C" src="./assets/logo.png"> -->
     <router-view/>
   </div>
 </template>
@@ -26,5 +26,8 @@ export default {
 .logo_C {
   height: auto;
   width: 100px;
+}
+ul,li {
+  list-style: none;
 }
 </style>

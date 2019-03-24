@@ -1,9 +1,17 @@
 <template>
   <div class="flexbox_C">
-    <form class="form_C" action="#">
+    <!-- <form class="form_C" action="#">
       <input type="email" placeholder="Enter your email">
       <button type="button">send</button>
-    </form>
+    </form> -->
+    <div>
+      <select name="" id="">
+        <option v-for="item in typeList" value=""></option>
+      </select>
+    </div>
+    <ul class="dataUl_C">
+      <li v-for="(item,index) in mySpnedData" :key="index">{{ item.expRemark }}</li>
+    </ul>
   </div>
 </template>
 
@@ -11,24 +19,34 @@
 export default {
   data () {
     return {
-
+      mySpnedData: [],
+      typeList: []
     }
   },
   created () {
     this.getMyInfor();
+    this.getType();
   },
   mounted () {},
   methods: {
     getMyInfor () {
-      // this.$http.get('../../static/consumption.json').then((response) => {
-      //     console.log(response,88);//需要这样获取到数组
-      // });
       this.$axios({
         method: 'get',
         url: '../../static/consumption.json',
         dataType: 'json'
       }).then(res => {
-        console.log(res)
+        console.log(res.data.data.mySpnedData)
+        this.mySpnedData = res.data.data.mySpnedData;
+      })
+    },
+    getType () {
+      this.$axios({
+        method: 'get',
+        url: '../../static/consumptionType.json',
+        dataType: 'json'
+      }).then(res => {
+        console.log(res.data.data.typeList)
+        this.typeList = res.data.data.typeList;
       })
     }
   }
@@ -57,5 +75,10 @@ button {
   /* height: 50px; */
 
   /* align-self: flex-end; */
+}
+.dataUl_C {
+  width: 100%;
+  overflow: hidden;
+  text-align: left;
 }
 </style>
