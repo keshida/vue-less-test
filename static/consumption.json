@@ -122,7 +122,12 @@
       {"date":"2018-03-18","expRemark":"医院租床",  "type":"dailyNecesExp","value":10},
       {"date":"2018-03-19","expRemark":"医院租床",  "type":"dailyNecesExp","value":10},
       {"date":"2018-03-20","expRemark":"护照",  "type":"dailyNecesExp","value":160},
-      {"date":"2018-03-23","expRemark":"医疗费",  "type":"instruinstrumentExp","value":15500}
+      {"date":"2018-03-23","expRemark":"医疗费",  "type":"instruinstrumentExp","value":15500},
+      {"date":"2018-03-24","expRemark":"公交",  "type":"trafficExp","value":1},
+      {"date":"2018-03-25","expRemark":"公交",  "type":"trafficExp","value":1},
+      {"date":"2018-03-25","expRemark":"早餐",  "type":"foodExp","value":12},
+      {"date":"2018-03-25","expRemark":"午餐",  "type":"foodExp","value":22},
+      {"date":"2018-03-25","expRemark":"小黑盒游戏充值买游戏","type":"gameExp","value":50}
     ]
   },
   "meta" : {
