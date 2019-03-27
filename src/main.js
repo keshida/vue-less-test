@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 Vue.prototype.$axios = axios
-require('./router/baseAxios')
+require('./axios/index')
 
 Vue.config.productionTip = false
 

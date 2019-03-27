@@ -6,12 +6,13 @@
     </form> -->
     <div>
       <select name="" id="">
-        <option v-for="item in typeList" value=""></option>
+        <option v-for="(item,index) in typeList" value="" :key="index"></option>
       </select>
     </div>
     <ul class="dataUl_C">
       <li v-for="(item,index) in mySpnedData" :key="index">{{ item.expRemark }}</li>
     </ul>
+    <div class="test_C"></div>
   </div>
 </template>
 
@@ -24,8 +25,8 @@ export default {
     }
   },
   created () {
-    this.getMyInfor();
-    this.getType();
+//  this.getMyInfor();
+//  this.getType();
   },
   mounted () {},
   methods: {
@@ -35,7 +36,6 @@ export default {
         url: '../../static/consumption.json',
         dataType: 'json'
       }).then(res => {
-        console.log(res.data.data.mySpnedData)
         this.mySpnedData = res.data.data.mySpnedData;
       })
     },
@@ -80,5 +80,13 @@ button {
   width: 100%;
   overflow: hidden;
   text-align: left;
+}
+.test_C {
+	height: 50px;
+	width: 500px;
+	background: #999;
+	border-bottom: 100px solid #333;
+	border-image: -webkit-repeating-linear-gradient(left,#F80 0%,#F80 50%, #2ED 50%, #2ED 100%) 10 20;
+	
 }
 </style>
