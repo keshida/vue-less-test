@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import flexbox from '@/view/flexbox'
 
 Vue.use(Router)
 
@@ -9,13 +7,19 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      component: resolve => require(['@/components/HelloWorld'], resolve)
+    },
+    {
+      path: '/consumption',
+      component: resolve => require(['@/views/consumption/consumption'], resolve)
     },
     {
       path: '/flexbox',
-      name: 'flexbox',
-      component: flexbox
+      component: resolve => require(['@/views/flexbox/flexbox'], resolve)
+    },
+    {
+      path: '/cssborder',
+      component: resolve => require(['@/views/csstest/cssborder'], resolve)
     }
   ]
 })
