@@ -62,7 +62,6 @@ button {
   /*flex-direction: row;
   flex-wrap: wrap;*/
   align-items: flex-start;
-  
 }
 .flexDiv_C div {
   /*flex: 1;*/

@@ -15,8 +15,8 @@ export default {
     }
   },
   created () {
-    this.getMyInfor();
-    this.getType();
+    this.getMyInfor()
+    // this.getType()
   },
   mounted () {},
   methods: {
@@ -26,7 +26,15 @@ export default {
         url: '../../static/consumption.json',
         dataType: 'json'
       }).then(res => {
-        this.mySpnedData = res.data.data.mySpnedData;
+        let resData = res.data, num = 0;
+
+        console.log(resData)
+        this.mySpnedData = resData.data.mySpnedData;
+        for (let i in this.mySpnedData) {
+          num += this.mySpnedData[i].value * 100;
+        }
+        console.log(num/100)
+        console.log(16.56+1.01)
       })
     },
     getType () {
@@ -35,7 +43,6 @@ export default {
         url: '../../static/consumptionType.json',
         dataType: 'json'
       }).then(res => {
-        console.log(res.data.data.typeList)
         this.typeList = res.data.data.typeList;
       })
     }

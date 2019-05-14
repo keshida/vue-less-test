@@ -1,6 +1,6 @@
 import axios from 'axios'
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.baseURL = process.env.API_ROOT;
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+axios.defaults.baseURL = process.env.API_ROOT
 axios.interceptors.request.use(
   config => {
     return config
@@ -10,5 +10,3 @@ axios.interceptors.request.use(
     return Promise.reject(error)
   }
 )
-
-

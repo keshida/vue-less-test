@@ -48,6 +48,7 @@ module.exports = {
     "no-ex-assign": 2,//禁止给catch语句中的异常参数赋值 
     "no-extend-native": 2,//禁止扩展native对象 
     "no-extra-bind": 2,//禁止不必要的函数绑定 
+    "no-extra-semicolon": 0,//禁止不必要的分号
     "no-extra-boolean-cast": 2,//禁止不必要的bool转换 
     "no-extra-parens": 2,//禁止非必要的括号 
     "no-extra-semi": 2,//禁止多余的冒号 

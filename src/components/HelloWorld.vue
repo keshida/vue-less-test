@@ -8,7 +8,6 @@
       <router-link v-for="(content,key) in menus" :to="content.path" :key="key" tag="li">{{content.name}}</router-link>
     </ul>
     <div>
-      
     </div>
   </div>
 </template>
@@ -20,7 +19,7 @@ export default {
     return {
       msg: '我的年终工作总结',
       workList: [{name: 'linker', remark: '第一个开始的vue项目'}, {name: '睡眠仪', remark: '第二个的vue项目'}, {name: '遴选平台', remark: '第三个的vue项目'}, {name: 'otc/M版小程序', remark: '微信小程序'}, {name: '个人账单', remark: '第一个原生js项目'}],
-      menus: [{name: 'flexbox布局', path: '/flexbox'},{name: 'cssborder', path: '/cssborder'},{name: '个人账单', path: '/consumption'}]
+      menus: [{name: 'flexbox布局', path: '/flexbox'}, {name: 'cssborder', path: '/cssborder'}, {name: '个人账单', path: '/consumption'}]
     }
   },
   created () {
