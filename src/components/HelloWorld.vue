@@ -32,7 +32,8 @@ export default {
         {name: '浏览器监听测试', path: '/brawserHome'},
         {name: '文字特效', path: '/textSpecialEffectHome'},
         {name: 'svg', path: '/svgHome'},
-        {name: '相关js库', path: '/jsScriptHome'}
+        {name: '相关js库', path: '/jsScriptHome'},
+        {name: '武器', path: '/weaponHome'}
       ]
     }
   },
@@ -83,10 +84,11 @@ a {
   height: 50px;
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   line-height: 50px;
 }
 .hello_routerList_C li {
-  flex: 1;
+  display: flex;
   cursor: pointer;
   /* padding: 0 10%; */
 }

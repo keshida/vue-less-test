@@ -36,6 +36,10 @@ export default new Router({
     {
       path: '/jsScriptHome',
       component: resolve => require(['@/views/jsScript/jsScriptHome'], resolve)
+    },
+    {
+      path: '/weaponHome',
+      component: resolve => require(['@/views/weapon/weaponHome'], resolve)
     }
   ]
 })
