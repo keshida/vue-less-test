@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import vueDrag from 'vue-dragging'
+
+Vue.use(vueDrag)
 Vue.prototype.$axios = axios
 require('./axios/index')
 

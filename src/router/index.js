@@ -10,16 +10,32 @@ export default new Router({
       component: resolve => require(['@/components/HelloWorld'], resolve)
     },
     {
-      path: '/consumption',
-      component: resolve => require(['@/views/consumption/consumption'], resolve)
+      path: '/consumptionHome',
+      component: resolve => require(['@/views/consumption/consumptionHome'], resolve)
     },
     {
       path: '/flexbox',
       component: resolve => require(['@/views/flexbox/flexbox'], resolve)
     },
     {
-      path: '/cssborder',
-      component: resolve => require(['@/views/csstest/cssborder'], resolve)
+      path: '/cssTestHome',
+      component: resolve => require(['@/views/csstest/cssTestHome'], resolve)
+    },
+    {
+      path: '/brawserHome',
+      component: resolve => require(['@/views/brawser/brawserHome'], resolve)
+    },
+    {
+      path: '/textSpecialEffectHome',
+      component: resolve => require(['@/views/textSpecialEffects/textSpecialEffectHome'], resolve)
+    },
+    {
+      path: '/svgHome',
+      component: resolve => require(['@/views/svgHome/svgHome'], resolve)
+    },
+    {
+      path: '/jsScriptHome',
+      component: resolve => require(['@/views/jsScript/jsScriptHome'], resolve)
     }
   ]
 })

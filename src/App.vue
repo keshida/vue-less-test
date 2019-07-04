@@ -13,6 +13,7 @@ export default {
 
 <style lang='less'>
 @import './less/index.less';
+@import './assets/css/base.css';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
