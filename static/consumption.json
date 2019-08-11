@@ -557,8 +557,10 @@
       {"date":"2018-08-09","expRemark":"午餐",  "type":"foodExp","value":19},
       {"date":"2018-08-09","expRemark":"晚餐",  "type":"foodExp","value":21.4},
       {"date":"2018-08-10","expRemark":"午餐",  "type":"foodExp","value":32},
+      {"date":"2018-08-10","expRemark":"字帖+钢笔",  "type":"officeExp","value":112.58},
       {"date":"2018-08-11","expRemark":"午餐",  "type":"foodExp","value":26},
-      {"date":"2018-08-11","expRemark":"晚餐",  "type":"foodExp","value":11.97}
+      {"date":"2018-08-11","expRemark":"晚餐",  "type":"foodExp","value":14}
+      {"date":"2018-08-11","expRemark":"腾讯视频vip",  "type":"movieExp","value":10}
     ]
   }
 }

@@ -5,20 +5,20 @@
       <button class="muneBnt_C" v-on:click="goBack">返回</button>
     </aside>
     <section>
-      <weapon v-if="indexed == 0"></weapon>
+      <china v-if="indexed == 0"></china>
     </section>
   </div>
 </template>
 <script>
-import weapon from '@/views/weapon/weapon';
+import china from '@/views/weapon/china';
 export default {
   components: {
-    weapon
+    china
   },
   data () {
     return {
       muneList: [
-        {name: 'weapon'}
+        {name: 'china'}
       ],
       indexed: 0
     }
