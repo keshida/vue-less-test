@@ -17,23 +17,24 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: '我的年终工作总结',
+      msg: '项目性能实验',
       workList: [
-        {name: 'linker', remark: '第一个开始的vue项目'}, 
-        {name: '睡眠仪', remark: '第二个的vue项目'}, 
-        {name: '遴选平台', remark: '第三个的vue项目'}, 
-        {name: 'otc/M版小程序', remark: '微信小程序'}, 
+        {name: 'linker', remark: '第一个开始的vue项目'},
+        {name: '睡眠仪', remark: '第二个的vue项目'},
+        {name: '遴选平台', remark: '第三个的vue项目'},
+        {name: 'otc/M版小程序', remark: '微信小程序'},
         {name: '个人账单', remark: '第一个原生js项目'}
       ],
       menus: [
-        {name: 'flexbox布局', path: '/flexbox'}, 
-        {name: 'csstest', path: '/cssTestHome'}, 
-        {name: '个人账单', path: '/consumptionHome'}, 
+        {name: 'flexbox布局', path: '/flexbox'},
+        {name: 'csstest', path: '/cssTestHome'},
+        {name: '个人账单', path: '/consumptionHome'},
         {name: '浏览器监听测试', path: '/brawserHome'},
         {name: '文字特效', path: '/textSpecialEffectHome'},
         {name: 'svg', path: '/svgHome'},
         {name: '相关js库', path: '/jsScriptHome'},
-        {name: '武器', path: '/weaponHome'}
+        {name: '武器', path: '/weaponHome'},
+        {name: '视频音频', path: '/videoAudioHome'}
       ]
     }
   },
