@@ -208,7 +208,7 @@
       {"date":"2018-04-20","expRemark":"晚餐",  "type":"foodExp","value":24},
       {"date":"2018-04-21","expRemark":"午餐",  "type":"foodExp","value":15.9},
       {"date":"2018-04-22","expRemark":"公交",  "type":"trafficExp","value":2},
-      {"date":"2018-04-22","expRemark":"理发",  "type":"dailyNecesExp","value":2},
+      {"date":"2018-04-22","expRemark":"理发",  "type":"dailyNecesExp","value":20},
       {"date":"2018-04-22","expRemark":"早餐",  "type":"foodExp","value":8},
       {"date":"2018-04-22","expRemark":"午餐",  "type":"foodExp","value":22},
       {"date":"2018-04-23","expRemark":"公交",  "type":"trafficExp","value":2},
@@ -567,7 +567,12 @@
       {"date":"2018-08-12","expRemark":"晚餐",  "type":"foodExp","value":7.4},
       {"date":"2018-08-13","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-08-13","expRemark":"早餐",  "type":"foodExp","value":8},
-      {"date":"2018-08-13","expRemark":"午餐",  "type":"foodExp","value":21}
+      {"date":"2018-08-13","expRemark":"午餐",  "type":"foodExp","value":21},
+      {"date":"2018-08-13","expRemark":"理发",  "type":"dailyNecesExp","value":20},
+      {"date":"2018-08-14","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-08-14","expRemark":"早餐",  "type":"foodExp","value":8},
+      {"date":"2018-08-14","expRemark":"科技要塞",  "type":"gameExp","value":8},
+      {"date":"2018-08-14","expRemark":"午餐",  "type":"foodExp","value":12},
     ]
   }
 }

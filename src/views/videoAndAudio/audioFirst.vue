@@ -2,26 +2,47 @@
   <div class="china_C pagePosition">
     <p>音频测试</p>
     <div>
-      <!-- <audio controls="controls" src="../../assets/audio/test.ogg"></audio> -->
-      <!-- <audio controls="controls" src="https://m701.music.126.net/20190813174030/f4626096f04761848b9e239e29e9db24/jdyyaac/0459/5108/040f/33f890a63ffb0358ab803e8013df9841.m4a"></audio> -->
-      <!-- <audio controls="controls" :src="asdf"></audio> -->
-      <!-- <video controls="controls"  src="../../assets/audios/she.mp3"></video> -->
+      <audio controls="controls" loop="loop" muted="muted" preload="none" id="musicPlayer">
+        <source src="../../../static/audio/she.mp3" type="audio/mpeg"/>
+        <source src="../../../static/audio/she.ogg" type="audio/ogg"/>
+      </audio>
     </div>
-    
+    <div>
+      <button v-on:click="play">开始</button>
+      <button v-on:click="pause">暂停</button>
+      
+    </div>
   </div>
 </template>
 
 <script>
-// import asdf from '@/assets/audio/she.mp3'
 export default {
   data () {
     return {
-      // asdf: '../../assets/audio/she.mp3'
+      musicPlayer: {}
     }
   },
-  created () {},
-  mounted () {},
-  methods: {}
+  created () {
+    // var audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    // var oscillatorNode = audioCtx.createOscillator()
+    // var gainNode = audioCtx.createGain()
+    // var finish = audioCtx.destination
+  },
+  mounted () {
+    //获取音频文件
+    this.musicPlayer = document.getElementById('musicPlayer')
+    console.log(this.musicPlayer.textTracks)
+  },
+  methods: {
+    play() {
+      console.log(this.musicPlayer.currentSrc)
+      this.musicPlayer.currentTime = 20;
+      this.musicPlayer.play()
+    },
+    pause() {
+      this.musicPlayer.pause()
+    }
+  }
 }
 </script>
 <style>
