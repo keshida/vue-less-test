@@ -12,6 +12,10 @@
       <button v-on:click="pause">暂停</button>
       
     </div>
+    <div>
+      <input type="text" v-model="currentTime">
+      <button v-on:click="playCurrentTime">指定时间</button>
+    </div>
   </div>
 </template>
 
@@ -19,7 +23,8 @@
 export default {
   data () {
     return {
-      musicPlayer: {}
+      musicPlayer: {},
+      currentTime: 0
     }
   },
   created () {
@@ -31,13 +36,13 @@ export default {
   mounted () {
     //获取音频文件
     this.musicPlayer = document.getElementById('musicPlayer')
-    console.log(this.musicPlayer.textTracks)
   },
   methods: {
     play() {
-      console.log(this.musicPlayer.currentSrc)
-      this.musicPlayer.currentTime = 20;
       this.musicPlayer.play()
+    },
+    playCurrentTime () {
+      this.musicPlayer.currentTime = this.currentTime;
     },
     pause() {
       this.musicPlayer.pause()

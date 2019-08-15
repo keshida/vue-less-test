@@ -14,8 +14,8 @@ export default new Router({
       component: resolve => require(['@/views/consumption/consumptionHome'], resolve)
     },
     {
-      path: '/flexbox',
-      component: resolve => require(['@/views/flexbox/flexbox'], resolve)
+      path: '/layoutHome',
+      component: resolve => require(['@/views/layout/layoutHome'], resolve)
     },
     {
       path: '/cssTestHome',

@@ -26,7 +26,7 @@ export default {
         {name: '个人账单', remark: '第一个原生js项目'}
       ],
       menus: [
-        {name: 'flexbox布局', path: '/flexbox'},
+        {name: 'layout布局', path: '/layoutHome'},
         {name: 'csstest', path: '/cssTestHome'},
         {name: '个人账单', path: '/consumptionHome'},
         {name: '浏览器监听测试', path: '/brawserHome'},
