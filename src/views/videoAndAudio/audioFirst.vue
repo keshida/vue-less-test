@@ -6,6 +6,7 @@
         <source src="../../../static/audio/she.mp3" type="audio/mpeg"/>
         <source src="../../../static/audio/she.ogg" type="audio/ogg"/>
       </audio> -->
+      <audio controls="controls" src="https://webfs.yun.kugou.com/201908242120/8f5c5c8c960efe37e7507685ef6af953/G165/M01/18/19/RYcBAF1Kh7uALs57AC4XijezPT0599.mp3">来自尘埃的光</audio>
     </div>
     <div>
       <button v-on:click="play">开始</button>

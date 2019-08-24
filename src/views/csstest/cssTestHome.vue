@@ -12,6 +12,7 @@
       <ballShadow v-if="indexed == 4"></ballShadow>
       <pageTurning v-if="indexed == 5"></pageTurning>
       <myPageTurn v-if="indexed == 6"></myPageTurn>
+      <lessTest v-if="indexed == 6"></lessTest>
     </section>
   </div>
 </template>
@@ -23,6 +24,7 @@ import filterCss from '@/views/csstest/filterCss';
 import ballShadow from '@/views/csstest/ballShadow';
 import pageTurning from '@/views/csstest/pageTurning';
 import myPageTurn from '@/views/csstest/myPageTurn';
+import lessTest from '@/views/csstest/lessTest';
 export default {
   components: {
     cssborder,
@@ -31,7 +33,8 @@ export default {
     filterCss,
     ballShadow,
     pageTurning,
-    myPageTurn
+    myPageTurn,
+    lessTest
   },
   data () {
     return {
@@ -42,7 +45,8 @@ export default {
         {name: 'filterCss'},
         {name: 'ballShadow'},
         {name: 'pageTurning'},
-        {name: 'myPageTurn'}
+        {name: 'myPageTurn'},
+        {name: 'lessTest'}
       ],
       indexed: 0
     }

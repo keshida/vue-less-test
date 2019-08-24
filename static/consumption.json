@@ -559,7 +559,7 @@
       {"date":"2018-08-10","expRemark":"午餐",  "type":"foodExp","value":32},
       {"date":"2018-08-10","expRemark":"字帖+钢笔",  "type":"officeExp","value":112.58},
       {"date":"2018-08-11","expRemark":"午餐",  "type":"foodExp","value":26},
-      {"date":"2018-08-11","expRemark":"晚餐",  "type":"foodExp","value":14}
+      {"date":"2018-08-11","expRemark":"晚餐",  "type":"foodExp","value":14},
       {"date":"2018-08-11","expRemark":"腾讯视频vip",  "type":"movieExp","value":10},
       {"date":"2018-08-12","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-08-12","expRemark":"早餐",  "type":"foodExp","value":8},
@@ -605,7 +605,11 @@
       {"date":"2018-08-22","expRemark":"晚餐",  "type":"foodExp","value":156},
       {"date":"2018-08-23","expRemark":"公交",  "type":"trafficExp","value":1},
       {"date":"2018-08-23","expRemark":"早餐",  "type":"foodExp","value":8},
-      {"date":"2018-08-23","expRemark":"晚餐",  "type":"foodExp","value":1},
+      {"date":"2018-08-23","expRemark":"晚餐",  "type":"foodExp","value":20},
+      {"date":"2018-08-24","expRemark":"早餐",  "type":"foodExp","value":7},
+      {"date":"2018-08-24","expRemark":"高低床+桌子",  "type":"dailyNecesExp","value":450},
+      {"date":"2018-08-23","expRemark":"午餐",  "type":"foodExp","value":25.5},
+      {"date":"2018-08-23","expRemark":"晚餐",  "type":"foodExp","value":23}
     ]
   }
 }
