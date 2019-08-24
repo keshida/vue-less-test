@@ -6,19 +6,23 @@
     </aside>
     <section>
       <vueDrag v-if="indexed == 0"></vueDrag>
+      <prototypejs v-if="indexed == 1"></prototypejs>
     </section>
   </div>
 </template>
 <script>
 import vueDrag from '@/views/jsScript/vueDrag';
+import prototypejs from '@/views/jsScript/prototypejs';
 export default {
   components: {
-    vueDrag
+    vueDrag,
+    prototypejs
   },
   data () {
     return {
       muneList: [
-        {name: 'vueDrag'}
+        {name: 'vueDrag'},
+        {name: 'prototypejs'}
       ],
       indexed: 0
     }

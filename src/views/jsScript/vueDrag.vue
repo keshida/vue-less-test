@@ -1,5 +1,5 @@
 <template>
-  <div class="cueDrag_C">
+  <div class="pagePosition cueDrag_C">
     <div class="demo">
       <div class="drag"  v-drag></div>
     </div>
@@ -21,10 +21,6 @@ export default {
 }
 </script>
 <style>
-.cueDrag_C {
-  width: 100%;
-  height: 100%;
-}
 .drag {
   position: absolute;
   top: 20px;
