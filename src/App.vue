@@ -11,8 +11,7 @@ export default {
 }
 </script>
 
-<style lang='less'>
-@import './less/index.less';
+<style>
 @import './assets/css/base.css';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
