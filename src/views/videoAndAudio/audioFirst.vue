@@ -1,17 +1,18 @@
 <template>
   <div class="china_C pagePosition">
-    <p>音频测试</p>
+    <p v-for="(item,index) in audioList" :key="index" v-on:click="changAudio(index)" @dblclick="dbchangAudio(index)">{{ item.name }}</p>
     <div>
       <!-- <audio controls="controls" loop="loop" muted="muted" preload="none" id="musicPlayer">
         <source src="../../../static/audio/she.mp3" type="audio/mpeg"/>
         <source src="../../../static/audio/she.ogg" type="audio/ogg"/>
       </audio> -->
-      <audio controls="controls" src="https://webfs.yun.kugou.com/201908242120/8f5c5c8c960efe37e7507685ef6af953/G165/M01/18/19/RYcBAF1Kh7uALs57AC4XijezPT0599.mp3">来自尘埃的光</audio>
+      <audio controls="controls" loop="loop" src="" muted="muted" id="musicPlayer">
+        <!-- <source src="../../../static/audio/1.mp3" type="audio/mpeg"/> -->
+      </audio>
     </div>
     <div>
       <button v-on:click="play">开始</button>
       <button v-on:click="pause">暂停</button>
-      
     </div>
     <div>
       <input type="text" v-model="currentTime">
@@ -25,7 +26,12 @@ export default {
   data () {
     return {
       musicPlayer: {},
-      currentTime: 0
+      currentTime: 0,
+      audioList: [
+        {name: '来自尘埃的光', src: '../../../static/audio/1.mp3'},
+        {name: '知否知否应是绿肥红瘦', src: '../../../static/audio/2.mp3'},
+        {name: 'she', src: '../../../static/audio/she.mp3'}
+      ]
     }
   },
   created () {
@@ -37,8 +43,16 @@ export default {
   mounted () {
     //获取音频文件
     this.musicPlayer = document.getElementById('musicPlayer')
+    this.musicPlayer.src= this.audioList[0].src;
   },
   methods: {
+    changAudio (index) {
+      this.musicPlayer.src= this.audioList[index].src;
+    },
+    dbchangAudio (index) {
+      this.musicPlayer.src= this.audioList[index].src;
+      this.musicPlayer.play()
+    },
     play() {
       this.musicPlayer.play()
     },

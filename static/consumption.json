@@ -609,7 +609,10 @@
       {"date":"2018-08-24","expRemark":"早餐",  "type":"foodExp","value":7},
       {"date":"2018-08-24","expRemark":"高低床+桌子",  "type":"dailyNecesExp","value":450},
       {"date":"2018-08-23","expRemark":"午餐",  "type":"foodExp","value":25.5},
-      {"date":"2018-08-23","expRemark":"晚餐",  "type":"foodExp","value":23}
+      {"date":"2018-08-23","expRemark":"晚餐",  "type":"foodExp","value":23},
+      {"date":"2018-08-24","expRemark":"午餐",  "type":"foodExp","value":13.7},
+      {"date":"2018-08-24","expRemark":"晚餐",  "type":"foodExp","value":28.1},
+      {"date":"2018-08-24","expRemark":"水",  "type":"foodExp","value":19},
     ]
   }
 }
