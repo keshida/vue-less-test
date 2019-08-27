@@ -1,5 +1,5 @@
 <template>
-  <div class="filterCss_C">
+  <div class="textLabel_C pagePosition">
     <div class="testDiv_C">555</div>
     <div class="testDiv_C testDiv2_C">555sasdfasfasdfasssssssssdfs</div>
   </div>
@@ -16,7 +16,7 @@ export default {
 }
 </script>
 <style>
-.filterCss_C {
+.textLabel_C {
   width: 100%;
   height: 100%;
   --size-se: 150px;

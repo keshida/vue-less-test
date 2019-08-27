@@ -1,12 +1,14 @@
 <template>
   <div class="filterCss_C">
-    <svg xmlns="http://www.w3.org/2000/svg" 
-     width="150" height="100" viewBox="0 0 3 2">
+    <div class="div1">
+    </div>
+    <div class="div2">
 
-      <rect width="1" height="2" x="0" fill="#008d46" />
-      <rect width="1" height="2" x="1" fill="#ffffff" />
-      <rect width="1" height="2" x="2" fill="#d2232c" />
-    </svg>
+    </div>
+    <div class="div3" id="div3">
+        <div class="db" id="d1"></div>
+        <div class="dr" id="d2"></div>
+    </div>
   </div>
 </template>
 
@@ -17,7 +19,9 @@ export default {
   },
   created () {},
   mounted () {},
-  methods: {}
+  methods: {
+    
+  }
 }
 </script>
 <style>
@@ -25,5 +29,54 @@ export default {
   width: 100%;
   height: 100%;
   --size-se: 150px;
+}
+
+.div1 {
+  width: 200px;
+  height: 200px;
+  background: url("../../assets/images/filter/1.jpg") no-repeat;
+  background-size: 100% auto;
+}
+.div1:hover {
+  transition: filter 10.3s;
+  filter: brightness(5.5) contrast(50%);
+ }
+.div2 {
+  width: 200px;
+  height: 200px;
+  background: url("../../assets/images/filter/1.jpg") no-repeat;
+  background-size: 100% auto;
+}
+.div2:hover {
+  /*transition: filter .3s;*/
+  filter: blur(10px) brightness(80%) opacity(.8);
+}
+.div3 {
+  /*background: #f1f1f1;*/
+}
+.div3{
+  position: relative;
+  filter: contrast(100);
+}
+.db {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 400px;
+  width: 400px;
+  background: black;
+  border-radius: 100%;
+  filter: blur(20px);
+}
+.dr {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  height: 360px;
+  width: 360px;
+  background: blue;
+  border-radius: 100%;
+  filter: blur(20px);
 }
 </style>
