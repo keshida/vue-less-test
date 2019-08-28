@@ -15,9 +15,9 @@
       </div>
     </div>
     <div class="audioFirstRight">
-      <div class="audioOriginal"><audio controls="controls" loop="loop" src="" muted="muted" id="musicPlayer"></audio></div>
-      <div class="audioDisplay">
-        
+      <div class="audioOriginal"><audio controls="controls" crossOrigin="anonymous" autoplay="autoplay" loop="loop" src="" muted="muted" id="musicPlayer"></audio></div>
+      <div class="audioDisplay" id="audioDisplayId">
+        <canvas id="canvasId"></canvas>
       </div>
       <div class="audioOperating">
         <div>
@@ -59,6 +59,7 @@ export default {
     //获取音频文件
     this.musicPlayer = document.getElementById('musicPlayer')
     this.musicPlayer.src= this.audioList[0].src;
+    this.canvasStart()
   },
   methods: {
     changAudio (index) {
@@ -89,11 +90,80 @@ export default {
           let resData = JSON.parse(newHttp.responseText)
 
           this.audioLyrics = resData.data.lrclist;
-          console.log(this.audioLyrics)
           this.audioInfor = resData.data.songinfo;
-          console.log(this.audioInfor)
         }
       }
+    },
+    canvasStart () {
+      let canvasId = document.getElementById('canvasId');
+      let audioDisplayId = document.getElementById('audioDisplayId');
+
+      canvasId.width = audioDisplayId.offsetWidth;
+      canvasId.height = audioDisplayId.offsetHeight;
+      let ctx = canvasId.getContext('2d');
+
+      // audioSource 为音频源，bufferSource为buffer源
+      let audioSource, bufferSource;
+
+      //实例化音频对象
+      let AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
+
+      if (!AudioContext) {
+        alert('您的浏览器不支持audio API，请更换浏览器（chrome、firefox）再尝试')
+        return;
+      }
+
+      let AC = new AudioContext();
+
+      // analyser为analysernode，具有频率的数据，用于创建数据可视化
+      let analyser = AC.createAnalyser();
+
+      // gain为gainNode，音频的声音处理模块
+      let gainnode = AC.createGain();
+
+      gainnode.gain.value = 1;
+
+      let RAF = this.setTimer();
+
+      let musicPlayer = document.getElementById('musicPlayer');
+
+      audioSource = AC.createMediaElementSource(musicPlayer)
+      console.log(audioSource)
+      // audioSource.connect(analyser);
+      // analyser.fftSize = 256;
+      
+      // Create a gain node
+      var gainNode = AC.createGain();
+
+      // Create variables to store mouse pointer Y coordinate
+      // and HEIGHT of screen
+      var CurY;
+      var HEIGHT = window.innerHeight;
+
+      // Get new mouse pointer coordinates when mouse is moved
+      // then set new gain value
+
+      document.onmousemove = updatePage;
+
+      function updatePage(e) {
+          CurY = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
+
+          gainNode.gain.value = CurY/HEIGHT;
+          console.log(gainNode)
+      }
+
+
+      // connect the AudioBufferSourceNode to the gainNode
+      // and the gainNode to the destination, so we can play the
+      // music and adjust the volume using the mouse cursor
+      audioSource.connect(gainNode);
+      gainNode.connect(AC.destination);
+    },
+    setTimer () {
+      //计时器
+      return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(callback) {
+        window.setTimeout(callback, 1000 / 60);
+      };
     }
   }
 }
