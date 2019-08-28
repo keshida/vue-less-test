@@ -7,22 +7,26 @@
     <section>
       <vueDrag v-if="indexed == 0"></vueDrag>
       <prototypejs v-if="indexed == 1"></prototypejs>
+      <exceltest v-if="indexed == 2"></exceltest>
     </section>
   </div>
 </template>
 <script>
 import vueDrag from '@/views/jsScript/vueDrag';
 import prototypejs from '@/views/jsScript/prototypejs';
+import exceltest from '@/views/jsScript/exceltest';
 export default {
   components: {
     vueDrag,
-    prototypejs
+    prototypejs,
+    exceltest
   },
   data () {
     return {
       muneList: [
         {name: 'vueDrag'},
-        {name: 'prototypejs'}
+        {name: 'prototypejs'},
+        {name: 'exceltest'}
       ],
       indexed: 0
     }

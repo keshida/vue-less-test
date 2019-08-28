@@ -12,7 +12,8 @@
       <ballShadow v-if="indexed == 4"></ballShadow>
       <pageTurning v-if="indexed == 5"></pageTurning>
       <myPageTurn v-if="indexed == 6"></myPageTurn>
-      <lessTest v-if="indexed == 6"></lessTest>
+      <lessTest v-if="indexed == 7"></lessTest>
+      <loadingCylinder v-if="indexed == 8"></loadingCylinder>
     </section>
   </div>
 </template>
@@ -25,6 +26,7 @@ import ballShadow from '@/views/csstest/ballShadow';
 import pageTurning from '@/views/csstest/pageTurning';
 import myPageTurn from '@/views/csstest/myPageTurn';
 import lessTest from '@/views/csstest/lessTest';
+import loadingCylinder from '@/views/csstest/loadingCylinder';
 export default {
   components: {
     cssborder,
@@ -34,7 +36,8 @@ export default {
     ballShadow,
     pageTurning,
     myPageTurn,
-    lessTest
+    lessTest,
+    loadingCylinder
   },
   data () {
     return {
@@ -46,7 +49,9 @@ export default {
         {name: 'ballShadow'},
         {name: 'pageTurning'},
         {name: 'myPageTurn'},
-        {name: 'lessTest'}
+        {name: 'lessTest'},
+        {name: 'loadingCylinder'}
+
       ],
       indexed: 0
     }
@@ -68,42 +73,5 @@ export default {
   height: 100%;
   width: 100%;
   display: flex;
-}
-aside {
-  height: 100%;
-  flex: 1;
-  background: #f1f1f1;
-  position: relative;
-}
-.muneList_C {
-  height: 30px;
-  line-height: 30px;
-}
-.active_C {
-  background: #05ba9a;
-  color: #fff;
-}
-.muneBnt_C {
-  position: absolute;
-  height: 30px;
-  width: 80%;
-  background: #c5d2db;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border: none;
-  outline: none;
-  color: #fff;
-  border-radius: 3px;
-}
-.muneBnt_C:hover {
-  background: #2096ba;
-}
-.muneBnt_C:active {
-  background: #df6e21;
-}
-section {
-  height: 100%;
-  flex: 9;
 }
 </style>
