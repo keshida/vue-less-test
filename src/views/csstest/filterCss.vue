@@ -29,6 +29,7 @@ export default {
   width: 100%;
   height: 100%;
   --size-se: 150px;
+  --size-hw: 180px;
 }
 
 .div1 {
@@ -62,21 +63,21 @@ export default {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  height: 400px;
-  width: 400px;
+  height:var(--size-hw);
+  width: var(--size-hw);
   background: black;
   border-radius: 100%;
-  filter: blur(20px);
+  filter: blur(5px);
 }
 .dr {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   right: 0;
-  height: 360px;
-  width: 360px;
-  background: blue;
+  height: var(--size-hw);
+  width: var(--size-hw);
+  background: black;
   border-radius: 100%;
-  filter: blur(20px);
+  filter: blur(5px);
 }
 </style>
