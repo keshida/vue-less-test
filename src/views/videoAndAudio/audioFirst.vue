@@ -128,17 +128,16 @@ export default {
       let musicPlayer = document.getElementById('musicPlayer');
 
       audioSource = AC.createMediaElementSource(musicPlayer)
-      console.log(audioSource)
       // audioSource.connect(analyser);
       // analyser.fftSize = 256;
       
       // Create a gain node
-      var gainNode = AC.createGain();
+      let gainNode = AC.createGain();
 
       // Create variables to store mouse pointer Y coordinate
       // and HEIGHT of screen
-      var CurY;
-      var HEIGHT = window.innerHeight;
+      let CurY;
+      let HEIGHT = window.innerHeight;
 
       // Get new mouse pointer coordinates when mouse is moved
       // then set new gain value
@@ -146,10 +145,8 @@ export default {
       document.onmousemove = updatePage;
 
       function updatePage(e) {
-          CurY = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
-
-          gainNode.gain.value = CurY/HEIGHT;
-          console.log(gainNode)
+        CurY = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
+        gainNode.gain.value = CurY/HEIGHT;
       }
 
 
