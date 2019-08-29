@@ -23,6 +23,7 @@
         <div>
           <button v-on:click="play">开始</button>
           <button v-on:click="pause">暂停</button>
+          <button id="btnSer">btnSer</button>
         </div>
         <div>
           <input type="text" v-model="currentTime">
@@ -102,9 +103,6 @@ export default {
       canvasId.height = audioDisplayId.offsetHeight;
       let ctx = canvasId.getContext('2d');
 
-      // audioSource 为音频源，bufferSource为buffer源
-      let audioSource, bufferSource;
-
       //实例化音频对象
       let AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
 
@@ -127,34 +125,53 @@ export default {
 
       let musicPlayer = document.getElementById('musicPlayer');
 
-      audioSource = AC.createMediaElementSource(musicPlayer)
-      // audioSource.connect(analyser);
-      // analyser.fftSize = 256;
-      
+      // 通过使用 createMediaElementSource() 方法
+      // 创建了一个音源,将其通过 GainNode 节点,输出到AudioDestinationNode 节点以播放
+      // audioSource 为音频源
+      let audioSource = AC.createMediaElementSource(musicPlayer)
+
       // Create a gain node
       let gainNode = AC.createGain();
-
-      // Create variables to store mouse pointer Y coordinate
-      // and HEIGHT of screen
-      let CurY;
-      let HEIGHT = window.innerHeight;
-
-      // Get new mouse pointer coordinates when mouse is moved
-      // then set new gain value
-
-      document.onmousemove = updatePage;
-
-      function updatePage(e) {
-        CurY = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
-        gainNode.gain.value = CurY/HEIGHT;
-      }
-
 
       // connect the AudioBufferSourceNode to the gainNode
       // and the gainNode to the destination, so we can play the
       // music and adjust the volume using the mouse cursor
+      gainNode.gain.value = 0.1;
       audioSource.connect(gainNode);
       gainNode.connect(AC.destination);
+
+      var channels = 2;
+      // 创建一个 采样率与音频环境(AudioContext)相同的 时长2秒的 音频片段。
+      var frameCount = AC.sampleRate * 3.0;
+
+      var myArrayBuffer = AC.createBuffer(channels, frameCount, AC.sampleRate/2);
+
+      let btnSer = document.getElementById('btnSer')
+      btnSer.onclick = function() {
+        // 使用白噪声填充;
+        // 就是 -1.0 到 1.0 之间的随机数
+        for (var channel = 0; channel < channels; channel++) {
+        // 这允许我们读取实际音频片段(AudioBuffer)中包含的数据
+        var nowBuffering = myArrayBuffer.getChannelData(channel);
+        for (var i = 0; i < frameCount; i++) {
+          // Math.random() is in [0; 1.0]
+          // audio needs to be in [-1.0; 1.0]
+          nowBuffering[i] = Math.random() * 2 - 1;
+        }
+        }
+
+        // 获取一个 音频片段源节点(AudioBufferSourceNode)。
+        // 当我们想播放音频片段时，我们会用到这个源节点。
+        var source = AC.createBufferSource();
+        // 把刚才生成的片段加入到 音频片段源节点(AudioBufferSourceNode)。
+        source.buffer = myArrayBuffer;
+        // 把 音频片段源节点(AudioBufferSourceNode) 连接到
+        // 音频环境(AudioContext) 的终节点，这样我们就能听到声音了。
+        source.connect(AC.destination);
+        // 开始播放声源
+        source.start();
+      }
+
     },
     setTimer () {
       //计时器
