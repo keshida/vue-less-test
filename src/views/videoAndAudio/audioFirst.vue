@@ -142,29 +142,29 @@ export default {
       audioSource.connect(gainNode);
       gainNode.connect(AC.destination);
 
-      var channels = 2;
+      let channels = 2;
       // 创建一个 采样率与音频环境(AudioContext)相同的 时长2秒的 音频片段。
-      var frameCount = AC.sampleRate * 3.0;
+      let frameCount = AC.sampleRate * 3.0;
 
-      var myArrayBuffer = AC.createBuffer(channels, frameCount, AC.sampleRate/2);
+      let myArrayBuffer = AC.createBuffer(channels, frameCount, AC.sampleRate/2);
 
       let btnSer = document.getElementById('btnSer')
       btnSer.onclick = function() {
         // 使用白噪声填充;
         // 就是 -1.0 到 1.0 之间的随机数
-        for (var channel = 0; channel < channels; channel++) {
+        for (let channel = 0; channel < channels; channel++) {
         // 这允许我们读取实际音频片段(AudioBuffer)中包含的数据
-        var nowBuffering = myArrayBuffer.getChannelData(channel);
-        for (var i = 0; i < frameCount; i++) {
-          // Math.random() is in [0; 1.0]
-          // audio needs to be in [-1.0; 1.0]
-          nowBuffering[i] = Math.random() * 2 - 1;
-        }
+        let nowBuffering = myArrayBuffer.getChannelData(channel);
+          for (let i = 0; i < frameCount; i++) {
+            // Math.random() is in [0; 1.0]
+            // audio needs to be in [-1.0; 1.0]
+            nowBuffering[i] = Math.random() * 2 - 1;
+          }
         }
 
         // 获取一个 音频片段源节点(AudioBufferSourceNode)。
         // 当我们想播放音频片段时，我们会用到这个源节点。
-        var source = AC.createBufferSource();
+        let source = AC.createBufferSource();
         // 把刚才生成的片段加入到 音频片段源节点(AudioBufferSourceNode)。
         source.buffer = myArrayBuffer;
         // 把 音频片段源节点(AudioBufferSourceNode) 连接到
