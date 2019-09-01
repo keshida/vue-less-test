@@ -44,6 +44,8 @@ export default {
         {name: '来自尘埃的光', src: '../../../static/audio/1.mp3', file: '1.json'},
         {name: '知否知否应是绿肥红瘦', src: '../../../static/audio/2.mp3', file: '2.json'},
         {name: '从别后', src: '../../../static/audio/3.aac', file: '3.json'},
+        {name: '永夜', src: '../../../static/audio/4.mp3', file: '4.json'},
+        {name: '巅峰之上', src: '../../../static/audio/5.mp3', file: '5.json'},
         {name: 'she', src: '../../../static/audio/she.mp3'}
       ],
       audioLyrics: [],
