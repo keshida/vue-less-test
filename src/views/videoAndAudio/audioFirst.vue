@@ -46,6 +46,7 @@ export default {
         {name: '从别后', src: '../../../static/audio/3.aac', file: '3.json'},
         {name: '永夜', src: '../../../static/audio/4.mp3', file: '4.json'},
         {name: '巅峰之上', src: '../../../static/audio/5.mp3', file: '5.json'},
+        {name: '需要人陪', src: '../../../static/audio/6.mp3', file: '6.json'},
         {name: 'she', src: '../../../static/audio/she.mp3'}
       ],
       audioLyrics: [],
@@ -195,8 +196,6 @@ export default {
   flex-direction: column;
 }
 .audioFirstLeftLists {
-  height: 100px;
-  flex-shrink: 0;
   cursor: pointer;
 }
 .audioFirstLeftList {
