@@ -61,8 +61,11 @@ export default {
   },
   mounted () {
     //获取音频文件
-    this.musicPlayer = document.getElementById('musicPlayer')
+    // this.musicPlayer = document.getElementById('musicPlayer')
+    this.musicPlayer = new Audio();
     this.musicPlayer.src= this.audioList[0].src;
+    this.musicPlayer.loop = true;
+    this.musicPlayer.play();
     this.canvasStart()
   },
   methods: {
@@ -124,12 +127,12 @@ export default {
 
       let RAF = this.setTimer();
 
-      let musicPlayer = document.getElementById('musicPlayer');
+      // let musicPlayer = document.getElementById('musicPlayer');
 
       // 通过使用 createMediaElementSource() 方法
       // 创建了一个音源,将其通过 GainNode 节点,输出到AudioDestinationNode 节点以播放
       // audioSource 为音频源
-      let audioSource = AC.createMediaElementSource(musicPlayer)
+      let audioSource = AC.createMediaElementSource(this.musicPlayer)
 
       // Create a gain node
       let gainNode = AC.createGain();
