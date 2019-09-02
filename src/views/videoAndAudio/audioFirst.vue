@@ -122,8 +122,6 @@ export default {
       // gain为gainNode，音频的声音处理模块
       let gainnode = AC.createGain();
 
-      gainnode.gain.value = 1;
-
       let RAF = this.setTimer();
 
       let musicPlayer = document.getElementById('musicPlayer');
@@ -139,7 +137,7 @@ export default {
       // connect the AudioBufferSourceNode to the gainNode
       // and the gainNode to the destination, so we can play the
       // music and adjust the volume using the mouse cursor
-      gainNode.gain.value = 0.1;
+      gainNode.gain.value = 0.3;
       audioSource.connect(gainNode);
       gainNode.connect(AC.destination);
 
