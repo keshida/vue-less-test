@@ -15,7 +15,11 @@
       </div>
     </div>
     <div class="audioFirstRight">
-      <div class="audioOriginal"><audio controls="controls" crossOrigin="anonymous" autoplay="autoplay" loop="loop" src="" muted="muted" id="musicPlayer"></audio></div>
+      <div class="audioOriginal">
+        <audio controls></audio>
+        <video controls></video>
+        <button id="saveBtn" v-on:click="saveAudio">{{ btnText }}</button>
+      </div>
       <div class="audioDisplay" id="audioDisplayId">
         <canvas id="canvasId"></canvas>
       </div>
@@ -50,23 +54,25 @@ export default {
         {name: 'she', src: '../../../static/audio/she.mp3'}
       ],
       audioLyrics: [],
-      audioInfor: {}
+      audioInfor: {},
+      clicked: true,
+      btnText: 'Make sine wave',
+      chunks: [],
+      ac: {},
+      mediaRecorder: {}
     }
   },
-  created () {
-    // var audioCtx = new (window.AudioContext || window.webkitAudioContext)()
-    // var oscillatorNode = audioCtx.createOscillator()
-    // var gainNode = audioCtx.createGain()
-    // var finish = audioCtx.destination
-  },
+  created () {},
   mounted () {
     //获取音频文件
     // this.musicPlayer = document.getElementById('musicPlayer')
     this.musicPlayer = new Audio();
     this.musicPlayer.src= this.audioList[0].src;
     this.musicPlayer.loop = true;
-    this.musicPlayer.play();
-    this.canvasStart()
+    // this.musicPlayer.play();
+    // this.canvasStart()
+    // this.getStream()
+    // this.destination()
   },
   methods: {
     changAudio (index) {
@@ -101,13 +107,79 @@ export default {
         }
       }
     },
+    destination () {
+      this.ac = new AudioContext();
+      this.osc = this.ac.createOscillator();
+      let dest = this.ac.createMediaStreamDestination();
+
+      this.mediaRecorder = new MediaRecorder(dest.stream);
+      this.osc.connect(dest);
+ 
+      this.mediaRecorder.ondataavailable = function(evt) {
+        // push each chunk (blobs) in an array
+        this.chunks.push(evt.data);
+        console.log(evt)
+      };
+      this.mediaRecorder.onstop = function() {
+        console.log(555)
+        // Make blob out of our blobs, and open it.
+        let blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+
+        document.querySelector('audio').src = URL.createObjectURL(blob);
+      };
+    },
+    saveAudio () {
+      if (this.clicked) {
+        this.mediaRecorder.start();
+        this.osc.start(0);
+        this.btnText = 'Stop recording';
+      } else {
+        this.mediaRecorder.stop();
+        this.osc.stop(0);
+      }
+    },
+    getStream () {
+      let video = document.querySelector('video');
+
+      if (navigator.mediaDevices) {
+        navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+          .then(function(stream) {
+            video.srcObject = stream;
+            video.onloadedmetadata = function() {
+              video.play();
+              video.muted = true;
+              
+              // Create a MediaStreamAudioSourceNode
+              // Feed the HTMLMediaElement into it
+              let audioCtx = new AudioContext();
+              let source = audioCtx.createMediaStreamSource(stream);
+              // Create a biquadfilter
+              let biquadFilter = audioCtx.createBiquadFilter();
+
+              biquadFilter.type = 'lowshelf';
+              biquadFilter.frequency.value = 1000;
+              biquadFilter.gain.value = 32;
+              // connect the AudioBufferSourceNode to the gainNode
+              // and the gainNode to the destination, so we can play the
+              // music and adjust the volume using the mouse cursor
+              source.connect(biquadFilter);
+              biquadFilter.connect(audioCtx.destination);
+              // Get new mouse pointer coordinates when mouse is moved
+              // then set new gain value
+            };
+          })
+          .catch(function(err) {
+            console.log('The following gUM error occured: ' + err);
+          });
+      }
+    },
     canvasStart () {
       let canvasId = document.getElementById('canvasId');
       let audioDisplayId = document.getElementById('audioDisplayId');
 
       canvasId.width = audioDisplayId.offsetWidth;
       canvasId.height = audioDisplayId.offsetHeight;
-      let ctx = canvasId.getContext('2d');
+      // let ctx = canvasId.getContext('2d');
 
       //实例化音频对象
       let AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
@@ -119,13 +191,7 @@ export default {
 
       let AC = new AudioContext();
 
-      // analyser为analysernode，具有频率的数据，用于创建数据可视化
-      let analyser = AC.createAnalyser();
-
-      // gain为gainNode，音频的声音处理模块
-      let gainnode = AC.createGain();
-
-      let RAF = this.setTimer();
+      // let RAF = this.setTimer();
 
       // let musicPlayer = document.getElementById('musicPlayer');
 
@@ -134,7 +200,7 @@ export default {
       // audioSource 为音频源
       let audioSource = AC.createMediaElementSource(this.musicPlayer)
 
-      // Create a gain node
+      // Create a gain node 音频的声音处理模块
       let gainNode = AC.createGain();
 
       // connect the AudioBufferSourceNode to the gainNode
@@ -151,12 +217,14 @@ export default {
       let myArrayBuffer = AC.createBuffer(channels, frameCount, AC.sampleRate/2);
 
       let btnSer = document.getElementById('btnSer')
+
       btnSer.onclick = function() {
         // 使用白噪声填充;
         // 就是 -1.0 到 1.0 之间的随机数
         for (let channel = 0; channel < channels; channel++) {
         // 这允许我们读取实际音频片段(AudioBuffer)中包含的数据
-        let nowBuffering = myArrayBuffer.getChannelData(channel);
+          let nowBuffering = myArrayBuffer.getChannelData(channel);
+
           for (let i = 0; i < frameCount; i++) {
             // Math.random() is in [0; 1.0]
             // audio needs to be in [-1.0; 1.0]
@@ -167,6 +235,7 @@ export default {
         // 获取一个 音频片段源节点(AudioBufferSourceNode)。
         // 当我们想播放音频片段时，我们会用到这个源节点。
         let source = AC.createBufferSource();
+
         // 把刚才生成的片段加入到 音频片段源节点(AudioBufferSourceNode)。
         source.buffer = myArrayBuffer;
         // 把 音频片段源节点(AudioBufferSourceNode) 连接到
@@ -221,7 +290,7 @@ export default {
   flex-direction: column;
 }
 .audioOriginal {
-  height: 60px;
+  height: 200px;
   flex-shrink: 0;
 }
 .audioDisplay {
@@ -229,5 +298,10 @@ export default {
 }
 .audioOperating {
   height: 60px;
+}
+
+video {
+  width: 200px;
+  height: 100px;
 }
 </style>
