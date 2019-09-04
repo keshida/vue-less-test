@@ -16,9 +16,10 @@
     </div>
     <div class="audioFirstRight">
       <div class="audioOriginal">
-        <audio controls></audio>
+        <audio controls src="../../../static/audio/1.mp3"></audio>
         <video controls></video>
         <button id="saveBtn" v-on:click="saveAudio">{{ btnText }}</button>
+        <button id="sssaveBtn">fasdfsd</button>
       </div>
       <div class="audioDisplay" id="audioDisplayId">
         <canvas id="canvasId"></canvas>
@@ -73,6 +74,45 @@ export default {
     // this.canvasStart()
     // this.getStream()
     // this.destination()
+    this.createStereoPanner();
+
+    //this.setScriptProcessor()
+    // var playButton = document.getElementById('sssaveBtn');
+    // var audioCtx = new AudioContext();
+    // var source = audioCtx.createBufferSource();
+    // var scriptNode = audioCtx.createScriptProcessor(0, 2, 2);
+    // function getData() {
+    //   let request = new XMLHttpRequest();
+    //   request.open('get', '../../../static/audio/1.mp3', true);
+    //   request.responseType = 'arraybuffer';
+    //   request.onload = function() {
+    //     audioCtx.decodeAudioData(request.response, function(buffer) {
+    //       source.buffer = buffer;
+    //     });
+    //   }
+    //   request.send();
+    // }
+    // getData();
+    // scriptNode.onaudioprocess = function(audioProcessingEvent) {
+    //   var inputBuffer = audioProcessingEvent.inputBuffer;
+    //   var outputBuffer = audioProcessingEvent.outputBuffer;
+    //   for (var channel = 0; channel < outputBuffer.numberOfChannels; channel++) {
+    //     var inputData = inputBuffer.getChannelData(channel);
+    //     var outputData = outputBuffer.getChannelData(channel);
+    //     for (var sample = 0; sample < inputBuffer.length; sample++) {
+    //       outputData[sample] = inputData[sample];
+    //     }
+    //   }
+    // }
+    // playButton.onclick = function() {
+    //   source.connect(scriptNode);
+    //   scriptNode.connect(audioCtx.destination);
+    //   source.start();
+    // }
+    // source.onended = function() {
+    //   source.disconnect(scriptNode);
+    //   scriptNode.disconnect(audioCtx.destination);
+    // }
   },
   methods: {
     changAudio (index) {
@@ -107,6 +147,26 @@ export default {
         }
       }
     },
+    setScriptProcessor () {},
+    createStereoPanner() {
+      let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      let myAudio = document.querySelector('audio');
+
+      myAudio.crossOrigin = 'anonymous';
+      //这将防止CORS访问限制。
+      
+      let source = audioCtx.createMediaElementSource(myAudio);
+
+      // Create a stereo panner
+      let panNode = audioCtx.createStereoPanner();
+
+      panNode.pan.value = 0.1;
+      // connect the MediaElementAudioSourceNode to the panNode
+      // and the panNode to the destination, so we can play the
+      // music and adjust the panning using the controls
+      source.connect(panNode);
+      panNode.connect(audioCtx.destination);
+    },
     destination () {
       this.ac = new AudioContext();
       this.osc = this.ac.createOscillator();
@@ -129,6 +189,7 @@ export default {
       };
     },
     saveAudio () {
+      console.log(this.mediaRecorder)
       if (this.clicked) {
         this.mediaRecorder.start();
         this.osc.start(0);
