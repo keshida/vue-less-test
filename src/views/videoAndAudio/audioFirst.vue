@@ -44,6 +44,9 @@ export default {
   data () {
     return {
       musicPlayer: {},
+      audioSource: {},// 音频源 
+      vidoeSource: {},// 视频源 
+      audioCtx: {},// 音频上下文
       currentTime: 0,
       audioList: [
         {name: '来自尘埃的光', src: '../../../static/audio/1.mp3', file: '1.json'},
@@ -59,7 +62,6 @@ export default {
       clicked: true,
       btnText: 'Make sine wave',
       chunks: [],
-      ac: {},
       mediaRecorder: {}
     }
   },
@@ -74,19 +76,25 @@ export default {
     // this.canvasStart()
     // this.getStream()
     // this.destination()
-    this.createStereoPanner();
 
+    //实例化音频对象
+    this.audioCtx = new AudioContext();
+    //= window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
+    // if (!this.audioCtx) {
+    //   alert('您的浏览器不支持audio API，请更换浏览器（chrome、firefox）再尝试')
+    //   return;
+    // }
+    this.createStereoPanner();
     //this.setScriptProcessor()
     // var playButton = document.getElementById('sssaveBtn');
-    // var audioCtx = new AudioContext();
-    // var source = audioCtx.createBufferSource();
-    // var scriptNode = audioCtx.createScriptProcessor(0, 2, 2);
+    // var source = this.audioCtx.createBufferSource();
+    // var scriptNode = this.audioCtx.createScriptProcessor(0, 2, 2);
     // function getData() {
     //   let request = new XMLHttpRequest();
     //   request.open('get', '../../../static/audio/1.mp3', true);
     //   request.responseType = 'arraybuffer';
     //   request.onload = function() {
-    //     audioCtx.decodeAudioData(request.response, function(buffer) {
+    //     this.audioCtx.decodeAudioData(request.response, function(buffer) {
     //       source.buffer = buffer;
     //     });
     //   }
@@ -106,12 +114,12 @@ export default {
     // }
     // playButton.onclick = function() {
     //   source.connect(scriptNode);
-    //   scriptNode.connect(audioCtx.destination);
+    //   scriptNode.connect(this.audioCtx.destination);
     //   source.start();
     // }
     // source.onended = function() {
     //   source.disconnect(scriptNode);
-    //   scriptNode.disconnect(audioCtx.destination);
+    //   scriptNode.disconnect(this.audioCtx.destination);
     // }
   },
   methods: {
@@ -149,28 +157,26 @@ export default {
     },
     setScriptProcessor () {},
     createStereoPanner() {
-      let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       let myAudio = document.querySelector('audio');
 
       myAudio.crossOrigin = 'anonymous';
       //这将防止CORS访问限制。
       
-      let source = audioCtx.createMediaElementSource(myAudio);
+      let source = this.audioCtx.createMediaElementSource(myAudio);
 
       // Create a stereo panner
-      let panNode = audioCtx.createStereoPanner();
+      let panNode = this.audioCtx.createStereoPanner();
 
       panNode.pan.value = 0.1;
       // connect the MediaElementAudioSourceNode to the panNode
       // and the panNode to the destination, so we can play the
       // music and adjust the panning using the controls
       source.connect(panNode);
-      panNode.connect(audioCtx.destination);
+      panNode.connect(this.audioCtx.destination);
     },
     destination () {
-      this.ac = new AudioContext();
-      this.osc = this.ac.createOscillator();
-      let dest = this.ac.createMediaStreamDestination();
+      this.osc = this.audioCtx.createOscillator();
+      let dest = this.audioCtx.createMediaStreamDestination();
 
       this.mediaRecorder = new MediaRecorder(dest.stream);
       this.osc.connect(dest);
@@ -178,10 +184,8 @@ export default {
       this.mediaRecorder.ondataavailable = function(evt) {
         // push each chunk (blobs) in an array
         this.chunks.push(evt.data);
-        console.log(evt)
       };
       this.mediaRecorder.onstop = function() {
-        console.log(555)
         // Make blob out of our blobs, and open it.
         let blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
 
@@ -189,7 +193,6 @@ export default {
       };
     },
     saveAudio () {
-      console.log(this.mediaRecorder)
       if (this.clicked) {
         this.mediaRecorder.start();
         this.osc.start(0);
@@ -212,10 +215,9 @@ export default {
               
               // Create a MediaStreamAudioSourceNode
               // Feed the HTMLMediaElement into it
-              let audioCtx = new AudioContext();
-              let source = audioCtx.createMediaStreamSource(stream);
+              let source = this.audioCtx.createMediaStreamSource(stream);
               // Create a biquadfilter
-              let biquadFilter = audioCtx.createBiquadFilter();
+              let biquadFilter = this.audioCtx.createBiquadFilter();
 
               biquadFilter.type = 'lowshelf';
               biquadFilter.frequency.value = 1000;
@@ -224,7 +226,7 @@ export default {
               // and the gainNode to the destination, so we can play the
               // music and adjust the volume using the mouse cursor
               source.connect(biquadFilter);
-              biquadFilter.connect(audioCtx.destination);
+              biquadFilter.connect(this.audioCtx.destination);
               // Get new mouse pointer coordinates when mouse is moved
               // then set new gain value
             };
@@ -241,41 +243,28 @@ export default {
       canvasId.width = audioDisplayId.offsetWidth;
       canvasId.height = audioDisplayId.offsetHeight;
       // let ctx = canvasId.getContext('2d');
-
-      //实例化音频对象
-      let AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
-
-      if (!AudioContext) {
-        alert('您的浏览器不支持audio API，请更换浏览器（chrome、firefox）再尝试')
-        return;
-      }
-
-      let AC = new AudioContext();
-
       // let RAF = this.setTimer();
-
-      // let musicPlayer = document.getElementById('musicPlayer');
 
       // 通过使用 createMediaElementSource() 方法
       // 创建了一个音源,将其通过 GainNode 节点,输出到AudioDestinationNode 节点以播放
       // audioSource 为音频源
-      let audioSource = AC.createMediaElementSource(this.musicPlayer)
+      let audioSource = this.audioCtx.createMediaElementSource(this.musicPlayer)
 
       // Create a gain node 音频的声音处理模块
-      let gainNode = AC.createGain();
+      let gainNode = this.audioCtx.createGain();
 
       // connect the AudioBufferSourceNode to the gainNode
       // and the gainNode to the destination, so we can play the
       // music and adjust the volume using the mouse cursor
       gainNode.gain.value = 0.3;
       audioSource.connect(gainNode);
-      gainNode.connect(AC.destination);
+      gainNode.connect(this.audioCtx.destination);
 
       let channels = 2;
       // 创建一个 采样率与音频环境(AudioContext)相同的 时长2秒的 音频片段。
-      let frameCount = AC.sampleRate * 3.0;
+      let frameCount = this.audioCtx.sampleRate * 3.0;
 
-      let myArrayBuffer = AC.createBuffer(channels, frameCount, AC.sampleRate/2);
+      let myArrayBuffer = this.audioCtx.createBuffer(channels, frameCount, this.audioCtx.sampleRate/2);
 
       let btnSer = document.getElementById('btnSer')
 
@@ -292,20 +281,18 @@ export default {
             nowBuffering[i] = Math.random() * 2 - 1;
           }
         }
-
         // 获取一个 音频片段源节点(AudioBufferSourceNode)。
         // 当我们想播放音频片段时，我们会用到这个源节点。
-        let source = AC.createBufferSource();
+        let source = this.audioCtx.createBufferSource();
 
         // 把刚才生成的片段加入到 音频片段源节点(AudioBufferSourceNode)。
         source.buffer = myArrayBuffer;
         // 把 音频片段源节点(AudioBufferSourceNode) 连接到
-        // 音频环境(AudioContext) 的终节点，这样我们就能听到声音了。
-        source.connect(AC.destination);
+        // 音频环境(AudioCtx) 的终节点，这样我们就能听到声音了。
+        source.connect(this.audioCtx.destination);
         // 开始播放声源
         source.start();
       }
-
     },
     setTimer () {
       //计时器
