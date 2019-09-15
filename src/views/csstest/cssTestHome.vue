@@ -14,6 +14,8 @@
       <myPageTurn v-if="indexed == 6"></myPageTurn>
       <lessTest v-if="indexed == 7"></lessTest>
       <loadingCylinder v-if="indexed == 8"></loadingCylinder>
+      <faceRecognition v-if="indexed == 9"></faceRecognition>
+      <eclipse v-if="indexed == 10"></eclipse>
     </section>
   </div>
 </template>
@@ -27,6 +29,8 @@ import pageTurning from '@/views/csstest/pageTurning';
 import myPageTurn from '@/views/csstest/myPageTurn';
 import lessTest from '@/views/csstest/lessTest';
 import loadingCylinder from '@/views/csstest/loadingCylinder';
+import faceRecognition from '@/views/csstest/faceRecognition';
+import eclipse from '@/views/csstest/eclipse';
 export default {
   components: {
     cssborder,
@@ -37,7 +41,9 @@ export default {
     pageTurning,
     myPageTurn,
     lessTest,
-    loadingCylinder
+    loadingCylinder,
+    faceRecognition,
+    eclipse
   },
   data () {
     return {
@@ -50,7 +56,9 @@ export default {
         {name: 'pageTurning'},
         {name: 'myPageTurn'},
         {name: 'lessTest'},
-        {name: 'loadingCylinder'}
+        {name: 'loadingCylinder'},
+        {name: 'faceRecognition'},
+        {name: 'eclipse'}
 
       ],
       indexed: 0

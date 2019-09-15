@@ -44,9 +44,9 @@ export default {
   data () {
     return {
       musicPlayer: {},
-      audioSource: {},// 音频源 
+      audioSource: {},// 音频源
       vidoeSource: {},// 视频源 
-      audioCtx: {},// 音频上下文
+      sourceBuffer: {},
       currentTime: 0,
       audioList: [
         {name: '来自尘埃的光', src: '../../../static/audio/1.mp3', file: '1.json'},
@@ -72,19 +72,11 @@ export default {
     this.musicPlayer = new Audio();
     this.musicPlayer.src= this.audioList[0].src;
     this.musicPlayer.loop = true;
-    // this.musicPlayer.play();
     // this.canvasStart()
     // this.getStream()
     // this.destination()
 
-    //实例化音频对象
-    this.audioCtx = new AudioContext();
-    //= window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
-    // if (!this.audioCtx) {
-    //   alert('您的浏览器不支持audio API，请更换浏览器（chrome、firefox）再尝试')
-    //   return;
-    // }
-    this.createStereoPanner();
+    // this.createStereoPanner();
     //this.setScriptProcessor()
     // var playButton = document.getElementById('sssaveBtn');
     // var source = this.audioCtx.createBufferSource();

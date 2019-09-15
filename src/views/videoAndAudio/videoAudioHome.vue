@@ -6,21 +6,37 @@
     </aside>
     <section>
       <audioFirst v-if="indexed == 0"></audioFirst>
+      <browserSound v-if="indexed == 1"></browserSound>
+      <audioVisualization v-if="indexed == 2"></audioVisualization>
+      <speakVisualization v-if="indexed == 3"></speakVisualization>
+      <remotelyVisualization v-if="indexed == 4"></remotelyVisualization>
     </section>
   </div>
 </template>
 <script>
 import audioFirst from '@/views/videoAndAudio/audioFirst';
+import browserSound from '@/views/videoAndAudio/browserSound';
+import audioVisualization from '@/views/videoAndAudio/audioVisualization';
+import speakVisualization from '@/views/videoAndAudio/speakVisualization';
+import remotelyVisualization from '@/views/videoAndAudio/remotelyVisualization';
 export default {
   components: {
-    audioFirst
+    audioFirst,
+    browserSound,
+    audioVisualization,
+    speakVisualization,
+    remotelyVisualization
   },
   data () {
     return {
       muneList: [
-        {name: 'audioFirst'}
+        {name: 'audioFirst'},
+        {name: 'browserSound'},
+        {name: 'audioVisualization'},
+        {name: 'speakVisualization'},
+        {name: 'remotelyVisualization'}
       ],
-      indexed: 0
+      indexed: 4
     }
   },
   created () {},

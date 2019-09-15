@@ -164,7 +164,7 @@ module.exports = {
     "newline-after-var": 2,//变量声明后是否需要空一行 
     "object-curly-spacing": [0, "never"],//大括号内是否允许不必要的空格 
     "object-shorthand": 0,//强制对象字面量缩写语法 
-    "one-var": 1,//连续声明 
+    "one-var": 0,//连续声明 
     "operator-assignment": [0, "always"],//赋值运算符 += -=什么的 
     "operator-linebreak": [2, "after"],//换行时运算符在行尾还是行首 
     "padded-blocks": 0,//块语句内行首行尾是否要空行 

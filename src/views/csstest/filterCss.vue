@@ -3,12 +3,12 @@
     <div class="div1">
     </div>
     <div class="div2">
-
     </div>
     <div class="div3" id="div3">
-        <div class="db" id="d1"></div>
-        <div class="dr" id="d2"></div>
+      <div class="db" id="d1"></div>
+      <div class="dr" id="d2"></div>
     </div>
+    <div class="simulation"></div>
   </div>
 </template>
 
@@ -79,5 +79,15 @@ export default {
   background: black;
   border-radius: 100%;
   filter: blur(5px);
+}
+
+.simulation {
+  height: 200px;
+  width: 300px;
+  /* 改变--c 背景图片色值变化 类似滤镜效果 */
+  --c: #ff000088;
+  background: linear-gradient(var(--c),var(--c)),url("../../assets/images/filter/1.jpg");
+  background-size: cover;
+  
 }
 </style>
