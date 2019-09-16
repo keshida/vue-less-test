@@ -677,6 +677,10 @@
       {"date":"2018-09-14","expRemark":"午餐",  "type":"foodExp","value":15.4},
       {"date":"2018-09-14","expRemark":"晚餐",  "type":"foodExp","value":25.1},
       {"date":"2018-09-15","expRemark":"晚餐",  "type":"foodExp","value":22},
+      {"date":"2018-09-16","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-09-16","expRemark":"早餐",  "type":"foodExp","value":6.5},
+      {"date":"2018-09-16","expRemark":"午餐",  "type":"foodExp","value":17.5},
+      {"date":"2018-09-16","expRemark":"晚餐",  "type":"foodExp","value":19.8},
     ]
   }
 }

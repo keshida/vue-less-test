@@ -10,6 +10,7 @@
       <audioVisualization v-if="indexed == 2"></audioVisualization>
       <speakVisualization v-if="indexed == 3"></speakVisualization>
       <remotelyVisualization v-if="indexed == 4"></remotelyVisualization>
+      <differentSpeed v-if="indexed == 5"></differentSpeed>
     </section>
   </div>
 </template>
@@ -19,13 +20,15 @@ import browserSound from '@/views/videoAndAudio/browserSound';
 import audioVisualization from '@/views/videoAndAudio/audioVisualization';
 import speakVisualization from '@/views/videoAndAudio/speakVisualization';
 import remotelyVisualization from '@/views/videoAndAudio/remotelyVisualization';
+import differentSpeed from '@/views/videoAndAudio/differentSpeed';
 export default {
   components: {
     audioFirst,
     browserSound,
     audioVisualization,
     speakVisualization,
-    remotelyVisualization
+    remotelyVisualization,
+    differentSpeed
   },
   data () {
     return {
@@ -34,9 +37,10 @@ export default {
         {name: 'browserSound'},
         {name: 'audioVisualization'},
         {name: 'speakVisualization'},
-        {name: 'remotelyVisualization'}
+        {name: 'remotelyVisualization'},
+        {name: 'differentSpeed'}
       ],
-      indexed: 4
+      indexed: 5
     }
   },
   created () {},
