@@ -1,9 +1,9 @@
 <template>
   <div class="gird_C onePage">
-    <div class="divF">
-      <!-- <div><p>1</p><p>2</p><p>3</p></div>
+    <!-- <div class="divF">
+      <div><p>1</p><p>2</p><p>3</p></div>
       <div><p>4</p><p>5</p><p>6</p></div>
-      <div><p>7</p><p>8</p><p>9</p></div> -->
+      <div><p>7</p><p>8</p><p>9</p></div>
       <div class="item_1">1</div>
       <div class="item_2">2</div>
       <div class="item_3">3</div>
@@ -13,6 +13,18 @@
       <div class="item_7">7</div>
       <div class="item_8">8</div>
       <div class="item_9">9</div>
+    </div> -->
+    <div class="divT">
+      <div class="items itemT_1">1</div>
+      <div class="items itemT_2">2</div>
+      <div class="items itemT_3">3</div>
+      <div class="items itemT_4">4</div>
+      <div class="items itemT_5">5</div>
+      <div class="items itemT_6">6</div>
+      <div class="items itemT_7">7</div>
+      <div class="items itemT_8">8</div>
+      <div class="items itemT_9">9</div>
+      <div class="items itemT_10">10</div>
     </div>
   </div>
 </template>
@@ -128,5 +140,21 @@ export default {
   background-color: #4dc7ec;
   /* grid-row-start: 5;
   grid-column-start: 3; */
+}
+
+.divT {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  grid-auto-rows: 100px;
+  grid-template-areas: 'a a a'
+                       'b b b'
+                       'c c c';
+}
+.items {
+  border-bottom: 1px solid #333;
+}
+.itemT_1 {
+
 }
 </style>
