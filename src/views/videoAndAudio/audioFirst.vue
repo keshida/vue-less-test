@@ -117,9 +117,9 @@ export default {
   methods: {
     changAudio (index) {
       this.musicPlayer.src= this.audioList[index].src;
+      console.log(this.musicPlayer.duration)
       // this.musicPlayer.playbackRate= 1;
       this.musicPlayer.play()
-      console.log(this.musicPlayer)
       if (this.audioList[index].file) {
         this.getJsonHttp(index)
       }

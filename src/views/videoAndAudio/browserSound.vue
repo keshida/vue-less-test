@@ -92,6 +92,7 @@ export default {
       return;
     }
     this.audioCtx = new AudioContext();
+    console.log(this.audioCtx)
 
     this.init();
   },
