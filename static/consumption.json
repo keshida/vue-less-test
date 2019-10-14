@@ -758,7 +758,14 @@
       {"date":"2018-10-12","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-10-12","expRemark":"早餐",  "type":"foodExp","value":6},
       {"date":"2018-10-12","expRemark":"午餐",  "type":"foodExp","value":16},
-      {"date":"2018-10-12","expRemark":"晚餐",  "type":"foodExp","value":},
+      {"date":"2018-10-12","expRemark":"晚餐",  "type":"foodExp","value":18},
+      {"date":"2018-10-13","expRemark":"午餐",  "type":"foodExp","value":17},
+      {"date":"2018-10-13","expRemark":"手机换屏",  "type":"dailyNecesExp","value":670},
+      {"date":"2018-10-13","expRemark":"晚餐",  "type":"foodExp","value":15.7},
+      {"date":"2018-10-14","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-10-14","expRemark":"早餐",  "type":"foodExp","value":6.5},
+      {"date":"2018-10-14","expRemark":"午餐",  "type":"foodExp","value":16},
+      {"date":"2018-10-14","expRemark":"晚餐",  "type":"foodExp","value":0},
     ]
   }
 }

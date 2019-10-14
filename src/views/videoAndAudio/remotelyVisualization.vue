@@ -157,7 +157,7 @@ export default {
   padding: 20px;
   box-sizing: border-box;
 }
-.canvasC {
+.remotelyVisualization_C .canvasC {
   height: 100px;
   width: 100%;
   background: #2c3e50;

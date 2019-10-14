@@ -1,8 +1,6 @@
 <template>
-  <div class="audioVisualization_C pagePosition">
-    <ul>
-      <li v-for="(item,index) in audioList" :key="index" v-on:click="changAudio(index)">{{ item.name }}</li>
-    </ul>
+  <div class="maxaci_C pagePosition">
+    <img class="seaImg" src="../../assets/images/audio/sealevel.jpg" alt="" v-on:click="play">
     <canvas class="canvasC" id="audioCanvas"></canvas>
   </div>
 </template>
@@ -42,51 +40,40 @@ export default {
     this.musicPlayer = new Audio();
     this.musicPlayer.src= this.audioList[0].src;
     this.musicPlayer.loop = true;
-    this.audioSource = this.audioCtx.createMediaElementSource(this.musicPlayer);
-
-    this.initAnalyser()
+    this.init()
   },
   beforeDestroy () {
     this.audioCtx.close()
   },
   methods: {
-    changAudio (index) {
-      this.musicPlayer.src= this.audioList[index].src;
+    play() {
+      this.musicPlayer.src= this.audioList[1].src;
       this.musicPlayer.play()
-      this.setAudio()
-    },
-    setAudio () {
+
       this.audioSource.connect(this.analyser);
       this.audioSource.connect(this.gainNode);
       this.audioSource.connect(this.audioCtx.destination);
-
       this.bindDrawEvent(); 
     },
-    initAnalyser () {
-      //创建分析器
-      this.analyser = this.audioCtx.createAnalyser();
-      //快速傅里叶变换参数
+    init () {
+      this.audioSource = this.audioCtx.createMediaElementSource(this.musicPlayer);// 创建音频源
+      this.analyser = this.audioCtx.createAnalyser();// 创建分析器
       this.analyser.fftSize = 256;
-      //bufferArray长度
-      this.bufferLength = this.analyser.frequencyBinCount;
-      //创建bufferArray，用来装音频数据
+      this.bufferLength = this.analyser.frequencyBinCount;// 创建bufferArray，用来装音频数据
       this.dataArray = new Uint8Array(this.bufferLength);
-      this.gainNode = this.audioCtx.createGain();
-      this.initScriptProcessor()
-    },
-    initScriptProcessor () {
-      //创建处理器，参数分别是缓存区大小、输入声道数、输出声道数
-      this.scriptProcessor = this.audioCtx.createScriptProcessor(2048, 1, 1);
-      //分析器连接处理器，处理器连接扬声器
-      this.analyser.connect(this.scriptProcessor);
-      this.scriptProcessor.connect(this.audioCtx.destination);
+      this.gainNode = this.audioCtx.createGain();// 创建增益节点
+      this.gainNode.gain.value = 0.5;
+      this.scriptProcessor = this.audioCtx.createScriptProcessor(2048, 1, 1);// 创建处理器，参数分别是缓存区大小、输入声道数、输出声道数
+      this.analyser.connect(this.scriptProcessor);// 分析器连接处理器
+      this.scriptProcessor.connect(this.audioCtx.destination);// 处理器连接扬声器
+      console.log(this.scriptProcessor)
     },
     bindDrawEvent () {
       this.scriptProcessor.onaudioprocess = this.draw;
     },
     draw () {
+      console.log(2)
       let canvas = document.getElementById('audioCanvas');
-
       const cWidth = canvas.width = canvas.offsetWidth,
         cHeight = canvas.height = canvas.offsetHeight,
         barWidth = parseInt(0.5 * cWidth / this.bufferLength, 0);
@@ -101,7 +88,7 @@ export default {
       this.analyser.getByteFrequencyData(this.dataArray);
     
       //把每个音频“切片”画在画布上
-      cxt.fillStyle = '#3498db';
+      cxt.fillStyle = '#b76510';
       for (let i = 0; i < this.bufferLength; i++) {
         barHeight = parseInt(0.2 * this.dataArray[i], 0);
         cxt.fillRect(x, cHeight, barWidth, -barHeight);
@@ -112,14 +99,20 @@ export default {
 };
 </script>
 <style>
-.audioVisualization_C {
-  text-align: left;
-  padding: 20px;
-  box-sizing: border-box;
+.maxaci_C {
+  position: relative;
 }
-.audioVisualization_C .canvasC {
+.maxaci_C .canvasC {
   height: 100px;
   width: 100%;
-  background: #2c3e50;
+  position: absolute;
+  top: 329px;
+  left: 0;
+}
+.seaImg {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0
 }
 </style>

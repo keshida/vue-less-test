@@ -1,5 +1,5 @@
 <template>
-  <div class="audioVisualization_C pagePosition">
+  <div class="speakVisualization_C pagePosition">
     <canvas class="canvasC" id="speakCanvas"></canvas>
   </div>
 </template>
@@ -96,12 +96,12 @@ export default {
 };
 </script>
 <style>
-.audioVisualization_C {
+.speakVisualization_C {
   text-align: left;
   padding: 20px;
   box-sizing: border-box;
 }
-.canvasC {
+.speakVisualization_C .canvasC {
   height: 100px;
   width: 100%;
   background: #2c3e50;

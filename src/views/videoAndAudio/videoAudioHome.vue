@@ -11,6 +11,7 @@
       <speakVisualization v-if="indexed == 3"></speakVisualization>
       <remotelyVisualization v-if="indexed == 4"></remotelyVisualization>
       <differentSpeed v-if="indexed == 5"></differentSpeed>
+      <maxaci v-if="indexed == 6"></maxaci>
     </section>
   </div>
 </template>
@@ -21,6 +22,7 @@ import audioVisualization from '@/views/videoAndAudio/audioVisualization';
 import speakVisualization from '@/views/videoAndAudio/speakVisualization';
 import remotelyVisualization from '@/views/videoAndAudio/remotelyVisualization';
 import differentSpeed from '@/views/videoAndAudio/differentSpeed';
+import maxaci from '@/views/videoAndAudio/maxaci';
 export default {
   components: {
     audioFirst,
@@ -28,7 +30,8 @@ export default {
     audioVisualization,
     speakVisualization,
     remotelyVisualization,
-    differentSpeed
+    differentSpeed,
+    maxaci
   },
   data () {
     return {
@@ -38,9 +41,10 @@ export default {
         {name: 'audioVisualization'},
         {name: 'speakVisualization'},
         {name: 'remotelyVisualization'},
-        {name: 'differentSpeed'}
+        {name: 'differentSpeed'},
+        {name: 'maxaci'}
       ],
-      indexed: 5
+      indexed: 6
     }
   },
   created () {},
