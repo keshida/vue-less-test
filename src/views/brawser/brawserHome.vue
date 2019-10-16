@@ -7,24 +7,28 @@
     <section>
       <webStorage v-if="indexed == 0"></webStorage>
       <H5label v-if="indexed == 1"></H5label>
+      <fullScreen v-if="indexed == 2"></fullScreen>
     </section>
   </div>
 </template>
 <script>
 import webStorage from '@/views/brawser/webStorage';
 import H5label from '@/views/brawser/H5label';
+import fullScreen from '@/views/brawser/fullScreen';
 export default {
   components: {
     webStorage,
-    H5label
+    H5label,
+    fullScreen
   },
   data () {
     return {
       muneList: [
         {name: 'webStorage'},
-        {name: 'H5label'}
+        {name: 'H5label'},
+        {name: 'fullScreen'}
       ],
-      indexed: 0
+      indexed: 2
     }
   },
   created () {},
