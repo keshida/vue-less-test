@@ -1,5 +1,5 @@
 <template>
-  <div class="flexbox_C">
+  <div class="flexbox_C pagePosition">
     <form class="form_C" action="#">
       <input type="email" placeholder="Enter your email">
       <button type="button">send</button>

@@ -1,5 +1,5 @@
 <template>
-  <div class="gird_C onePage">
+  <div class="gird_C onePage pagePosition">
     <!-- <div class="divF">
       <div><p>1</p><p>2</p><p>3</p></div>
       <div><p>4</p><p>5</p><p>6</p></div>

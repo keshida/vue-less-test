@@ -7,22 +7,26 @@
     <section>
       <flexbox v-if="indexed == 0"></flexbox>
       <gird v-if="indexed == 1"></gird>
+      <responsive v-if="indexed == 2"></responsive>
     </section>
   </div>
 </template>
 <script>
 import flexbox from '@/views/layout/flexbox';
 import gird from '@/views/layout/gird';
+import responsive from '@/views/layout/responsive';
 export default {
   components: {
     flexbox,
-    gird
+    gird,
+    responsive
   },
   data () {
     return {
       muneList: [
         {name: 'flexbox'},
-        {name: 'gird'}
+        {name: 'gird'},
+        {name: 'responsive'}
       ],
       indexed: 0
     }
