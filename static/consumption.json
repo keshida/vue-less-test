@@ -807,11 +807,16 @@
       {"date":"2018-10-26","expRemark":"植物园门票",  "type":"dailyNecesExp","value":10},
       {"date":"2018-10-27","expRemark":"早餐",  "type":"foodExp","value":7},
       {"date":"2018-10-27","expRemark":"午餐",  "type":"foodExp","value":18.66},
+      {"date":"2018-10-27","expRemark":"冲锋衣",  "type":"clothesExp","value":279},
       {"date":"2018-10-27","expRemark":"晚餐",  "type":"foodExp","value":20.98},
       {"date":"2018-10-28","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-10-28","expRemark":"早餐",  "type":"foodExp","value":6.5},
       {"date":"2018-10-29","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-10-29","expRemark":"早餐",  "type":"foodExp","value":6.5},
+      {"date":"2018-10-30","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-10-30","expRemark":"早餐",  "type":"foodExp","value":6.5},
+      {"date":"2018-10-31","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-10-31","expRemark":"早餐",  "type":"foodExp","value":6},
     ]
   }
 }
