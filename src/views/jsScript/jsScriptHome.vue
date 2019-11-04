@@ -8,6 +8,7 @@
       <vueDrag v-if="indexed == 0"></vueDrag>
       <prototypejs v-if="indexed == 1"></prototypejs>
       <exceltest v-if="indexed == 2"></exceltest>
+      <ImplicitConversion v-if="indexed == 3"></ImplicitConversion>
     </section>
   </div>
 </template>
@@ -15,20 +16,23 @@
 import vueDrag from '@/views/jsScript/vueDrag';
 import prototypejs from '@/views/jsScript/prototypejs';
 import exceltest from '@/views/jsScript/exceltest';
+import ImplicitConversion from '@/views/jsScript/ImplicitConversion';
 export default {
   components: {
     vueDrag,
     prototypejs,
-    exceltest
+    exceltest,
+    ImplicitConversion
   },
   data () {
     return {
       muneList: [
         {name: 'vueDrag'},
         {name: 'prototypejs'},
-        {name: 'exceltest'}
+        {name: 'exceltest'},
+        {name: 'ImplicitConversion'}
       ],
-      indexed: 0
+      indexed: 3
     }
   },
   created () {},

@@ -788,7 +788,7 @@
       {"date":"2018-10-20","expRemark":"懒人听书",  "type":"dailyNecesExp","value":100},
       {"date":"2018-10-21","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-10-21","expRemark":"早餐",  "type":"foodExp","value":8.5},
-      {"date":"2018-10-21","expRemark":"午餐甲乙饼充的钱",  "type":"foodExp","value":100},
+      {"date":"2018-10-21","expRemark":"午餐甲乙饼充的钱",  "type":"foodExp","value":150},
       {"date":"2018-10-21","expRemark":"晚餐",  "type":"foodExp","value":12.8},
       {"date":"2018-10-22","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-10-22","expRemark":"早餐",  "type":"foodExp","value":6.5},
@@ -817,6 +817,17 @@
       {"date":"2018-10-30","expRemark":"早餐",  "type":"foodExp","value":6.5},
       {"date":"2018-10-31","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-10-31","expRemark":"早餐",  "type":"foodExp","value":6},
+      {"date":"2018-10-31","expRemark":"午餐",  "type":"foodExp","value":0},
+      {"date":"2018-11-01","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-11-01","expRemark":"早餐",  "type":"foodExp","value":6.5},
+      {"date":"2018-11-01","expRemark":"午餐",  "type":"foodExp","value":17.1},
+      {"date":"2018-11-01","expRemark":"晚餐",  "type":"foodExp","value":20.7},
+      {"date":"2018-11-02","expRemark":"午餐",  "type":"foodExp","value":21.99},
+      {"date":"2018-11-02","expRemark":"晚餐",  "type":"foodExp","value":17.7},
+      {"date":"2018-11-03","expRemark":"午餐",  "type":"foodExp","value":24.98},
+      {"date":"2018-11-03","expRemark":"理发",  "type":"dailyNecesExp","value":20},
+      {"date":"2018-11-03","expRemark":"话费",  "type":"dailyNecesExp","value":200},
+      {"date":"2018-11-03","expRemark":"晚餐",  "type":"foodExp","value":29.8},
     ]
   }
 }
