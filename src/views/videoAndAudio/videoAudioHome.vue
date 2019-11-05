@@ -10,7 +10,7 @@
       <audioVisualization :audioList="audioList" v-if="indexed == 2"></audioVisualization>
       <speakVisualization :audioList="audioList" v-if="indexed == 3"></speakVisualization>
       <remotelyVisualization :audioList="audioList" v-if="indexed == 4"></remotelyVisualization>
-      <differentSpeed :audioList="audioList" v-if="indexed == 5"></differentSpeed>
+      <ringVisualization :audioList="audioList" v-if="indexed == 5"></ringVisualization>
       <maxaci :audioList="audioList" v-if="indexed == 6"></maxaci>
     </section>
   </div>
@@ -21,7 +21,7 @@ import browserSound from '@/views/videoAndAudio/browserSound';
 import audioVisualization from '@/views/videoAndAudio/audioVisualization';
 import speakVisualization from '@/views/videoAndAudio/speakVisualization';
 import remotelyVisualization from '@/views/videoAndAudio/remotelyVisualization';
-import differentSpeed from '@/views/videoAndAudio/differentSpeed';
+import ringVisualization from '@/views/videoAndAudio/ringVisualization';
 import maxaci from '@/views/videoAndAudio/maxaci';
 export default {
   components: {
@@ -30,7 +30,7 @@ export default {
     audioVisualization,
     speakVisualization,
     remotelyVisualization,
-    differentSpeed,
+    ringVisualization,
     maxaci
   },
   data () {
@@ -41,7 +41,7 @@ export default {
         {name: 'audioVisualization'},
         {name: 'speakVisualization'},
         {name: 'remotelyVisualization'},
-        {name: 'differentSpeed'},
+        {name: 'ringVisualization'},
         {name: 'maxaci'}
       ],
       indexed: 0,

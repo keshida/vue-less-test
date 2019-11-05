@@ -65,7 +65,7 @@ export default {
       this.analyser.connect(this.scriptProcessor);
       this.audioSource.connect(this.analyser);
       this.audioSource.connect(this.gainNode);
-      // this.audioSource.connect(this.audioCtx.destination);
+      this.audioSource.connect(this.audioCtx.destination);
     },
     requestSong (url) {
       const request = new XMLHttpRequest();
@@ -155,7 +155,7 @@ export default {
   box-sizing: border-box;
 }
 .remotelyVisualization_C .canvasC {
-  height: 100px;
+  height: 600px;
   width: 100%;
   background: #2c3e50;
 }
