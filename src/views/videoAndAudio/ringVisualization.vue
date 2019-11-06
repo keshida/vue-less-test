@@ -39,11 +39,34 @@ export default {
     }
     this.audioCtx = new AudioContext();
     this.init()
+    this.canvasDraw()
   },
   beforeDestroy () {
     this.audioCtx.close()
   },
   methods: {
+    canvasDraw () {
+      let canvas = document.getElementById('audioCanvas');
+
+      const cWidth = canvas.width = canvas.offsetWidth,
+        cHeight = canvas.height = canvas.offsetHeight,
+        barWidth = parseInt(0.5 * cWidth / this.bufferLength, 0);
+
+      let x = cWidth / 2,
+        y = cHeight / 2,
+        radius = 60,
+        startAngle = 0,
+        endAngle = Math.PI;
+      
+      const cxt = canvas.getContext('2d');
+
+      cxt.translate(x,y)
+      cxt.arc(0, 0, radius, startAngle, endAngle, false);
+    
+      //把每个音频“切片”画在画布上
+      cxt.strokeStyle = '#3498db';
+      cxt.stroke();
+    },
     init () {
       this.audioSource = this.audioCtx.createBufferSource();
       //创建分析器
@@ -76,8 +99,6 @@ export default {
       this.loading = true;
       request.onload = () => {
         this.audioCtx.decodeAudioData(request.response, buffer => {
-          console.log(buffer)
-          // buffer.length = buffer.length/2
           this.loading = false;
           this.playing = true;
 
@@ -88,13 +109,12 @@ export default {
       request.send();
     },
     playSound (buffer) {
-      // this.audioSource.buffer = null;
       setTimeout(() => {
         this.audioSource.buffer = buffer;
         this.audioSource.loop = true;
         this.audioSource.start(0);
         this.playStart = new Date().getTime();
-        this.bindDrawEvent();
+        // this.bindDrawEvent();
       }, 200)
     },
     onPlay () {

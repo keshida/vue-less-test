@@ -44,7 +44,7 @@ export default {
         {name: 'ringVisualization'},
         {name: 'maxaci'}
       ],
-      indexed: 0,
+      indexed: 5,
       audioList: [
         {name: '来自尘埃的光', src: '../../../static/audio/1.mp3', file: '1.json'},
         {name: '知否知否应是绿肥红瘦', src: '../../../static/audio/2.mp3', file: '2.json'},
