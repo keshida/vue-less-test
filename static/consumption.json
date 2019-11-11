@@ -844,11 +844,13 @@
       {"date":"2018-11-07","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-11-07","expRemark":"早餐",  "type":"foodExp","value":7.5},
       {"date":"2018-11-07","expRemark":"晚餐",  "type":"foodExp","value":19.98},
-      {"date":"2018-11-09","expRemark":"公交",  "type":"trafficExp","value":2},
-      {"date":"2018-11-09","expRemark":"早餐",  "type":"foodExp","value":7.5},
+      {"date":"2018-11-08","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-11-08","expRemark":"早餐",  "type":"foodExp","value":7.5},
       {"date":"2018-11-09","expRemark":"午餐",  "type":"foodExp","value":20},
       {"date":"2018-11-09","expRemark":"午餐",  "type":"foodExp","value":19.48},
       {"date":"2018-11-09","expRemark":"晚餐",  "type":"foodExp","value":16.4},
+      {"date":"2018-11-11","expRemark":"公交",  "type":"trafficExp","value":1},
+      {"date":"2018-11-11","expRemark":"早餐",  "type":"foodExp","value":8.5},
     ]
   }
 }
