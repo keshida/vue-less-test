@@ -49,23 +49,43 @@ export default {
       let canvas = document.getElementById('audioCanvas');
 
       const cWidth = canvas.width = canvas.offsetWidth,
-        cHeight = canvas.height = canvas.offsetHeight,
-        barWidth = parseInt(0.5 * cWidth / this.bufferLength, 0);
+        cHeight = canvas.height = canvas.offsetHeight;
+        // barWidth = parseInt(0.5 * cWidth / this.bufferLength, 0);
 
       let x = cWidth / 2,
         y = cHeight / 2,
         radius = 60,
         startAngle = 0,
-        endAngle = Math.PI;
+        endAngle = Math.PI,
+        l = 32,
+        angle = (Math.PI * 2) / l,
+        r = 2;
       
       const cxt = canvas.getContext('2d');
 
+      cxt.beginPath()
       cxt.translate(x,y)
-      cxt.arc(0, 0, radius, startAngle, endAngle, false);
-    
-      //把每个音频“切片”画在画布上
+      cxt.arc(0, 0, radius, startAngle, endAngle * 2, true);
       cxt.strokeStyle = '#3498db';
       cxt.stroke();
+      cxt.closePath()
+
+      this.analyser.getByteFrequencyData(this.dataArray);
+
+      for (let i = 0; i < l; i++ ) {
+        cxt.beginPath()
+        const R = radius + this.setRandom(this.dataArray[i])
+        cxt.arc(0 + R * Math.sin(angle * i), 0 + R * Math.cos(angle * i), r, 0, Math.PI * 2, false);
+        cxt.strokeStyle = '#fff';
+        cxt.stroke();
+        cxt.closePath()
+      }
+    
+      //把每个音频“切片”画在画布上
+      
+    },
+    setRandom (val) {
+      return Math.random(1) * val;
     },
     init () {
       this.audioSource = this.audioCtx.createBufferSource();
@@ -76,11 +96,13 @@ export default {
       this.gainNode = this.audioCtx.createGain();
 
       //快速傅里叶变换参数
-      this.analyser.fftSize = 256;
+      this.analyser.fftSize = 64;
       //bufferArray长度
       this.bufferLength = this.analyser.frequencyBinCount;
+      console.log(this.bufferLength)
       //创建bufferArray，用来装音频数据
       this.dataArray = new Uint8Array(this.bufferLength);
+      console.log(this.dataArray)
       this.connection()
     },
     connection () {
@@ -114,7 +136,7 @@ export default {
         this.audioSource.loop = true;
         this.audioSource.start(0);
         this.playStart = new Date().getTime();
-        // this.bindDrawEvent();
+        this.bindDrawEvent();
       }, 200)
     },
     onPlay () {
@@ -139,31 +161,7 @@ export default {
       this.playing = false;
     },
     bindDrawEvent () {
-      this.scriptProcessor.onaudioprocess = this.draw;
-    },
-    draw () {
-      let canvas = document.getElementById('audioCanvas');
-
-      const cWidth = canvas.width = canvas.offsetWidth,
-        cHeight = canvas.height = canvas.offsetHeight,
-        barWidth = parseInt(0.5 * cWidth / this.bufferLength, 0);
-
-      let barHeight = 0,
-        x = 0;
-
-      const cxt = canvas.getContext('2d');
-
-      cxt.clearRect(0, 0, cWidth, cHeight);
-      //分析器获取音频数据“切片”
-      this.analyser.getByteFrequencyData(this.dataArray);
-    
-      //把每个音频“切片”画在画布上
-      cxt.fillStyle = '#3498db';
-      for (let i = 0; i < this.bufferLength; i++) {
-        barHeight = parseInt(0.2 * this.dataArray[i], 0);
-        cxt.fillRect(x, cHeight, barWidth, -barHeight);
-        x += barWidth + 3;
-      }
+      this.scriptProcessor.onaudioprocess = this.canvasDraw;
     }
   }
 };
