@@ -839,7 +839,12 @@
       {"date":"2018-11-06","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-11-06","expRemark":"早餐",  "type":"foodExp","value":7.5},
       {"date":"2018-11-06","expRemark":"午餐",  "type":"foodExp","value":16.28},
-      {"date":"2018-11-06","expRemark":"晚餐",  "type":"foodExp","value":0},
+      {"date":"2018-11-06","expRemark":"晚餐",  "type":"foodExp","value":13.60},
+      {"date":"2018-11-06","expRemark":"饮料",  "type":"foodExp","value":6.03},
+      {"date":"2018-11-07","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-11-07","expRemark":"早餐",  "type":"foodExp","value":8},
+      {"date":"2018-11-07","expRemark":"午餐",  "type":"foodExp","value":0},
+      {"date":"2018-11-07","expRemark":"晚餐",  "type":"foodExp","value":0},
     ]
   }
 }
