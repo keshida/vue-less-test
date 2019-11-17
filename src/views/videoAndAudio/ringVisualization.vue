@@ -30,7 +30,9 @@ export default {
       audioSource: {}
     };
   },
-  created() {},
+  created() {
+    console.log(navigator)
+  },
   mounted() {
     //实例化音频对象
     if (!AudioContext) {
@@ -75,6 +77,7 @@ export default {
       for (let i = 0; i < l; i++ ) {
         cxt.beginPath()
         const R = radius + this.setRandom(this.dataArray[i])
+
         cxt.arc(0 + R * Math.sin(angle * i), 0 + R * Math.cos(angle * i), r, 0, Math.PI * 2, false);
         cxt.strokeStyle = '#fff';
         cxt.stroke();
@@ -99,10 +102,8 @@ export default {
       this.analyser.fftSize = 64;
       //bufferArray长度
       this.bufferLength = this.analyser.frequencyBinCount;
-      console.log(this.bufferLength)
       //创建bufferArray，用来装音频数据
       this.dataArray = new Uint8Array(this.bufferLength);
-      console.log(this.dataArray)
       this.connection()
     },
     connection () {

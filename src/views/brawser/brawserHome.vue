@@ -9,6 +9,7 @@
       <H5label v-if="indexed == 1"></H5label>
       <fullScreen v-if="indexed == 2"></fullScreen>
       <desktopIcon v-if="indexed == 3"></desktopIcon>
+      <Navigator v-if="indexed == 4"></Navigator>
     </section>
   </div>
 </template>
@@ -17,12 +18,14 @@ import webStorage from '@/views/brawser/webStorage';
 import H5label from '@/views/brawser/H5label';
 import fullScreen from '@/views/brawser/fullScreen';
 import desktopIcon from '@/views/brawser/desktopIcon';
+import Navigator from '@/views/brawser/Navigator';
 export default {
   components: {
     webStorage,
     H5label,
     fullScreen,
-    desktopIcon
+    desktopIcon,
+    Navigator
   },
   data () {
     return {
@@ -30,9 +33,10 @@ export default {
         {name: 'webStorage'},
         {name: 'H5label'},
         {name: 'fullScreen'},
-        {name: 'desktopIcon'}
+        {name: 'desktopIcon'},
+        {name: 'Navigator'}
       ],
-      indexed: 3
+      indexed: 4
     }
   },
   created () {},
