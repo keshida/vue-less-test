@@ -48,6 +48,7 @@ const FADING_TIME = 0.5;
 export default {
   data() {
     return {
+      // https://wow.techbrood.com/fiddle/35067
       audioCtx: {}, // 音频上下文
       oscillator: {}, // 振荡器
       gainNode: {}, // 增益节点

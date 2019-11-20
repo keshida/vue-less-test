@@ -14,6 +14,7 @@ export default {
   },
   data() {
     return {
+      // https://wow.techbrood.com/fiddle/30177
       audioCtx: {}, // 音频上下文
       oscillator: {}, // 振荡器
       gainNode: {}, // 增益节点
