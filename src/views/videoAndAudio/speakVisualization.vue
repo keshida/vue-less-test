@@ -1,17 +1,8 @@
 <template>
   <div class="speakVisualization_C pagePosition">
     <canvas class="canvasC" id="speakCanvas"></canvas>
-    <h1>createMediaStreamSource example</h1>
-    <video controls>
-    </video>
-    <br>
     <input type="range" min="1" max="40">
-
-    <pre></pre>
-
-    <p>Biquad filter frequency response for: </p>
-    <ul class="freq-response-output">
-    </ul>
+    <ul class="freq-response-output"></ul>
   </div>
 </template>
 
@@ -26,7 +17,8 @@ export default {
       scriptProcessor: {}, // 处理器
       bufferLength: "",
       dataArray: [],
-      audioSource: {}
+      audioSource: {},
+      reco: null
     };
   },
   created() {},
@@ -47,9 +39,7 @@ export default {
   methods: {
     setInit() {
       var myAudio = document.querySelector("audio");
-      var pre = document.querySelector("pre");
       var video = document.querySelector("video");
-      var myScript = document.querySelector("script");
       var range = document.querySelector("input");
       var freqResponseOutput = document.querySelector(".freq-response-output");
       // create float32 arrays for getFrequencyResponse
@@ -69,7 +59,7 @@ export default {
         navigator.mediaDevices
           .getUserMedia({
             audio: true,
-            video: true
+            video: false
           })
           .then(function(stream) {
             video.srcObject = stream;
@@ -118,19 +108,15 @@ export default {
             }
             calcFrequencyResponse();
           })
-          .catch(function(err) {
-            console.log("The following gUM error occured: " + err);
-          });
-      } else {
-        console.log("getUserMedia not supported on your browser!");
+          
       }
-      // dump script to pre element
-      pre.innerHTML = myScript.innerHTML;
     },
     init() {
       navigator.mediaDevices.getUserMedia({ audio: true }).then(
         stream => {
+          console.log(stream)
           this.audioSource = this.audioCtx.createMediaStreamSource(stream);
+          this.reco = new Recorder
           this.audioSource.connect(this.analyser);
           this.audioSource.connect(this.gainNode);
           this.audioSource.connect(this.audioCtx.destination);
@@ -140,7 +126,9 @@ export default {
           console.log(error);
           alert("出错，请确保已允许浏览器获取音频权限");
         }
-      );
+      ).catch(function(err) {
+        console.log("The following gUM error occured: " + err);
+      });
     },
     initAnalyser() {
       //创建分析器
