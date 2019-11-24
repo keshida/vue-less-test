@@ -1,17 +1,40 @@
 <template>
   <div class="speakVisualization_C pagePosition">
+    <ul>
+      <li v-for="(item,index) in audioList" :key="index" v-on:click="changAudio(index)">{{ item.name }}</li>
+    </ul>
     <canvas class="canvasC" id="speakCanvas"></canvas>
+    说话人x:<input v-model="pannerPosition.x">
+    <input v-model="pannerPosition.x" type="range" min="-100" max="100"><br>
+    说话人y:<input v-model="pannerPosition.y">
+    <input v-model="pannerPosition.y" type="range" min="-100" max="100"><br>
+    说话人z:<input v-model="pannerPosition.z">
+    <input v-model="pannerPosition.z" type="range" min="-100" max="100">
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    audioList: {
+      type: Array
+    }
+  },
   data() {
     return {
+      musicPlayer: {},
       audioCtx: {}, // 音频上下文
       oscillator: {}, // 振荡器
       gainNode: {}, // 增益节点
       analyser: {}, // 分析器
+      scriptProcessor: {}, // 处理器
+      pannerNode: {}, // 音频监听
+      listener: {},
+      pannerPosition: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
       bufferLength: "",
       dataArray: [],
       audioSource: {},
@@ -26,35 +49,38 @@ export default {
     }
     this.audioCtx = new AudioContext();
 
-    this.init();
     this.initAnalyser();
   },
   beforeDestroy() {
     this.audioCtx.close();
   },
   methods: {
+    changAudio (index) {
+      this.musicPlayer.src= this.audioList[index].src;
+      this.musicPlayer.play()
+      this.setAudio()
+    },
+    setAudio () {
+      this.audioSource.connect(this.analyser);
+      this.audioSource.connect(this.gainNode);
+      this.audioSource.connect(this.audioCtx.destination);
+
+      this.bindDrawEvent(); 
+    },
     init() {
-      navigator.mediaDevices.getUserMedia({ audio: true }).then(
-        // 浏览器 调用 机器音频接收器
-        // 一般调用此功能 都会经过用户同意
-        // http 不被允许
-        stream => {
-          // 返回 流文件
-          this.audioSource = this.audioCtx.createMediaStreamSource(stream);
-          // createMediaStreamSource 接受流文件创建音频源
-          this.audioSource.connect(this.analyser);
-          this.audioSource.connect(this.gainNode);
-          this.audioSource.connect(this.audioCtx.destination);
-          // 用于音频源播放
-          this.bindDrawEvent();
-        },
-        error => {
-          console.log(error);
-          alert("出错，请确保已允许浏览器获取音频权限");
-        }
-      ).catch(function(err) {
-        console.log("The following gUM error occured: " + err);
-      });
+      this.musicPlayer = new Audio();
+      this.musicPlayer.loop = true;
+      this.musicPlayer.src= this.audioList[6].src;
+      this.musicPlayer.play()
+      this.audioSource = this.audioCtx.createMediaElementSource(this.musicPlayer);// 创建音频源
+
+      this.audioSource.connect(this.analyser);
+      this.audioSource.connect(this.gainNode);
+      this.audioSource.connect(this.pannerNode);
+      // this.audioSource.connect(this.audioCtx.destination);
+      this.pannerNode.connect(this.audioCtx.destination);
+      // 用于音频源播放
+      this.bindDrawEvent();
     },
     initAnalyser() {
       // 创建分析器
@@ -71,16 +97,34 @@ export default {
     },
     initScriptProcessor() {
       // 创建处理器，参数分别是缓存区大小、输入声道数、输出声道数
-      this.scriptProcessor = this.audioCtx.createScriptProcessor(2048, 1, 1);
+      this.scriptProcessor = this.audioCtx.createScriptProcessor(2048, 2, 2);
       // 分析器连接处理器
       this.analyser.connect(this.scriptProcessor);
       // 处理器连接扬声器 用于可视化数据显示
       this.scriptProcessor.connect(this.audioCtx.destination);
+      this.initCreatePanner()
+    },
+    initCreatePanner () {
+      this.pannerNode = this.audioCtx.createPanner();
+      this.pannerNode.setPosition(-30,0,0); // 将发声体坐标传给PannerNode
+      this.pannerNode.panningModel = 'HRTF';
+      this.pannerNode.distanceModel = 'inverse';
+      this.pannerNode.refDistance = 1;
+      this.pannerNode.maxDistance = 10000;
+      this.pannerNode.rolloffFactor = 1;
+      this.pannerNode.coneInnerAngle = 360;
+      this.pannerNode.coneOuterAngle = 0;
+      this.pannerNode.coneOuterGain = 0;
+
+      this.listener = this.audioCtx.listener;
+      this.listener.setPosition(0,0,0);
+      this.init();
     },
     bindDrawEvent() {
       this.scriptProcessor.onaudioprocess = this.draw;
     },
     draw() {
+      this.listener.setPosition(this.pannerPosition.x,this.pannerPosition.y,this.pannerPosition.z);
       let canvas = document.getElementById("speakCanvas");
 
       const cWidth = (canvas.width = canvas.offsetWidth),

@@ -12,6 +12,7 @@
       <remotelyVisualization :audioList="audioList" v-if="indexed == 4"></remotelyVisualization>
       <ringVisualization :audioList="audioList" v-if="indexed == 5"></ringVisualization>
       <maxaci :audioList="audioList" v-if="indexed == 6"></maxaci>
+      <audioSpatialization :audioList="audioList" v-if="indexed == 7"></audioSpatialization>
     </section>
   </div>
 </template>
@@ -23,6 +24,7 @@ import speakVisualization from '@/views/videoAndAudio/speakVisualization';
 import remotelyVisualization from '@/views/videoAndAudio/remotelyVisualization';
 import ringVisualization from '@/views/videoAndAudio/ringVisualization';
 import maxaci from '@/views/videoAndAudio/maxaci';
+import audioSpatialization from '@/views/videoAndAudio/audioSpatialization';
 export default {
   components: {
     audioFirst,
@@ -31,7 +33,8 @@ export default {
     speakVisualization,
     remotelyVisualization,
     ringVisualization,
-    maxaci
+    maxaci,
+    audioSpatialization
   },
   data () {
     return {
@@ -42,7 +45,8 @@ export default {
         {name: 'speakVisualization'},
         {name: 'remotelyVisualization'},
         {name: 'ringVisualization'},
-        {name: 'maxaci'}
+        {name: 'maxaci'},
+        {name: 'audioSpatialization'}
       ],
       indexed: 5,
       audioList: [
