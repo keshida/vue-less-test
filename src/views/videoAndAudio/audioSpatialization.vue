@@ -9,7 +9,19 @@
     说话人y:<input v-model="pannerPosition.y">
     <input v-model="pannerPosition.y" type="range" min="-100" max="100"><br>
     说话人z:<input v-model="pannerPosition.z">
-    <input v-model="pannerPosition.z" type="range" min="-100" max="100">
+    <input v-model="pannerPosition.z" type="range" min="-100" max="100"><br>
+    听话人x:<input v-model="camera.x">
+    <input v-model="camera.x" type="range" min="-100" max="100"><br>
+    听话人y:<input v-model="camera.y">
+    <input v-model="camera.y" type="range" min="-100" max="100"><br>
+    听话人z:<input v-model="camera.z">
+    <input v-model="camera.z" type="range" min="-100" max="100"><br>
+    听方向x:<input v-model="forward.x">
+    <input v-model="forward.x" type="range" min="-100" max="100"><br>
+    听方向y:<input v-model="forward.y">
+    <input v-model="forward.y" type="range" min="-100" max="100"><br>
+    听方向z:<input v-model="forward.z">
+    <input v-model="forward.z" type="range" min="-100" max="100">
   </div>
 </template>
 
@@ -31,6 +43,16 @@ export default {
       pannerNode: {}, // 音频监听
       listener: {},
       pannerPosition: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+      camera: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+      forward: {
         x: 0,
         y: 0,
         z: 0,
@@ -106,7 +128,7 @@ export default {
     },
     initCreatePanner () {
       this.pannerNode = this.audioCtx.createPanner();
-      this.pannerNode.setPosition(-30,0,0); // 将发声体坐标传给PannerNode
+      this.pannerNode.setPosition(this.pannerPosition.x,this.pannerPosition.y,this.pannerPosition.z); // 将发声体坐标传给PannerNode
       this.pannerNode.panningModel = 'HRTF';
       this.pannerNode.distanceModel = 'inverse';
       this.pannerNode.refDistance = 1;
@@ -117,14 +139,21 @@ export default {
       this.pannerNode.coneOuterGain = 0;
 
       this.listener = this.audioCtx.listener;
-      this.listener.setPosition(0,0,0);
+      this.listener.setPosition(this.camera.x,this.camera.y,this.camera.z);
+      this.listener.forwardX.value = this.forward.x;
+      this.listener.forwardY.value = this.forward.y;
+      this.listener.forwardZ.value = this.forward.z;
       this.init();
     },
     bindDrawEvent() {
       this.scriptProcessor.onaudioprocess = this.draw;
     },
     draw() {
-      this.listener.setPosition(this.pannerPosition.x,this.pannerPosition.y,this.pannerPosition.z);
+      this.pannerNode.setPosition(this.pannerPosition.x,this.pannerPosition.y,this.pannerPosition.z);
+      this.listener.setPosition(this.camera.x,this.camera.y,this.camera.z);
+      this.listener.forwardX.value = this.forward.x;
+      this.listener.forwardY.value = this.forward.y;
+      this.listener.forwardZ.value = this.forward.z;
       let canvas = document.getElementById("speakCanvas");
 
       const cWidth = (canvas.width = canvas.offsetWidth),
