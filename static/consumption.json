@@ -891,6 +891,9 @@
       {"date":"2018-11-25","expRemark":"公交",  "type":"trafficExp","value":2},
       {"date":"2018-11-25","expRemark":"早餐",  "type":"foodExp","value":7.5},
       {"date":"2018-11-25","expRemark":"晚餐",  "type":"foodExp","value":4.68},
+      {"date":"2018-11-25","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-11-25","expRemark":"早餐",  "type":"foodExp","value":8},
+      {"date":"2018-11-25","expRemark":"晚餐",  "type":"foodExp","value":0},
     ]
   }
 }
