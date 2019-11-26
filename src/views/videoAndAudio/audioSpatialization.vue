@@ -128,7 +128,8 @@ export default {
     },
     initCreatePanner () {
       this.pannerNode = this.audioCtx.createPanner();
-      this.pannerNode.setPosition(this.pannerPosition.x,this.pannerPosition.y,this.pannerPosition.z); // 将发声体坐标传给PannerNode
+      // 将发声体坐标传给PannerNode
+      this.pannerNode.setPosition(this.pannerPosition.x,this.pannerPosition.y,this.pannerPosition.z);
       this.pannerNode.panningModel = 'HRTF';
       this.pannerNode.distanceModel = 'inverse';
       this.pannerNode.refDistance = 1;
@@ -139,7 +140,9 @@ export default {
       this.pannerNode.coneOuterGain = 0;
 
       this.listener = this.audioCtx.listener;
+      // 声音接受位置
       this.listener.setPosition(this.camera.x,this.camera.y,this.camera.z);
+      // 声音接受方向
       this.listener.forwardX.value = this.forward.x;
       this.listener.forwardY.value = this.forward.y;
       this.listener.forwardZ.value = this.forward.z;
