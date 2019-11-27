@@ -16,7 +16,6 @@
       <div class="control">
         <button v-on:click="play">开始</button>
         <button v-on:click="pause">暂停</button>
-        <button id="btnSer">btnSer</button>
       </div>
     </div>
   </div>

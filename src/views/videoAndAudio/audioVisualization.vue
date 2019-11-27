@@ -9,6 +9,13 @@
 
 <script>
 export default {
+  /**
+   * AudioContext 生成音频的上下文 都有操作都会在AudioContext之下完成
+   * 首先要获取一个音频源 audio标签 new Audio() 请求的数据流 或者是浏览器接受的话筒设备
+   * 
+   * 这个是个简单的例子，canvas上根据音频流绘制简单的方形动画效果
+   * requestAnimationFrame
+   */
   props: {
     audioList: {
       type: Array
@@ -28,24 +35,36 @@ export default {
   },
   created() {},
   mounted() {
-    //实例化音频对象
-    if (!AudioContext) {
-      alert('您的浏览器不支持audioContext!');
-      return;
-    }
-    this.audioCtx = new AudioContext();
-    
-    this.musicPlayer = new Audio();
-    this.musicPlayer.src= this.audioList[0].src;
-    this.musicPlayer.loop = true;
-    this.audioSource = this.audioCtx.createMediaElementSource(this.musicPlayer);
-
-    this.initAnalyser()
+    this.init();
   },
   beforeDestroy () {
     this.audioCtx.close()
   },
   methods: {
+    init () {
+      // 实例化音频对象
+      if (!AudioContext) {
+        alert('您的浏览器不支持audioContext!');
+        return;
+      }
+      /**
+       * new AudioContext() 创建音频对象
+       */
+      this.audioCtx = new AudioContext();
+
+      /**
+       * 这个例子是new Audio()
+       */
+      this.musicPlayer = new Audio();
+      this.musicPlayer.src= this.audioList[0].src;
+      this.musicPlayer.loop = true;
+
+      /**
+       * 通过createMediaElementSource 根据文档音频文件来源 创建音频源
+       */
+      this.audioSource = this.audioCtx.createMediaElementSource(this.musicPlayer);
+      this.initAnalyser()
+    },
     changAudio (index) {
       this.musicPlayer.src= this.audioList[index].src;
       this.musicPlayer.play()
@@ -59,19 +78,34 @@ export default {
       this.bindDrawEvent(); 
     },
     initAnalyser () {
-      //创建分析器
+      /**
+       * 创建分析器
+       * 这个相当于可视化的核心
+       * 音频播放中的所有数据返回都是analyser返回的
+       */
       this.analyser = this.audioCtx.createAnalyser();
-      //快速傅里叶变换参数
+      /**
+       * 快速傅里叶变换参数 这个参数设置规定2的倍数 一般指定为256 有个文档是讲这个的 但都是英文 还有计算公式 没怎么看
+       */
       this.analyser.fftSize = 256;
-      //bufferArray长度
+      /**
+       * bufferArray长度 默认为fftSize的1/2
+       * 图上显示的是绘制128个竖线，但音频 我也不太清除是 音调还是跟高低音有关，后面很多都是0 就像现在显示的样子
+       */
       this.bufferLength = this.analyser.frequencyBinCount;
       //创建bufferArray，用来装音频数据
       this.dataArray = new Uint8Array(this.bufferLength);
+      /**
+       * gainNode用来控制音频图的总体增益(或音量)
+       */
       this.gainNode = this.audioCtx.createGain();
       this.initScriptProcessor()
     },
     initScriptProcessor () {
-      //创建处理器，参数分别是缓存区大小、输入声道数、输出声道数
+      /**
+       * 创建处理器，参数分别是缓存区大小、输入声道数、输出声道数
+       * 监听音频播放 靠这个一直更新数据变化
+       */
       this.scriptProcessor = this.audioCtx.createScriptProcessor(2048, 1, 1);
       //分析器连接处理器，处理器连接扬声器
       this.analyser.connect(this.scriptProcessor);

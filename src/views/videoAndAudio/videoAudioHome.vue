@@ -1,6 +1,7 @@
 <template>
   <div class="onePage videoAudioHome_C">
     <aside>
+      <p>音频可视化分享</p>
       <div class="muneList_C" v-for="(item,index) in muneList" :key="index" v-on:click="viewTheCom(index)" v-bind:class="{active_C:indexed == index}">{{ item.name }}</div>
       <button class="muneBnt_C" v-on:click="goBack">返回</button>
     </aside>
@@ -13,10 +14,12 @@
       <ringVisualization :audioList="audioList" v-if="indexed == 5"></ringVisualization>
       <maxaci :audioList="audioList" v-if="indexed == 6"></maxaci>
       <audioSpatialization :audioList="audioList" v-if="indexed == 7"></audioSpatialization>
+      <imgDisplay :audioList="audioList" v-if="indexed == 8"></imgDisplay>
     </section>
   </div>
 </template>
 <script>
+import imgDisplay from '@/views/videoAndAudio/imgDisplay';
 import audioFirst from '@/views/videoAndAudio/audioFirst';
 import browserSound from '@/views/videoAndAudio/browserSound';
 import audioVisualization from '@/views/videoAndAudio/audioVisualization';
@@ -27,6 +30,7 @@ import maxaci from '@/views/videoAndAudio/maxaci';
 import audioSpatialization from '@/views/videoAndAudio/audioSpatialization';
 export default {
   components: {
+    imgDisplay,
     audioFirst,
     browserSound,
     audioVisualization,
@@ -46,7 +50,8 @@ export default {
         {name: 'remotelyVisualization'},
         {name: 'ringVisualization'},
         {name: 'maxaci'},
-        {name: 'audioSpatialization'}
+        {name: 'audioSpatialization'},
+        {name: 'imgDisplay'}
       ],
       indexed: 5,
       audioList: [
