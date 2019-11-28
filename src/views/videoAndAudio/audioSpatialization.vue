@@ -45,28 +45,28 @@ export default {
       pannerPosition: {
         x: 0,
         y: 0,
-        z: 0,
+        z: 0
       },
       camera: {
         x: 0,
         y: 0,
-        z: 0,
+        z: 0
       },
       forward: {
         x: 0,
         y: 0,
-        z: 0,
+        z: 0
       },
-      bufferLength: "",
+      bufferLength: '',
       dataArray: [],
-      audioSource: {},
-    };
+      audioSource: {}
+    }
   },
   created() {},
   mounted() {
     //实例化音频对象
     if (!AudioContext) {
-      alert("您的浏览器不支持audioContext!");
+      alert('您的浏览器不支持audioContext!');
       return;
     }
     this.audioCtx = new AudioContext();
@@ -99,7 +99,6 @@ export default {
       this.audioSource.connect(this.analyser);
       this.audioSource.connect(this.gainNode);
       this.audioSource.connect(this.pannerNode);
-      // this.audioSource.connect(this.audioCtx.destination);
       this.pannerNode.connect(this.audioCtx.destination);
       // 用于音频源播放
       this.bindDrawEvent();
@@ -157,7 +156,7 @@ export default {
       this.listener.forwardX.value = this.forward.x;
       this.listener.forwardY.value = this.forward.y;
       this.listener.forwardZ.value = this.forward.z;
-      let canvas = document.getElementById("speakCanvas");
+      let canvas = document.getElementById('speakCanvas');
 
       const cWidth = (canvas.width = canvas.offsetWidth),
         cHeight = (canvas.height = canvas.offsetHeight),
@@ -166,14 +165,14 @@ export default {
       let barHeight = 0,
         x = 0;
 
-      const cxt = canvas.getContext("2d");
+      const cxt = canvas.getContext('2d');
 
       cxt.clearRect(0, 0, cWidth, cHeight);
       //分析器获取音频数据“切片”
       this.analyser.getByteFrequencyData(this.dataArray);
 
       //把每个音频“切片”画在画布上
-      cxt.fillStyle = "#3498db";
+      cxt.fillStyle = '#3498db';
       for (let i = 0; i < this.bufferLength; i++) {
         barHeight = parseInt(0.2 * this.dataArray[i], 0);
         cxt.fillRect(x, cHeight, barWidth, -barHeight);

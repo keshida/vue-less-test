@@ -1,9 +1,10 @@
 <template>
-  <div class="remotelyVisualization_C pagePosition">
+  <div class="ringVisualization_C pagePosition">
     <ul>
       <li v-for="(item,index) in audioList" :key="index" v-on:click="requestSong(item.src)">{{ item.name }}</li>
     </ul>
     <canvas class="canvasC" id="audioCanvas"></canvas>
+    <button @click="pause">暂停</button>
   </div>
 </template>
 <script>
@@ -20,7 +21,6 @@ export default {
       gainNode: {}, // 增益节点
       analyser: {},// 分析器
       scriptProcessor: {},// 处理器
-      buffer: {},
       loading: false,
       playing: false,
       playStart: '',
@@ -30,9 +30,7 @@ export default {
       audioSource: {}
     };
   },
-  created() {
-    console.log(navigator)
-  },
+  created() {},
   mounted() {
     //实例化音频对象
     if (!AudioContext) {
@@ -41,7 +39,6 @@ export default {
     }
     this.audioCtx = new AudioContext();
     this.init()
-    this.canvasDraw()
   },
   beforeDestroy () {
     this.audioCtx.close()
@@ -76,16 +73,13 @@ export default {
 
       for (let i = 0; i < l; i++ ) {
         cxt.beginPath()
-        const R = radius + this.setRandom(this.dataArray[i])
+        const R = radius + this.setRandom(this.dataArray[0]) / 10;
 
         cxt.arc(0 + R * Math.sin(angle * i), 0 + R * Math.cos(angle * i), r, 0, Math.PI * 2, false);
         cxt.strokeStyle = '#fff';
         cxt.stroke();
         cxt.closePath()
       }
-    
-      //把每个音频“切片”画在画布上
-      
     },
     setRandom (val) {
       return Math.random(1) * val;
@@ -125,11 +119,13 @@ export default {
           this.loading = false;
           this.playing = true;
 
-          this.buffer = buffer;
           this.playSound(buffer);
         });
       };
       request.send();
+    },
+    pause () {
+      this.audioSource.stop(0);
     },
     playSound (buffer) {
       setTimeout(() => {
@@ -140,27 +136,6 @@ export default {
         this.bindDrawEvent();
       }, 200)
     },
-    onPlay () {
-      //重新播放需要重新创建buffer
-      this.audioSource = this.audioCtx.createBufferSource();
-      this.audioSource.connect(this.analyser);
-      this.audioSource.connect(this.audioCtx.destination);
-      this.audioSource.buffer = this.buffer;
-      this.audioSource.loop = true;
-      this.audioSource.start(0, this.playResume);
-
-      this.playStart = new Date().getTime() - this.playResume * 1000;
-
-      this.playing = true;
-    },
-    onPause () {
-      this.playResume = new Date().getTime();
-      this.playResume -= this.playStart;
-      this.playResume /= 1000;
-      this.playResume %= this.audioSource.buffer.duration;
-      this.audioSource.stop();
-      this.playing = false;
-    },
     bindDrawEvent () {
       this.scriptProcessor.onaudioprocess = this.canvasDraw;
     }
@@ -168,12 +143,12 @@ export default {
 };
 </script>
 <style>
-.remotelyVisualization_C {
+.ringVisualization_C {
   text-align: left;
   padding: 20px;
   box-sizing: border-box;
 }
-.remotelyVisualization_C .canvasC {
+.ringVisualization_C .canvasC {
   height: 600px;
   width: 100%;
   background: #2c3e50;

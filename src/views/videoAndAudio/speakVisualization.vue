@@ -12,16 +12,16 @@ export default {
       oscillator: {}, // 振荡器
       gainNode: {}, // 增益节点
       analyser: {}, // 分析器
-      bufferLength: "",
+      bufferLength: '',
       dataArray: [],
-      audioSource: {},
+      audioSource: {}
     };
   },
   created() {},
   mounted() {
     //实例化音频对象
     if (!AudioContext) {
-      alert("您的浏览器不支持audioContext!");
+      alert('您的浏览器不支持audioContext!');
       return;
     }
     this.audioCtx = new AudioContext();
@@ -50,10 +50,10 @@ export default {
         },
         error => {
           console.log(error);
-          alert("出错，请确保已允许浏览器获取音频权限");
+          alert('出错，请确保已允许浏览器获取音频权限');
         }
       ).catch(function(err) {
-        console.log("The following gUM error occured: " + err);
+        console.log('The following gUM error occured: ' + err);
       });
     },
     initAnalyser() {
@@ -81,7 +81,7 @@ export default {
       this.scriptProcessor.onaudioprocess = this.draw;
     },
     draw() {
-      let canvas = document.getElementById("speakCanvas");
+      let canvas = document.getElementById('speakCanvas');
 
       const cWidth = (canvas.width = canvas.offsetWidth),
         cHeight = (canvas.height = canvas.offsetHeight),
@@ -90,14 +90,14 @@ export default {
       let barHeight = 0,
         x = 0;
 
-      const cxt = canvas.getContext("2d");
+      const cxt = canvas.getContext('2d');
 
       cxt.clearRect(0, 0, cWidth, cHeight);
       //分析器获取音频数据“切片”
       this.analyser.getByteFrequencyData(this.dataArray);
 
       //把每个音频“切片”画在画布上
-      cxt.fillStyle = "#3498db";
+      cxt.fillStyle = '#3498db';
       for (let i = 0; i < this.bufferLength; i++) {
         barHeight = parseInt(0.2 * this.dataArray[i], 0);
         cxt.fillRect(x, cHeight, barWidth, -barHeight);
