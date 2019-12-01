@@ -1,5 +1,6 @@
 <template>
   <div class="imgDisplay_C pagePosition">
+    <p>音频可视化分享</p>
     <img class="disImg" src="../../assets/images/audio/dis1.jpg" alt="">
     <img class="disImg" src="../../assets/images/audio/dis2.jpg" alt="">
     <img class="disImg" src="../../assets/images/audio/dis3.jpg" alt="">

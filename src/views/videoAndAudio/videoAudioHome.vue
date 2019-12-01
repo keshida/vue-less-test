@@ -1,20 +1,19 @@
 <template>
   <div class="onePage videoAudioHome_C">
     <aside>
-      <p>音频可视化分享</p>
-      <div class="muneList_C" v-for="(item,index) in muneList" :key="index" v-on:click="viewTheCom(index)" v-bind:class="{active_C:indexed == index}">{{ item.name }}</div>
+      <div class="muneList_C" v-for="item in muneList" :key="item.id" v-on:click="viewTheCom(item.id)" v-bind:class="{active_C:item.id == activeId}">{{ item.name }}</div>
       <button class="muneBnt_C" v-on:click="goBack">返回</button>
     </aside>
     <section>
-      <audioFirst :audioList="audioList" v-if="indexed == 0"></audioFirst>
-      <browserSound :audioList="audioList" v-if="indexed == 1"></browserSound>
-      <audioVisualization :audioList="audioList" v-if="indexed == 2"></audioVisualization>
-      <speakVisualization :audioList="audioList" v-if="indexed == 3"></speakVisualization>
-      <remotelyVisualization :audioList="audioList" v-if="indexed == 4"></remotelyVisualization>
-      <ringVisualization :audioList="audioList" v-if="indexed == 5"></ringVisualization>
-      <maxaci :audioList="audioList" v-if="indexed == 6"></maxaci>
-      <audioSpatialization :audioList="audioList" v-if="indexed == 7"></audioSpatialization>
-      <imgDisplay :audioList="audioList" v-if="indexed == 8"></imgDisplay>
+      <audioFirst :audioList="audioList" v-if="'audioFirst' == activeId"></audioFirst>
+      <browserSound :audioList="audioList" v-if="'browserSound' == activeId"></browserSound>
+      <audioVisualization :audioList="audioList" v-if="'audioVisualization' == activeId"></audioVisualization>
+      <speakVisualization :audioList="audioList" v-if="'speakVisualization' == activeId"></speakVisualization>
+      <remotelyVisualization :audioList="audioList" v-if="'remotelyVisualization' == activeId"></remotelyVisualization>
+      <ringVisualization :audioList="audioList" v-if="'ringVisualization' == activeId"></ringVisualization>
+      <maxaci :audioList="audioList" v-if="'maxaci' == activeId"></maxaci>
+      <audioSpatialization :audioList="audioList" v-if="'audioSpatialization' == activeId"></audioSpatialization>
+      <imgDisplay :audioList="audioList" v-if="'imgDisplay' == activeId"></imgDisplay>
     </section>
   </div>
 </template>
@@ -43,17 +42,17 @@ export default {
   data () {
     return {
       muneList: [
-        {name: 'audioFirst'},
-        {name: 'browserSound'},
-        {name: 'audioVisualization'},
-        {name: 'speakVisualization'},
-        {name: 'remotelyVisualization'},
-        {name: 'ringVisualization'},
-        {name: 'maxaci'},
-        {name: 'audioSpatialization'},
-        {name: 'imgDisplay'}
+        {name: '开篇', id: 'imgDisplay'},
+        {name: '音频可视化1', id: 'audioVisualization'},
+        {name: '音频可视化2', id: 'ringVisualization'},
+        {name: '远程音频', id: 'remotelyVisualization'},
+        {name: '振荡器声音', id: 'browserSound'},
+        {name: '麦克风可视化', id: 'speakVisualization'},
+        {name: '音频空间化', id: 'audioSpatialization'},
+        {name: 'maxaci', id: 'maxaci'},
+        {name: 'audioFirst', id: 'audioFirst'}
       ],
-      indexed: 5,
+      activeId: 'audioSpatialization',
       audioList: [
         {name: '来自尘埃的光', src: '../../../static/audio/1.mp3', file: '1.json'},
         {name: '知否知否应是绿肥红瘦', src: '../../../static/audio/2.mp3', file: '2.json'},
@@ -69,8 +68,8 @@ export default {
   created () {},
   mounted () {},
   methods: {
-    viewTheCom (index) {
-      this.indexed = index;
+    viewTheCom (id) {
+      this.activeId = id;
     },
     goBack () {
       this.$router.go(-1);//返回上一层

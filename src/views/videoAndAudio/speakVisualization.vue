@@ -3,7 +3,6 @@
     <canvas class="canvasC" id="speakCanvas"></canvas>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -19,63 +18,49 @@ export default {
   },
   created() {},
   mounted() {
-    //实例化音频对象
-    if (!AudioContext) {
-      alert('您的浏览器不支持audioContext!');
-      return;
-    }
-    this.audioCtx = new AudioContext();
-
     this.init();
-    this.initAnalyser();
   },
   beforeDestroy() {
     this.audioCtx.close();
   },
   methods: {
     init() {
+      if (!AudioContext) {
+        alert('您的浏览器不支持audioContext!');
+        return;
+      }
+      this.audioCtx = new AudioContext();
+      this.analyser = this.audioCtx.createAnalyser();
+      this.analyser.fftSize = 256;
+      this.gainNode = this.audioCtx.createGain();
+      this.scriptProcessor = this.audioCtx.createScriptProcessor(2048, 1, 1);
+      this.analyser.connect(this.scriptProcessor);
+      this.scriptProcessor.connect(this.audioCtx.destination);
+      this.bufferLength = this.analyser.frequencyBinCount;
+      this.dataArray = new Uint8Array(this.bufferLength);
+      this.getUserMeadiaFc();
+    },
+    getUserMeadiaFc () {
+      /**
+       * 浏览器 调用 音频视频接收器 视频的我没有开
+       * 一般调用此功能 都会经过用户同意
+       * http 不被允许麦克风摄像头
+       */
       navigator.mediaDevices.getUserMedia({ audio: true }).then(
-        // 浏览器 调用 机器音频接收器
-        // 一般调用此功能 都会经过用户同意
-        // http 不被允许
         stream => {
-          // 返回 流文件
+          /**
+           * createMediaStreamSource 接受流文件创建音频源
+           * 其实可以录制下来，利用流文件传输 可以结合WebRtc即时通信 传输数据
+           */
           this.audioSource = this.audioCtx.createMediaStreamSource(stream);
-          // createMediaStreamSource 接受流文件创建音频源
           this.audioSource.connect(this.analyser);
           this.audioSource.connect(this.gainNode);
           this.audioSource.connect(this.audioCtx.destination);
-          // 用于音频源播放
           this.bindDrawEvent();
-        },
-        error => {
-          console.log(error);
-          alert('出错，请确保已允许浏览器获取音频权限');
         }
       ).catch(function(err) {
         console.log('The following gUM error occured: ' + err);
       });
-    },
-    initAnalyser() {
-      // 创建分析器
-      this.analyser = this.audioCtx.createAnalyser();
-      // 快速傅里叶变换参数
-      // 一般都用256 这个用到了数学公式算 英文文档里 没看懂计算经过
-      this.analyser.fftSize = 256;
-      //bufferArray长度 fftSize值的一半
-      this.bufferLength = this.analyser.frequencyBinCount;
-      //创建bufferArray，用来装音频数据
-      this.dataArray = new Uint8Array(this.bufferLength);
-      this.gainNode = this.audioCtx.createGain();
-      this.initScriptProcessor();
-    },
-    initScriptProcessor() {
-      // 创建处理器，参数分别是缓存区大小、输入声道数、输出声道数
-      this.scriptProcessor = this.audioCtx.createScriptProcessor(2048, 1, 1);
-      // 分析器连接处理器
-      this.analyser.connect(this.scriptProcessor);
-      // 处理器连接扬声器 用于可视化数据显示
-      this.scriptProcessor.connect(this.audioCtx.destination);
     },
     bindDrawEvent() {
       this.scriptProcessor.onaudioprocess = this.draw;
@@ -93,10 +78,7 @@ export default {
       const cxt = canvas.getContext('2d');
 
       cxt.clearRect(0, 0, cWidth, cHeight);
-      //分析器获取音频数据“切片”
       this.analyser.getByteFrequencyData(this.dataArray);
-
-      //把每个音频“切片”画在画布上
       cxt.fillStyle = '#3498db';
       for (let i = 0; i < this.bufferLength; i++) {
         barHeight = parseInt(0.2 * this.dataArray[i], 0);

@@ -1,13 +1,26 @@
 <template>
   <div class="ringVisualization_C pagePosition">
     <ul>
-      <li v-for="(item,index) in audioList" :key="index" v-on:click="requestSong(item.src)">{{ item.name }}</li>
+      <li v-for="(item,index) in audioList" :key="index" v-on:click="selectAudio(index)">{{ item.name }}</li>
     </ul>
     <canvas class="canvasC" id="audioCanvas"></canvas>
+    <button @click="carryOn">继续</button>
     <button @click="pause">暂停</button>
   </div>
 </template>
 <script>
+/**
+ * 这个是例子 是绘制圆形的可视化图形
+ * 圆点跳动 折线跳动
+ * 这个跳动节奏 只是取得返回数据中的的第一个值 * 0-1随机数
+ * 这个我自己做的例子如果按照和方形取值相同的话会出现一部分圆弧数据为0不动
+ * 
+ * 添加 暂停 继续
+ * 
+ * 取消this.scriptProcessor.onaudioprocess 处理器调用图形绘制
+ * 采用 window.requestAnimationFrame 动画帧 默认每秒60次 我加了定时器改为150ms 
+ * 优点是在浏览器空闲的时候调用函数 不会影响其他函数的调用
+ */
 export default {
   props: {
     audioList: {
@@ -21,44 +34,82 @@ export default {
       gainNode: {}, // 增益节点
       analyser: {},// 分析器
       scriptProcessor: {},// 处理器
-      loading: false,
-      playing: false,
-      playStart: '',
-      playResume: 0,
       bufferLength: '',
       dataArray: [],
-      audioSource: {}
+      audioSource: {},
+      isPause: false
     };
   },
   created() {},
   mounted() {
-    //实例化音频对象
-    if (!AudioContext) {
-      alert('您的浏览器不支持audioContext!');
-      return;
-    }
-    this.audioCtx = new AudioContext();
     this.init()
   },
   beforeDestroy () {
     this.audioCtx.close()
   },
   methods: {
+    init () {
+      if (!AudioContext) {
+        alert('您的浏览器不支持audioContext!');
+        return;
+      }
+      this.audioCtx = new AudioContext();
+      this.musicPlayer = new Audio();
+      this.audioSource = this.audioCtx.createMediaElementSource(this.musicPlayer);
+      this.initAnalyser()
+    },
+    selectAudio (index) {
+      // 选择音频
+      this.musicPlayer.src= this.audioList[index].src;
+      this.musicPlayer.play()
+      this.bindDrawEvent();
+    },
+    carryOn () {
+      this.isPause = false;
+      this.musicPlayer.play();
+      this.canvasDraw();
+    },
+    pause () {
+      this.isPause = true;
+      this.musicPlayer.pause();
+    },
+    initAnalyser () {
+      this.analyser = this.audioCtx.createAnalyser();
+      this.analyser.fftSize = 256;
+      this.bufferLength = this.analyser.frequencyBinCount;
+      this.dataArray = new Uint8Array(this.bufferLength);
+      this.gainNode = this.audioCtx.createGain();
+      this.initScriptProcessor()
+    },
+    initScriptProcessor () {
+      this.scriptProcessor = this.audioCtx.createScriptProcessor(2048, 1, 1);
+      this.connection();
+    },
+    connection () {
+      this.audioSource.connect(this.analyser);
+      this.audioSource.connect(this.gainNode);
+      this.audioSource.connect(this.audioCtx.destination);
+      this.analyser.connect(this.scriptProcessor);
+      this.scriptProcessor.connect(this.audioCtx.destination);
+    },
+    bindDrawEvent () {
+      // this.scriptProcessor.onaudioprocess = this.canvasDraw;
+      this.canvasDraw();
+    },
     canvasDraw () {
       let canvas = document.getElementById('audioCanvas');
 
       const cWidth = canvas.width = canvas.offsetWidth,
         cHeight = canvas.height = canvas.offsetHeight;
-        // barWidth = parseInt(0.5 * cWidth / this.bufferLength, 0);
 
       let x = cWidth / 2,
         y = cHeight / 2,
-        radius = 60,
+        radius = 100,
         startAngle = 0,
         endAngle = Math.PI,
         l = 32,
-        angle = (Math.PI * 2) / l,
-        r = 2;
+        // r = 2,
+        angle = (Math.PI * 2) / l;
       
       const cxt = canvas.getContext('2d');
 
@@ -71,73 +122,38 @@ export default {
 
       this.analyser.getByteFrequencyData(this.dataArray);
 
+      // for (let i = 0; i < l; i++ ) {
+      //   cxt.beginPath()
+      //   const R = radius + this.setRandom(this.dataArray[0]) / 10;
+
+      //   cxt.arc(0 + R * Math.sin(angle * i), 0 + R * Math.cos(angle * i), r, 0, Math.PI * 2, false);
+      //   cxt.strokeStyle = '#fff';
+      //   cxt.stroke();
+      //   cxt.closePath()
+      // }
+
+      cxt.beginPath()
       for (let i = 0; i < l; i++ ) {
-        cxt.beginPath()
         const R = radius + this.setRandom(this.dataArray[0]) / 10;
 
-        cxt.arc(0 + R * Math.sin(angle * i), 0 + R * Math.cos(angle * i), r, 0, Math.PI * 2, false);
-        cxt.strokeStyle = '#fff';
-        cxt.stroke();
-        cxt.closePath()
+        if (i === 0) {
+          cxt.moveTo(0 + R * Math.sin(angle * i), 0 + R * Math.cos(angle * i));
+        } else {
+          cxt.lineTo(0 + R * Math.sin(angle * i), 0 + R * Math.cos(angle * i));
+        }
       }
+      cxt.closePath()
+      cxt.strokeStyle = '#fff';
+      cxt.stroke();
+      if (this.isPause) {
+        return
+      }
+      setTimeout(() => {
+        window.requestAnimationFrame(this.canvasDraw);
+      },150)
     },
     setRandom (val) {
       return Math.random(1) * val;
-    },
-    init () {
-      this.audioSource = this.audioCtx.createBufferSource();
-      //创建分析器
-      this.analyser = this.audioCtx.createAnalyser();
-      //创建处理器，参数分别是缓存区大小、输入声道数、输出声道数
-      this.scriptProcessor = this.audioCtx.createScriptProcessor(0, 2, 2);
-      this.gainNode = this.audioCtx.createGain();
-
-      //快速傅里叶变换参数
-      this.analyser.fftSize = 64;
-      //bufferArray长度
-      this.bufferLength = this.analyser.frequencyBinCount;
-      //创建bufferArray，用来装音频数据
-      this.dataArray = new Uint8Array(this.bufferLength);
-      this.connection()
-    },
-    connection () {
-      this.scriptProcessor.connect(this.audioCtx.destination);
-      this.analyser.connect(this.scriptProcessor);
-      this.audioSource.connect(this.analyser);
-      this.audioSource.connect(this.gainNode);
-      this.audioSource.connect(this.audioCtx.destination);
-    },
-    requestSong (url) {
-      const request = new XMLHttpRequest();
-
-      request.open('GET', url, true);
-      request.responseType = 'arraybuffer';
-
-      this.loading = true;
-      request.onload = () => {
-        this.audioCtx.decodeAudioData(request.response, buffer => {
-          this.loading = false;
-          this.playing = true;
-
-          this.playSound(buffer);
-        });
-      };
-      request.send();
-    },
-    pause () {
-      this.audioSource.stop(0);
-    },
-    playSound (buffer) {
-      setTimeout(() => {
-        this.audioSource.buffer = buffer;
-        this.audioSource.loop = true;
-        this.audioSource.start(0);
-        this.playStart = new Date().getTime();
-        this.bindDrawEvent();
-      }, 200)
-    },
-    bindDrawEvent () {
-      this.scriptProcessor.onaudioprocess = this.canvasDraw;
     }
   }
 };
@@ -149,7 +165,7 @@ export default {
   box-sizing: border-box;
 }
 .ringVisualization_C .canvasC {
-  height: 600px;
+  height: 500px;
   width: 100%;
   background: #2c3e50;
 }

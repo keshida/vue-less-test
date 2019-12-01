@@ -3,11 +3,15 @@
     <ul>
       <li v-for="(item,index) in audioList" :key="index" v-on:click="requestSong(item.src)">{{ item.name }}</li>
     </ul>
-    <canvas class="canvasC" id="audioCanvas"></canvas>
+    <canvas class="canvasC" id="remotelyId"></canvas>
   </div>
 </template>
 <script>
 export default {
+  /**
+   * 远程请求
+   * 通过request请求 返回数据
+   */
   props: {
     audioList: {
       type: Array
@@ -16,28 +20,17 @@ export default {
   data() {
     return {
       audioCtx: {}, // 音频上下文
-      oscillator: {}, // 振荡器
       gainNode: {}, // 增益节点
       analyser: {},// 分析器
       scriptProcessor: {},// 处理器
-      buffer: {},
-      loading: false,
-      playing: false,
-      playStart: '',
-      playResume: 0,
       bufferLength: '',
       dataArray: [],
-      audioSource: {}
+      audioSource: {},
+      isBegin: false
     };
   },
   created() {},
   mounted() {
-    //实例化音频对象
-    if (!AudioContext) {
-      alert('您的浏览器不支持audioContext!');
-      return;
-    }
-    this.audioCtx = new AudioContext();
     this.init()
   },
   beforeDestroy () {
@@ -45,83 +38,68 @@ export default {
   },
   methods: {
     init () {
+      //实例化音频对象
+      if (!AudioContext) {
+        alert('您的浏览器不支持audioContext!');
+        return;
+      }
+      this.audioCtx = new AudioContext();
       this.audioSource = this.audioCtx.createBufferSource();
-      //创建分析器
       this.analyser = this.audioCtx.createAnalyser();
-      //创建处理器，参数分别是缓存区大小、输入声道数、输出声道数
       this.scriptProcessor = this.audioCtx.createScriptProcessor(0, 2, 2);
       this.gainNode = this.audioCtx.createGain();
-
-      //快速傅里叶变换参数
       this.analyser.fftSize = 256;
-      //bufferArray长度
       this.bufferLength = this.analyser.frequencyBinCount;
-      //创建bufferArray，用来装音频数据
       this.dataArray = new Uint8Array(this.bufferLength);
       this.connection()
     },
     connection () {
       this.scriptProcessor.connect(this.audioCtx.destination);
       this.analyser.connect(this.scriptProcessor);
-      this.audioSource.connect(this.analyser);
-      this.audioSource.connect(this.gainNode);
-      this.audioSource.connect(this.audioCtx.destination);
     },
     requestSong (url) {
+      /**
+       * request请求
+       * AudioContext.decodeAudioData
+       * 用于异步解码音频文件中
+       * 
+       * 这个处理数据比较耗时 有明显的停顿
+       */
       const request = new XMLHttpRequest();
 
       request.open('GET', url, true);
       request.responseType = 'arraybuffer';
-
-      this.loading = true;
       request.onload = () => {
         this.audioCtx.decodeAudioData(request.response, buffer => {
-          console.log(buffer)
-          this.loading = false;
-          this.playing = true;
-
-          this.buffer = buffer;
           this.playSound(buffer);
         });
       };
       request.send();
     },
     playSound (buffer) {
-      // this.audioSource.buffer = null;
-      setTimeout(() => {
-        this.audioSource.buffer = buffer;
-        this.audioSource.loop = true;
-        this.audioSource.start(0);
-        this.playStart = new Date().getTime();
-        this.bindDrawEvent();
-      }, 200)
-    },
-    onPlay () {
-      //重新播放需要重新创建buffer
+      /**
+       * 一个 AudioBufferSourceNode 只能被播放一次
+       * 此处stop(0)将 AudioBufferSourceNode 相当用于清除了 
+       * 每次调用 start() 之后 必须重新创建 并连接
+       */
+      if (this.isBegin) {
+        this.audioSource.stop(0);
+      }
+      this.isBegin = true;
       this.audioSource = this.audioCtx.createBufferSource();
       this.audioSource.connect(this.analyser);
+      this.audioSource.connect(this.gainNode);
       this.audioSource.connect(this.audioCtx.destination);
-      this.audioSource.buffer = this.buffer;
-      this.audioSource.loop = true;
-      this.audioSource.start(0, this.playResume);
 
-      this.playStart = new Date().getTime() - this.playResume * 1000;
-
-      this.playing = true;
-    },
-    onPause () {
-      this.playResume = new Date().getTime();
-      this.playResume -= this.playStart;
-      this.playResume /= 1000;
-      this.playResume %= this.audioSource.buffer.duration;
-      this.audioSource.stop();
-      this.playing = false;
+      this.audioSource.buffer = buffer;
+      this.audioSource.start(0);// 计划0s之后播放
+      this.bindDrawEvent();
     },
     bindDrawEvent () {
       this.scriptProcessor.onaudioprocess = this.draw;
     },
     draw () {
-      let canvas = document.getElementById('audioCanvas');
+      let canvas = document.getElementById('remotelyId');
 
       const cWidth = canvas.width = canvas.offsetWidth,
         cHeight = canvas.height = canvas.offsetHeight,
@@ -133,10 +111,7 @@ export default {
       const cxt = canvas.getContext('2d');
 
       cxt.clearRect(0, 0, cWidth, cHeight);
-      //分析器获取音频数据“切片”
       this.analyser.getByteFrequencyData(this.dataArray);
-    
-      //把每个音频“切片”画在画布上
       cxt.fillStyle = '#3498db';
       for (let i = 0; i < this.bufferLength; i++) {
         barHeight = parseInt(0.2 * this.dataArray[i], 0);

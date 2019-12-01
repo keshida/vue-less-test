@@ -11,7 +11,7 @@
 export default {
   /**
    * AudioContext 生成音频的上下文 都有操作都会在AudioContext之下完成
-   * 首先要获取一个音频源 audio标签 new Audio() 请求的数据流 或者是浏览器接受的话筒设备
+   * 首先要获取一个音频源 audio标签 new Audio() 请求的数据流 或者是浏览器接受的麦克风设备
    * 
    * 这个是个简单的例子，canvas上根据音频流绘制简单的方形动画效果
    * requestAnimationFrame
@@ -92,7 +92,20 @@ export default {
        * gainNode用来控制音频图的总体增益(或音量)
        */
       this.gainNode = this.audioCtx.createGain();
-      
+      this.initScriptProcessor()
+    },
+    initScriptProcessor () {
+      /**
+       * 创建处理器 节点，参数分别是缓存区大小、输入声道数、输出声道数
+       * 缓存区大小 256 * n 最大16384 不传或者参数为0 则取当前环境最合适的大小
+       * 监听音频播放 靠这个一直更新数据变化
+       * 声道输出输入数值变化 我没怎么测试出变化
+       * 同样处理器也能创造声音 
+       */
+      this.scriptProcessor = this.audioCtx.createScriptProcessor(2048, 1, 1);
+      this.connection();
+    },
+    connection () {
       /**
        * 音频源链接分析器
        */
@@ -108,17 +121,6 @@ export default {
        * AudioContext.destination是所有音频（节点）的最终目标节点，一般是音频渲染设备，比如扬声器
        */
       this.audioSource.connect(this.audioCtx.destination);
-      this.initScriptProcessor()
-    },
-    initScriptProcessor () {
-      /**
-       * 创建处理器 节点，参数分别是缓存区大小、输入声道数、输出声道数
-       * 缓存区大小 256 * n 最大16384 不传或者参数为0 则取当前环境最合适的大小
-       * 监听音频播放 靠这个一直更新数据变化
-       * 声道输出输入数值变化 我没怎么测试出变化
-       * 同样处理器也能创造声音 
-       */
-      this.scriptProcessor = this.audioCtx.createScriptProcessor(2048, 1, 1);
       // 分析器连接处理器
       this.analyser.connect(this.scriptProcessor);
       // 处理器连接扬声器
