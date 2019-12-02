@@ -5,6 +5,9 @@
         <el-form-item label="音量">
           <el-input-number v-model="queryParams.gain" :min="0" :step="0.1" :max="1" label></el-input-number>
         </el-form-item>
+        <el-form-item label="失谐量">
+          <el-input-number v-model="queryParams.detune" :min="0" :step="1" :max="100" label></el-input-number>
+        </el-form-item>
         <el-form-item label="音乐变化曲线">
           <el-select v-model="queryParams.gainChangeType">
             <el-option
@@ -43,6 +46,17 @@
 </template>
 
 <script>
+/**
+ * 创建一个OscillatorNode 振荡器节点
+ * 周期性波形的源
+ * 生成一个指定频率的波形信号（即一个固定的音调）
+ * 通过改变 
+ *  @frequency 振动频率
+ *  @type 周期波形
+ *  @detune 振荡频率的失谐量(这个好像是声音发出后的损失)
+ *  @gain gainNode音调高低
+ * 四个值改变声音
+ */
 const FADING_TIME = 0.5;
 
 export default {
@@ -52,7 +66,6 @@ export default {
       audioCtx: {}, // 音频上下文
       oscillator: {}, // 振荡器
       gainNode: {}, // 增益节点
-      started: false,
       curveList: [
         { label: '线性变化', value: 'linearRampToValueAtTime' },
         { label: '指数变化', value: 'exponentialRampToValueAtTime' }
@@ -81,30 +94,29 @@ export default {
         gain: 0.5,
         gainChangeType: 'linearRampToValueAtTime',
         frequency: 196,
-        waveform: 'sine'
+        waveform: 'sine',
+        detune: 0
       }
     };
   },
   created() {},
   mounted() {
-    //实例化音频对象
-    if (!AudioContext) {
-      alert('您的浏览器不支持audioContext!');
-      return;
-    }
-    this.audioCtx = new AudioContext();
-    console.log(this.audioCtx)
-
     this.init();
   },
   methods: {
     init() {
-      this.oscillator = this.audioCtx.createOscillator();
+      if (!AudioContext) {
+        alert('您的浏览器不支持audioContext!');
+        return;
+      }
+      this.audioCtx = new AudioContext();
       this.gainNode = this.audioCtx.createGain();
     },
 
     onSet() {
+      this.oscillator = this.audioCtx.createOscillator();
       this.oscillator.type = this.queryParams.waveform;
+      this.oscillator.detune.value = this.queryParams.detune;
       this.gainNode.gain.value = this.queryParams.gain;
       this.oscillator.frequency.value = this.queryParams.frequency;
 
@@ -113,11 +125,8 @@ export default {
     },
 
     onStart() {
-      this.init();
       this.onSet();
       this.oscillator.start();
-
-      this.started = true;
     },
 
     onStop() {
@@ -127,13 +136,16 @@ export default {
         this.audioCtx.currentTime + FADING_TIME
       );
       this.oscillator.stop(this.audioCtx.currentTime + FADING_TIME);
-
-      this.started = false;
     },
     onPlay(item) {
-      this.init();
+      this.oscillator = this.audioCtx.createOscillator();
       this.oscillator.type = this.queryParams.waveform;
+      this.oscillator.detune.value = this.queryParams.detune;
       this.gainNode.gain.value = this.queryParams.gain;
+      /**
+       * 这个是从网上找的例子
+       * 模拟钢琴的几个键的发声频率
+       */
       this.oscillator.frequency.value = item;
 
       this.oscillator.connect(this.gainNode);

@@ -903,8 +903,10 @@
       {"date":"2018-11-29","expRemark":"早餐",  "type":"foodExp","value":7},
       {"date":"2018-11-29","expRemark":"午餐",  "type":"foodExp","value":16.5},
       {"date":"2018-11-30","expRemark":"午餐",  "type":"foodExp","value":18.54},
-      {"date":"2018-11-31","expRemark":"午餐",  "type":"foodExp","value":23.98},
-      {"date":"2018-11-31","expRemark":"晚餐",  "type":"foodExp","value":18.54},
+      {"date":"2018-12-01","expRemark":"午餐",  "type":"foodExp","value":23.98},
+      {"date":"2018-12-01","expRemark":"晚餐",  "type":"foodExp","value":18.54},
+      {"date":"2018-12-02","expRemark":"公交",  "type":"trafficExp","value":2},
+      {"date":"2018-12-02","expRemark":"早餐",  "type":"foodExp","value":5},
     ]
     ]
   }
