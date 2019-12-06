@@ -108,7 +108,7 @@ export default {
         startAngle = 0,
         endAngle = Math.PI,
         l = 32,
-        // r = 2,
+        r = 2,
         angle = (Math.PI * 2) / l;
       
       const cxt = canvas.getContext('2d');
@@ -122,15 +122,15 @@ export default {
 
       this.analyser.getByteFrequencyData(this.dataArray);
 
-      // for (let i = 0; i < l; i++ ) {
-      //   cxt.beginPath()
-      //   const R = radius + this.setRandom(this.dataArray[0]) / 10;
+      for (let i = 0; i < l; i++ ) {
+        cxt.beginPath()
+        const R = radius + this.setRandom(this.dataArray[0]) / 10;
 
-      //   cxt.arc(0 + R * Math.sin(angle * i), 0 + R * Math.cos(angle * i), r, 0, Math.PI * 2, false);
-      //   cxt.strokeStyle = '#fff';
-      //   cxt.stroke();
-      //   cxt.closePath()
-      // }
+        cxt.arc(0 + R * Math.sin(angle * i), 0 + R * Math.cos(angle * i), r, 0, Math.PI * 2, false);
+        cxt.strokeStyle = '#fff';
+        cxt.stroke();
+        cxt.closePath()
+      }
 
       cxt.beginPath()
       for (let i = 0; i < l; i++ ) {
