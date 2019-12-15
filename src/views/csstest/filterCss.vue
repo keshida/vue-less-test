@@ -1,14 +1,17 @@
 <template>
-  <div class="filterCss_C">
+  <div class="filterCss_C pagePosition">
     <div class="div1">
     </div>
     <div class="div2">
     </div>
-    <div class="div3" id="div3">
+    <div class="div3" id="div3"> 
       <div class="db" id="d1"></div>
       <div class="dr" id="d2"></div>
     </div>
     <div class="simulation"></div>
+    <div class="page-gray">
+      <div class="page-gray_1"></div>
+    </div>
   </div>
 </template>
 
@@ -89,5 +92,17 @@ export default {
   background: linear-gradient(var(--c),var(--c)),url("../../assets/images/filter/1.jpg");
   background-size: cover;
   
+}
+.page-gray {
+  height: 200px;
+  width: 100%;
+  -webkit-filter: grayscale(100%); 
+  /* Chrome, Safari, Opera */
+  filter: grayscale(100%);
+}
+.page-gray_1 {
+  background: red;
+  width: 50px;
+  height: 50px;
 }
 </style>
