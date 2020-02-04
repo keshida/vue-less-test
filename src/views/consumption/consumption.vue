@@ -3,6 +3,9 @@
     <!-- <ul class="dataUl_C">
       <li v-for="(item,index) in mySpnedData" :key="index">{{ item.expRemark }}</li>
     </ul> -->
+    <ul class="dataUl_C">
+      <li v-for="(item,index) in moreTData" :key="index">{{ item.expRemark }}:{{ item.value }}</li>
+    </ul>
     <!-- <ul class="dataUl_C">
       <li v-for="(item,index) in gameList" :key="index">{{ item.expRemark }} {{ item.value }}</li>
     </ul> -->
@@ -16,6 +19,7 @@ export default {
       mySpnedData: [],
       typeList: [],
       gameList: [],
+      moreTData: [],
       numTal: 0,
       gameTal: 0,
       tYear: '',
@@ -27,7 +31,7 @@ export default {
     }
   },
   created () {
-    // this.getMyInfor()
+    this.getMyInfor()
     // this.getType()
   },
   mounted () {},
@@ -47,7 +51,11 @@ export default {
             this.gameTal += this.mySpnedData[i].value * 100;
             this.gameList.push(this.mySpnedData[i]);
           }
+          if (this.mySpnedData[i].value > 100) {
+            this.moreTData.push(this.mySpnedData[i])
+          }
         }
+        console.log(this.numTal/100)
       })
     },
     getType () {
