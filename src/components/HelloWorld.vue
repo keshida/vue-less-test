@@ -8,6 +8,7 @@
       <router-link v-for="(content,key) in menus" :to="content.path" :key="key" tag="li">{{content.name}}</router-link>
     </ul>
     <div>
+      <iframe src="static/myRtcPro/index.html" style="width: 100%;height: 500px" frameborder="0"></iframe>
     </div>
   </div>
 </template>
