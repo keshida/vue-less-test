@@ -7,9 +7,7 @@
     <ul class="hello_routerList_C">
       <router-link v-for="(content,key) in menus" :to="content.path" :key="key" tag="li">{{content.name}}</router-link>
     </ul>
-    <div>
-      <iframe src="static/myRtcPro/index.html" style="width: 100%;height: 500px" frameborder="0"></iframe>
-    </div>
+    <video src="https://mv.m1o2v3.com/dongman/2019_10/08/dongman_QRSvdKkb_wm/dongman_QRSvdKkb_wm.m3u8" controls></video>
   </div>
 </template>
 
@@ -35,6 +33,7 @@ export default {
         {name: 'svg', path: '/svgHome'},
         {name: '相关js库', path: '/jsScriptHome'},
         {name: '武器', path: '/weaponHome'},
+        {name: 'canvas', path: '/canvasTest'},
         {name: '视频音频', path: '/videoAudioHome'}
       ]
     }

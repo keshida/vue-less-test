@@ -17,9 +17,6 @@ export default {
 }
 </script>
 <style>
-.faceRecognition_C {
-
-}
 .face {
   height: 300px;
   width: 300px;

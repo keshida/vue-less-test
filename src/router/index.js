@@ -42,6 +42,10 @@ export default new Router({
       component: resolve => require(['@/views/weapon/weaponHome'], resolve)
     },
     {
+      path: '/canvasTest',
+      component: resolve => require(['@/views/canvasTest/canvasTestHome'], resolve)
+    },
+    {
       path: '/videoAudioHome',
       component: resolve => require(['@/views/videoAndAudio/videoAudioHome'], resolve)
     }

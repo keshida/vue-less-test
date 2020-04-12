@@ -1,26 +1,30 @@
 <template>
-  <div class="cssTestHome_C">
+  <div class="onePage cssTestHome_C">
     <aside>
-      <div class="muneList_C" v-for="(item,index) in muneList" :key="index" v-on:click="viewTheCom(index)" v-bind:class="{active_C:indexed == index}">{{ item.name }}</div>
+      <div class="muneList_C" v-for="(item,index) in muneList" :key="index" v-on:click="viewTheCom(item.name)" v-bind:class="{active_C:activeName == item.name}">{{ item.name }}</div>
       <button class="muneBnt_C" v-on:click="goBack">返回</button>
     </aside>
     <section>
-      <cssborder v-if="indexed == 0"></cssborder>
-      <tiltingParallax v-if="indexed == 1"></tiltingParallax>
-      <imageTransform v-if="indexed == 2"></imageTransform>
-      <filterCss v-if="indexed == 3"></filterCss>
-      <ballShadow v-if="indexed == 4"></ballShadow>
-      <pageTurning v-if="indexed == 5"></pageTurning>
-      <myPageTurn v-if="indexed == 6"></myPageTurn>
-      <lessTest v-if="indexed == 7"></lessTest>
-      <loadingCylinder v-if="indexed == 8"></loadingCylinder>
-      <faceRecognition v-if="indexed == 9"></faceRecognition>
-      <eclipse v-if="indexed == 10"></eclipse>
+      <tiltingParallax v-if="activeName == 'tiltingParallax'"></tiltingParallax>
+      <imageTransform v-if="activeName == 'imageTransform'"></imageTransform>
+      <filterCss v-if="activeName == 'filterCss'"></filterCss>
+      <ballShadow v-if="activeName == 'ballShadow'"></ballShadow>
+      <pageTurning v-if="activeName == 'pageTurning'"></pageTurning>
+      <myPageTurn v-if="activeName == 'myPageTurn'"></myPageTurn>
+      <lessTest v-if="activeName == 'lessTest'"></lessTest>
+      <loadingCylinder v-if="activeName == 'loadingCylinder'"></loadingCylinder>
+      <faceRecognition v-if="activeName == 'faceRecognition'"></faceRecognition>
+      <eclipse v-if="activeName == 'eclipse'"></eclipse>
+      <clipStyle v-if="activeName == 'clipStyle'"></clipStyle>
+      <spinSphere v-if="activeName == 'spinSphere'"></spinSphere>
+      <solarSystem v-if="activeName == 'solarSystem'"></solarSystem>
+      <weather v-if="activeName == 'weather'"></weather>
+      <btnStyle v-if="activeName == 'btnStyle'"></btnStyle>
+      <textLabel v-if="activeName == 'textLabel'"></textLabel>
     </section>
   </div>
 </template>
 <script>
-import cssborder from '@/views/csstest/cssborder';
 import tiltingParallax from '@/views/csstest/tiltingParallax';
 import imageTransform from '@/views/csstest/imageTransform';
 import filterCss from '@/views/csstest/filterCss';
@@ -31,9 +35,14 @@ import lessTest from '@/views/csstest/lessTest';
 import loadingCylinder from '@/views/csstest/loadingCylinder';
 import faceRecognition from '@/views/csstest/faceRecognition';
 import eclipse from '@/views/csstest/eclipse';
+import clipStyle from '@/views/csstest/clipStyle';
+import spinSphere from '@/views/csstest/spinSphere';
+import solarSystem from '@/views/csstest/solarSystem';
+import weather from '@/views/csstest/weather';
+import btnStyle from '@/views/csstest/btnStyle';
+import textLabel from '@/views/csstest/textLabel';
 export default {
   components: {
-    cssborder,
     tiltingParallax,
     imageTransform,
     filterCss,
@@ -43,12 +52,17 @@ export default {
     lessTest,
     loadingCylinder,
     faceRecognition,
-    eclipse
+    eclipse,
+    clipStyle,
+    spinSphere,
+    solarSystem,
+    weather,
+    btnStyle,
+    textLabel
   },
   data () {
     return {
       muneList: [
-        {name: 'testborder'},
         {name: 'tiltingParallax'},
         {name: 'imageTransform'},
         {name: 'filterCss'},
@@ -58,17 +72,23 @@ export default {
         {name: 'lessTest'},
         {name: 'loadingCylinder'},
         {name: 'faceRecognition'},
-        {name: 'eclipse'}
+        {name: 'eclipse'},
+        {name: 'clipStyle'},
+        {name: 'spinSphere'},
+        {name: 'solarSystem'},
+        {name: 'weather'},
+        {name: 'btnStyle'},
+        {name: 'textLabel'}
 
       ],
-      indexed: 0
+      activeName: 'tiltingParallax'
     }
   },
   created () {},
   mounted () {},
   methods: {
-    viewTheCom (index) {
-      this.indexed = index;
+    viewTheCom (name) {
+      this.activeName = name;
     },
     goBack () {
       this.$router.go(-1);//返回上一层
@@ -77,9 +97,4 @@ export default {
 }
 </script>
 <style>
-.cssTestHome_C {
-  height: 100%;
-  width: 100%;
-  display: flex;
-}
 </style>

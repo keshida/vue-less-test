@@ -1,9 +1,5 @@
 <template>
-  <div class="loadingCylinder_C">
-    <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
-      <p>适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。</p>
-      <p>来源：<a href="http://www.5iweb.com.cn/" target="_blank">网页特效库</a></p>
-    </div>
+  <div class="loadingCylinder_C pagePosition">
     <div id="robot">
       <div class="piston">
           <div class="rotator"></div>
@@ -55,10 +51,6 @@ export default {
 }
 </script>
 <style>
-.loadingCylinder_C {
-  height: 100%;
-  width: 100%;
-}
 
 @-webkit-keyframes piston {
     0% { margin-top: 0; }

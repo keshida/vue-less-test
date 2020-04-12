@@ -1,4 +1,5 @@
 <template>
+  <!-- 转移到cssTest，这个暂留给其他的用 -->
   <div class="textSpecialEffectHome_C">
     <aside>
       <div class="muneList_C" v-for="(item,index) in muneList" :key="index" v-on:click="viewTheCom(index)" v-bind:class="{active_C:indexed == index}">{{ item.name }}</div>

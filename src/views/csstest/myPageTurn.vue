@@ -1,5 +1,5 @@
 <template>
-  <div class="myPageTurn_C">
+  <div class="myPageTurn_C pagePosition">
     <ul class="books">
       <li class="page" v-for="(item,index) in imgList" :key="index" v-show="0<=indexed">
         <img class="pageImg" :src="item.imgSrc" alt="">
@@ -44,8 +44,6 @@ ul, li {
   margin: 0;
 }
 .myPageTurn_C {
-  width: 100%;
-  height: 100%;
   padding: 50px;
   box-sizing: border-box;
 }

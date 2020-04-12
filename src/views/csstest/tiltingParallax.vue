@@ -1,5 +1,5 @@
 <template>
-  <div class="tiltingParallax_C" id="tiltingParallax">
+  <div class="tiltingParallax_C pagePosition" id="tiltingParallax">
     <div class="cards">
       <h3>Movies</h3>
       <h1>Popular</h1>
@@ -80,8 +80,6 @@ export default {
 </script>
 <style>
 .tiltingParallax_C {
-  height: 100%;
-  width: 100%;
   align-items: center;
   background: #642B73;
   background: linear-gradient(to bottom, #C6426E, #642B73);

@@ -1,5 +1,5 @@
 <template>
-  <div class="pageTurning_C">
+  <div class="pageTurning_C pagePosition">
     <ul class="pages">
       <li class="paper" data-left> 
         <div class="page page-1-back">
@@ -37,9 +37,8 @@ ul, li {
   margin: 0;
 }
 .pageTurning_C {
-  width: 100%;
-  height: 100%;
   padding: 50px;
+  box-sizing: border-box;
 }
 .pages {
   height: 500px;

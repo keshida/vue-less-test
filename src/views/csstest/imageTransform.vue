@@ -1,5 +1,5 @@
 <template>
-  <div class="imageTransform_C">
+  <div class="imageTransform_C pagePosition">
     <img class="transImg_C" src="../../assets/images/tiltParallax/jpeg.jpeg" alt="">
   </div>
 </template>
@@ -19,8 +19,6 @@ export default {
   position: relative;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   background: #fefefe;
   perspective: 900px;
 }
