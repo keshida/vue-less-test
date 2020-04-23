@@ -33,9 +33,19 @@ export default {
   created () {
     this.getMyInfor()
     // this.getType()
+    this.getElaticSearchData()
   },
   mounted () {},
   methods: {
+    getElaticSearchData () {
+      this.$axios({
+        method: 'get',
+        url: 'http://localhost:9200/zwxcs/user/1',
+        dataType: 'json'
+      }).then(res => {
+        console.log(res)
+      })
+    },
     getMyInfor () {
       this.$axios({
         method: 'get',

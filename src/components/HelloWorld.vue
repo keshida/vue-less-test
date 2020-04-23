@@ -7,7 +7,6 @@
     <ul class="hello_routerList_C">
       <router-link v-for="(content,key) in menus" :to="content.path" :key="key" tag="li">{{content.name}}</router-link>
     </ul>
-    <video src="https://mv.m1o2v3.com/dongman/2019_10/08/dongman_QRSvdKkb_wm/dongman_QRSvdKkb_wm.m3u8" controls></video>
   </div>
 </template>
 
