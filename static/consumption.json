@@ -1101,7 +1101,32 @@
       { "date": "2019-04-22", "expRemark": "公交", "type": "trafficExp", "value": 2 },
       { "date": "2019-04-22", "expRemark": "馒头", "type": "foodExp", "value": 9 },
       { "date": "2019-04-22", "expRemark": "辣条", "type": "foodExp", "value": 3.5 },
-      { "date": "2019-04-23", "expRemark": "公交", "type": "trafficExp", "value": 2 }
+      { "date": "2019-04-23", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2019-04-23", "expRemark": "鸡蛋灌饼", "type": "foodExp", "value": 5 },
+      { "date": "2019-04-23", "expRemark": "猪头肉", "type": "foodExp", "value": 19.6 },
+      { "date": "2019-04-24", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2019-04-24", "expRemark": "鸡蛋灌饼", "type": "foodExp", "value": 5 },
+      { "date": "2019-04-25", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2019-04-25", "expRemark": "披萨外卖", "type": "foodExp", "value": 28 },
+      { "date": "2019-04-27", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2019-04-28", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2019-04-28", "expRemark": "手撕鸡", "type": "foodExp", "value": 38 },
+      { "date": "2019-04-29", "expRemark": "公交", "type": "trafficExp", "value": 1 },
+      { "date": "2019-04-29", "expRemark": "汉堡", "type": "foodExp", "value": 38 },
+      { "date": "2019-04-29", "expRemark": "麻局火锅", "type": "foodExp", "value": 23 },
+      { "date": "2019-04-30", "expRemark": "steam充值卡", "type": "gameExp", "value": 244 },
+      { "date": "2019-04-30", "expRemark": "手撕牛肉", "type": "foodExp", "value": 54.9 },
+      { "date": "2019-04-30", "expRemark": "零食", "type": "foodExp", "value": 95.89 },
+      { "date": "2019-05-02", "expRemark": "赵崇分子钱", "type": "dailyNecesExp", "value": 200 },
+      { "date": "2019-05-02", "expRemark": "蚊香液", "type": "dailyNecesExp", "value": 10 },
+      { "date": "2019-05-02", "expRemark": "鸡蛋", "type": "foodExp", "value": 10 },
+      { "date": "2019-05-03", "expRemark": "水", "type": "foodExp", "value": 10 },
+      { "date": "2019-05-05", "expRemark": "车费", "type": "trafficExp", "value": 140 },
+      { "date": "2019-05-05", "expRemark": "烤串", "type": "foodExp", "value": 33.6 },
+      { "date": "2019-05-06", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2019-05-06", "expRemark": "早餐", "type": "foodExp", "value": 16 },
+      { "date": "2019-05-06", "expRemark": "烤鸭", "type": "foodExp", "value": 18 },
+
     ]
   }
 }
