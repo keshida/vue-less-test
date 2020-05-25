@@ -1170,6 +1170,8 @@
       { "date": "2019-05-19", "expRemark": "京东 耳机麦克风二合一转接线", "type": "officeExp", "value": 10.05 },
       { "date": "2019-05-20", "expRemark": "公交", "type": "trafficExp", "value": 2 },
       { "date": "2019-05-20", "expRemark": "吉野家", "type": "foodExp", "value": 16.8 },
+      { "date": "2019-05-20", "expRemark": "脆皮鸡", "type": "foodExp", "value": 21.99 },
+      { "date": "2019-05-21", "expRemark": "公交", "type": "trafficExp", "value": 2 },
     ]
   }
 }
