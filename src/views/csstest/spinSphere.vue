@@ -83,12 +83,12 @@ export default {
   methods: {}
 };
 </script>
-<style>
+<style scoped>
 .spinSphere_C {
   background: #333;
   position: relative;
 }
-.ball {
+.spinSphere_C .ball {
   height: 500px;
   width: 500px;
   position: absolute;
@@ -97,16 +97,16 @@ export default {
   margin: -250px 0 0 -250px;
   transition: all 0.6s;
 }
-.ball:hover {
+.spinSphere_C .ball:hover {
   transform: scale(1.2);
 }
 
-.ball_box {
+.spinSphere_C .ball_box {
   width: 100%;
   height: 100%;
   animation: rotate3d 20s infinite linear;
 }
-.ball div {
+.spinSphere_C .ball div {
   width: 100%;
   height: 100%;
   border-radius: 100%;

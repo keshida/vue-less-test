@@ -18,8 +18,8 @@ export default new Router({
       component: resolve => require(['@/views/layout/layoutHome'], resolve)
     },
     {
-      path: '/cssTestHome',
-      component: resolve => require(['@/views/csstest/cssTestHome'], resolve)
+      path: '/csstest',
+      component: resolve => require(['@/views/csstest/index'], resolve)
     },
     {
       path: '/brawserHome',
