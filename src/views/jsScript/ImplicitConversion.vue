@@ -43,7 +43,7 @@ export default {
         ['a', 'aa', 'aab']
       ];
 
-      let newArr =  [];
+      let newArr = [];
 
       oriArr.forEach(oArr => {
         this.nextStr(oArr, newArr, 0)

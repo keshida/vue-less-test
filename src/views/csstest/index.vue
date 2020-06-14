@@ -85,7 +85,7 @@ export default {
         {name: 'textLabel'},
         {name: 'shadowBox'}
       ],
-      activeName: 'tiltingParallax'
+      activeName: 'shadowBox'
     }
   },
   created () {},
