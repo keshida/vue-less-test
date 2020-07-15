@@ -1283,6 +1283,22 @@
       { "date": "2020-07-08", "expRemark": "早餐", "type": "foodExp", "value": 7 },
       { "date": "2020-07-08", "expRemark": "午餐", "type": "foodExp", "value": 16 },
       { "date": "2020-07-08", "expRemark": "晚餐", "type": "foodExp", "value": 20 },
+      { "date": "2020-07-09", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2020-07-09", "expRemark": "早餐", "type": "foodExp", "value": 4 },
+      { "date": "2020-07-09", "expRemark": "午餐", "type": "foodExp", "value": 10 },
+      { "date": "2020-07-09", "expRemark": "烤鸭", "type": "foodExp", "value": 21 },
+      { "date": "2020-07-10", "expRemark": "晚餐", "type": "foodExp", "value": 31 },
+      { "date": "2020-07-11", "expRemark": "午餐", "type": "foodExp", "value": 15.88 },
+      { "date": "2020-07-12", "expRemark": "猪头肉", "type": "foodExp", "value": 22 },
+      { "date": "2020-07-13", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2020-07-13", "expRemark": "早餐", "type": "foodExp", "value": 5.5 },
+      { "date": "2020-07-13", "expRemark": "午餐", "type": "foodExp", "value": 16 },
+      { "date": "2020-07-14", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2020-07-14", "expRemark": "早餐", "type": "foodExp", "value": 5.5 },
+      { "date": "2020-07-14", "expRemark": "午餐", "type": "foodExp", "value": 16 },
+      { "date": "2020-07-14", "expRemark": " 耳机", "type": "foodExp", "value": 133.86 },
+      { "date": "2020-07-15", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2020-07-15", "expRemark": "早餐", "type": "foodExp", "value": 5.5 },
     ]
   }
 }
