@@ -47,7 +47,7 @@ export default new Router({
     },
     {
       path: '/videoAudioHome',
-      component: resolve => require(['@/views/videoAndAudio/videoAudioHome'], resolve)
+      component: resolve => require(['@/views/videoAndAudio'], resolve)
     }
   ]
 })
