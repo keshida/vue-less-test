@@ -1,8 +1,25 @@
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
-
+const os = require('os');
 const path = require('path')
+
+function getIPAdress() {
+  var interfaces = os.networkInterfaces();
+  var iface = {};
+  if (interfaces['WLAN']) {
+    iface = interfaces['WLAN'];
+  } else {
+    return 'localhost'
+  }
+  for (var i = 0; i < iface.length; i++) {
+    var alias = iface[i];
+    if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+      return alias.address;
+    }
+  }
+}
+const myHost = getIPAdress();
 
 module.exports = {
   dev: {
@@ -13,15 +30,14 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    host: '192.168.30.103', // can be overwritten by process.env.HOST
-    // host: 'localhost', // can be overwritten by process.env.HOST
+    host: myHost, // can be overwritten by process.env.HOST
     port: 8687, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    // Use Eslint Loader?
+    // Use Eslint Loader? 
     // If true, your code will be linted during bundling and
     // linting errors and warnings will be shown in the console.
     useEslint: true,
