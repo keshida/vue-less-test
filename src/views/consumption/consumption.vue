@@ -3,9 +3,9 @@
     <!-- <ul class="dataUl_C">
       <li v-for="(item,index) in mySpnedData" :key="index">{{ item.expRemark }}</li>
     </ul> -->
-    <ul class="dataUl_C">
+    <!-- <ul class="dataUl_C">
       <li v-for="(item,index) in moreTData" :key="index">{{ item.expRemark }}:{{ item.value }}</li>
-    </ul>
+    </ul> -->
     <!-- <ul class="dataUl_C">
       <li v-for="(item,index) in gameList" :key="index">{{ item.expRemark }} {{ item.value }}</li>
     </ul> -->
@@ -65,6 +65,13 @@ export default {
             this.moreTData.push(this.mySpnedData[i])
           }
         }
+        let list = this.mySpnedData.filter(v => v.date.indexOf('2020') !== -1)
+        let num2020 = 0;
+        
+        for (let i in list) {
+          num2020 += list[i].value * 100;
+        }
+        console.log(num2020 / 100)
         console.log(this.numTal/100)
       })
     },
