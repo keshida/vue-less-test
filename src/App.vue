@@ -13,6 +13,7 @@ export default {
 
 <style>
 @import './assets/css/base.css';
+@import './assets/css/media.css';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

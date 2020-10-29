@@ -7,6 +7,7 @@
     <ul class="hello_routerList_C">
       <router-link v-for="(content,key) in menus" :to="content.path" :key="key" tag="li">{{content.name}}</router-link>
     </ul>
+    <div style="font-size: 2rem;">张文旭</div>
   </div>
 </template>
 
@@ -38,9 +39,21 @@ export default {
     }
   },
   created () {
+    this.setHtmlFontSize();
   },
   mounted () {},
-  methods: {}
+  methods: {
+    setHtmlFontSize() {
+      window.addEventListener('resize', this.refreshRem);
+    },
+    refreshRem() {
+      const docEl = document.documentElement;
+      const width = docEl.getBoundingClientRect().width;
+      const rem = width / 100;
+
+      docEl.style.fontSize = rem + 'px';
+    }
+  }
 }
 </script>
 
