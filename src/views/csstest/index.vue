@@ -22,6 +22,8 @@
       <btnStyle v-if="activeName == 'btnStyle'"></btnStyle>
       <textLabel v-if="activeName == 'textLabel'"></textLabel>
       <shadowBox v-if="activeName == 'shadowBox'"></shadowBox>
+      <skeleton v-if="activeName == 'skeleton'"></skeleton>
+      
     </section>
   </div>
 </template>
@@ -43,6 +45,7 @@ import weather from '@/views/csstest/weather';
 import btnStyle from '@/views/csstest/btnStyle';
 import textLabel from '@/views/csstest/textLabel';
 import shadowBox from '@/views/csstest/shadowBox';
+import skeleton from '@/views/csstest/skeleton';
 
 export default {
   components: {
@@ -62,7 +65,8 @@ export default {
     weather,
     btnStyle,
     textLabel,
-    shadowBox
+    shadowBox,
+    skeleton
   },
   data () {
     return {
@@ -83,9 +87,10 @@ export default {
         {name: 'weather'},
         {name: 'btnStyle'},
         {name: 'textLabel'},
-        {name: 'shadowBox'}
+        {name: 'shadowBox'},
+        {name: 'skeleton'}
       ],
-      activeName: 'shadowBox'
+      activeName: 'skeleton'
     }
   },
   created () {},
