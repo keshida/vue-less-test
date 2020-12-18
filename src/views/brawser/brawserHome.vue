@@ -11,6 +11,7 @@
       <desktopIcon v-if="activeId == 'desktopIcon'"></desktopIcon>
       <Navigator v-if="activeId == 'Navigator'"></Navigator>
       <htmlStyleChange v-if="activeId == 'htmlStyleChange'"></htmlStyleChange>
+      <Fiction v-if="activeId == 'Fiction'"></Fiction>
     </section>
   </div>
 </template>
@@ -21,6 +22,7 @@ import fullScreen from '@/views/brawser/fullScreen';
 import desktopIcon from '@/views/brawser/desktopIcon';
 import Navigator from '@/views/brawser/Navigator';
 import htmlStyleChange from '@/views/brawser/htmlStyleChange';
+import Fiction from '@/views/brawser/Fiction';
 export default {
   components: {
     webStorage,
@@ -28,7 +30,8 @@ export default {
     fullScreen,
     desktopIcon,
     Navigator,
-    htmlStyleChange
+    htmlStyleChange,
+    Fiction
   },
   data () {
     return {
@@ -38,9 +41,10 @@ export default {
         {name: 'fullScreen', id: 'fullScreen'},
         {name: 'desktopIcon', id: 'desktopIcon'},
         {name: 'Navigator', id: 'Navigator'},
-        {name: 'htmlStyleChange', id: 'htmlStyleChange'}
+        {name: 'htmlStyleChange', id: 'htmlStyleChange'},
+        {name: 'Fiction', id: 'Fiction'}
       ],
-      activeId: 'webStorage'
+      activeId: 'Fiction'
     }
   },
   created () {},

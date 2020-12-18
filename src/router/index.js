@@ -15,7 +15,7 @@ export default new Router({
     },
     {
       path: '/layoutHome',
-      component: resolve => require(['@/views/layout/layoutHome'], resolve)
+      component: resolve => require(['@/views/layout/index.vue'], resolve)
     },
     {
       path: '/csstest',
