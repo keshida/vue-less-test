@@ -18,6 +18,7 @@
       
       {"lebel":"musicalInstrumentExp","value":13,"remark":"乐器"},
       {"lebel":"bookExp","value":13,"remark":"书"}
+      {"lebel":"good","value":14,"remark":"书"}
     ]
   },
   "meta" : {
