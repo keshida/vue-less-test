@@ -33,7 +33,7 @@ export default {
   created () {
     this.getMyInfor()
     // this.getType()
-    this.getElaticSearchData()
+    // this.getElaticSearchData()
   },
   mounted () {},
   methods: {

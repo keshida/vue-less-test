@@ -11,7 +11,7 @@ export default new Router({
     },
     {
       path: '/consumptionHome',
-      component: resolve => require(['@/views/consumption/consumptionHome'], resolve)
+      component: resolve => require(['@/views/consumption/index.vue'], resolve)
     },
     {
       path: '/layoutHome',
@@ -43,7 +43,7 @@ export default new Router({
     },
     {
       path: '/canvasTest',
-      component: resolve => require(['@/views/canvasTest/canvasTestHome'], resolve)
+      component: resolve => require(['@/views/canvasTest/index.vue'], resolve)
     },
     {
       path: '/videoAudioHome',
