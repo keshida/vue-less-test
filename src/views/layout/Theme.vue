@@ -5,11 +5,30 @@
       <div v-for="(item, index) in formList" :key="item.id" class="item" draggable='true' @dragstart='dragstarts(index)'>
         <template v-if="item.type === 'select'">
           <select name="请选择" class="z-select">
-            <option value ="volvo">请选择</option>
+            <option value='' disabled selected style='display:none;'>请选择</option> 
           </select>
         </template>
         <template v-else-if="item.type === 'text'">
           <input type="text" placeholder="请输入" class="z-input">
+        </template>
+        <template v-else-if="item.type === 'textarea'">
+          <textarea name="" id="" cols="30" rows="10" placeholder="请输入" class="z-textarea"></textarea>
+        </template>
+        <template v-else-if="item.type === 'radio'">
+          <div class="z-radio">
+            <div class="z-item" v-for="(a, ai) in item.options" :key="'option' + ai">
+              <div :class="['z-radio_box', {'z-radio_box-active': a.isSelect}]"></div>
+              <p>{{ a.label }}</p>
+            </div>
+          </div>
+        </template>
+        <template v-else-if="item.type === 'checkbox'">
+          <div class="z-checkbox">
+            <div class="z-item" v-for="(a, ai) in item.options" :key="'option' + ai">
+              <div :class="['z-radio_box', {'z-radio_box-active': a.isSelect}]"></div>
+              <p>{{ a.label }}</p>
+            </div>
+          </div>
         </template>
         <template v-else-if="item.type === 'button'">
           <button>按钮</button>
@@ -23,14 +42,34 @@
         <div class="item-m">
           <template v-if="item.type === 'select'">
             <select name="请选择" class="z-select">
-              <option value ="volvo">请选择</option>
+              <option value='' disabled selected style='display:none;'>{{ item.placeholder }}</option> 
+              <option v-for="(o, oi) in item.options" :key="index + '-' + oi" :value='o.value'>{{ o.label }}</option> 
             </select>
           </template>
           <template v-else-if="item.type === 'text'">
             <input type="text" :placeholder="item.placeholder" class="z-input">
           </template>
+          <template v-else-if="item.type === 'radio'">
+            <div class="z-radio">
+              <div class="z-item" v-for="(a, ai) in item.options" :key="'option' + ai" @click="selectRadio(index, ai)">
+                <div :class="['z-radio_box', {'z-radio_box-active': a.isSelect}]"></div>
+                <p>{{ a.label }}</p>
+              </div>
+            </div>
+          </template>
+          <template v-else-if="item.type === 'checkbox'">
+            <div class="z-checkbox">
+              <div class="z-item" v-for="(a, ai) in item.options" :key="'option' + ai" @click="selectCheckbox(index, ai)">
+                <div :class="['z-radio_box', {'z-radio_box-active': a.isSelect}]"></div>
+                <p>{{ a.label }}</p>
+              </div>
+            </div>
+          </template>
+          <template v-else-if="item.type === 'textarea'">
+            <textarea name="" id="" cols="30" rows="10" :placeholder="item.placeholder" class="z-textarea"></textarea>
+          </template>
           <template v-else-if="item.type === 'button'">
-            <button>按钮</button>
+            <button>{{ item.name }}</button>
           </template>
         </div>
         <div class="item-r">
@@ -40,15 +79,28 @@
       </div>
     </div>
     <div class="right">
-      <div v-if="modifyObj.type === 'text' || modifyObj.type === 'select'" class="item">
+      <div v-if="modifyObj.type === 'text' || modifyObj.type === 'select' || modifyObj.type === 'radio' || modifyObj.type === 'checkbox' || modifyObj.type === 'textarea'" class="item">
         <input type="text" v-model="modifyObj.title" placeholder="请输入" class="z-input">
       </div>
-      <div v-if="modifyObj.type === 'text'" class="item">
+      <div v-if="modifyObj.type === 'text' || modifyObj.type === 'select' || modifyObj.type === 'textarea'" class="item">
         <input type="text" v-model="modifyObj.placeholder" placeholder="请输入" class="z-input">
+      </div>
+      <div v-if="modifyObj.type === 'select' || modifyObj.type === 'radio' || modifyObj.type === 'checkbox'" class="item">
+        <div v-for="(item, index) in modifyObj.options" :key="'option' + index">
+          <div>
+            <input type="text" v-model="item.value">
+            <input type="text" v-model="item.label">
+          </div>
+          <button @click="deleteOption(index)">删除</button>
+        </div>
+        <button @click="addOption">添加</button>
+      </div>
+      <div v-if="modifyObj.type === 'button'" class="item">
+        <input type="text" v-model="modifyObj.name" placeholder="请输入" class="z-input">
       </div>
       <div class="item">
         <button @click="confirm">确定</button>
-        <button @click="reset">清空</button>
+        <!-- <button @click="reset">清空</button> -->
       </div>
     </div>
   </div>
@@ -59,9 +111,12 @@ export default {
   data () {
     return {
       formList: [
-        {id: 1, type: 'select', placeholder: '请选择', title: ''},
-        {id: 2, type: 'text', placeholder: '请输入', title: ''},
-        {id: 3, type: 'button', name: '按钮'}
+        {id: 1, type: 'select', placeholder: '请选择', title: '选择框', options: []},
+        {id: 2, type: 'text', placeholder: '请输入', title: '输入框'},
+        {id: 3, type: 'radio', title: '单选', options: [{value: 0, label: '是', isSelect: true}, {value: 1, label: '否', isSelect: false}]},
+        {id: 4, type: 'checkbox', title: '多选', options: [{value: 0, label: '选择1', isSelect: true}, {value: 1, label: '选择2', isSelect: false}]},
+        {id: 5, type: 'textarea', placeholder: '请输入', title: '输入框'},
+        {id: 6, type: 'button', name: '按钮'}
       ],
       dragIndex: 0,
       dropList: [],
@@ -76,12 +131,10 @@ export default {
       console.log(e)
     },
     dragstarts(e) {
-      console.log(e)
       this.dragIndex = e;
     },
     drops(e) {
       this.dropList.push(JSON.parse(JSON.stringify(this.formList[this.dragIndex])))
-      console.log(e)
     },
     allowDrop() {
       event.preventDefault();
@@ -100,7 +153,31 @@ export default {
     },
     reset() {
       
-    }
+    },
+    addOption() {
+      this.modifyObj.options.push({
+        value: '',
+        label: '',
+        isSelect: false
+      })
+    },
+    deleteOption(index) {
+      this.modifyObj.options.splice(index, 1)
+    },
+    selectRadio(index, ai) {
+      for (let i = 0, max = this.dropList[index].options.length; i < max; i++) {
+        if (this.dropList[index].options[i].isSelect) {
+          this.dropList[index].options[i].isSelect = false
+          break
+        }
+      }
+      this.dropList[index].options[ai].isSelect = true
+      this.$forceUpdate()
+    },
+    selectCheckbox(index, ai) {
+      this.dropList[index].options[ai].isSelect = !this.dropList[index].options[ai].isSelect
+      this.$forceUpdate()
+    },
   }
 }
 </script>
@@ -146,7 +223,7 @@ export default {
       display: flex;
       justify-content: space-between;
       .item-l {
-        width: 50px;
+        width: 100px;
       }
       .item-m {
         width: 300px;
@@ -171,7 +248,7 @@ export default {
     height: inherit;
     .item {
       width: 200px;
-      height: 30px;
+      min-height: 30px;
       margin-bottom: 10px;
       line-height: 30px;
       position: relative;
