@@ -55,7 +55,10 @@ export default {
         let resData = res.data;
 
         this.mySpnedData = resData.data.mySpnedData;
-        for (let i in this.mySpnedData) {
+        for (let i = 0, max = this.mySpnedData.length; i < max; i++) {
+          if (this.mySpnedData[i].value > 10000) {
+            console.log(this.mySpnedData[i].value)
+          }
           this.numTal += this.mySpnedData[i].value * 100;
           if (this.mySpnedData[i].type === 'gameExp') {
             this.gameTal += this.mySpnedData[i].value * 100;

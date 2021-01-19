@@ -17,8 +17,9 @@
       {"lebel":"hospitalizationExp","value":12,"remark":"住院"},
       
       {"lebel":"musicalInstrumentExp","value":13,"remark":"乐器"},
-      {"lebel":"bookExp","value":13,"remark":"书"}
-      {"lebel":"good","value":14,"remark":"书"}
+      {"lebel":"bookExp","value":13,"remark":"书"},
+      {"lebel":"good","value":14,"remark":"书"},
+      {"lebel":"study","value":14,"remark":"学习"}
     ]
   },
   "meta" : {
