@@ -23,7 +23,7 @@ export default new Router({
     },
     {
       path: '/brawserHome',
-      component: resolve => require(['@/views/brawser/brawserHome'], resolve)
+      component: resolve => require(['@/views/brawser/index.vue'], resolve)
     },
     {
       path: '/textSpecialEffectHome',

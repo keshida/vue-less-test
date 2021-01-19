@@ -134,6 +134,7 @@ export default {
       this.dragIndex = e;
     },
     drops(e) {
+      console.log(e)
       this.dropList.push(JSON.parse(JSON.stringify(this.formList[this.dragIndex])))
     },
     allowDrop() {
@@ -177,7 +178,7 @@ export default {
     selectCheckbox(index, ai) {
       this.dropList[index].options[ai].isSelect = !this.dropList[index].options[ai].isSelect
       this.$forceUpdate()
-    },
+    }
   }
 }
 </script>

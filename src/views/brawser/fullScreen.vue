@@ -15,12 +15,18 @@ export default {
     return {}
   },
   created () {
-    
+    this.init();
   },
   mounted () {
   },
   methods: {
-    
+    init() {
+      if (document.fullscreenEnabled) {
+        console.log('true')
+      } else {
+        console.log('false')
+      }
+    },
     fullscreen (e) {
       if (e === 'win') {
         document.body.requestFullscreen();

@@ -1940,6 +1940,7 @@
       { "date": "2021-01-19", "expRemark": "公交", "type": "trafficExp", "value": 2 },
       { "date": "2021-01-19", "expRemark": "买菜", "type": "foodExp", "value": 31.7 },
       { "date": "2021-01-19", "expRemark": "俯卧撑板", "type": "dailyNecesExp", "value": 17.54 },
+      { "date": "2021-01-19", "expRemark": "开心果", "type": "foodExp", "value": 23.63 },
     ]
   }
 }
