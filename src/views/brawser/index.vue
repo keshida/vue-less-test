@@ -13,6 +13,7 @@
       <htmlStyleChange v-if="activeId == 'htmlStyleChange'"></htmlStyleChange>
       <Fiction v-if="activeId == 'Fiction'"></Fiction>
       <Clipboard v-if="activeId == 'Clipboard'"></Clipboard>
+      <Resize v-if="activeId == 'Resize'"></Resize>
     </section>
   </div>
 </template>
@@ -25,6 +26,7 @@ import Navigator from '@/views/brawser/Navigator';
 import htmlStyleChange from '@/views/brawser/htmlStyleChange';
 import Fiction from '@/views/brawser/Fiction';
 import Clipboard from '@/views/brawser/Clipboard';
+import Resize from '@/views/brawser/Resize';
 export default {
   components: {
     webStorage,
@@ -34,7 +36,8 @@ export default {
     Navigator,
     htmlStyleChange,
     Fiction,
-    Clipboard
+    Clipboard,
+    Resize 
   },
   data () {
     return {
@@ -46,9 +49,10 @@ export default {
         {name: 'Navigator', id: 'Navigator'},
         {name: 'htmlStyleChange', id: 'htmlStyleChange'},
         {name: 'Fiction', id: 'Fiction'},
-        {name: 'Clipboard', id: 'Clipboard'}
+        {name: 'Clipboard', id: 'Clipboard'},
+        {name: 'Clipboard', id: 'Resize'}
       ],
-      activeId: 'Clipboard'
+      activeId: 'Resize'
     }
   },
   created () {},
