@@ -17,6 +17,7 @@
       <Capture v-if="activeId == 'Capture'"></Capture>
       <BroadcastChannel v-if="activeId == 'BroadcastChannel'"></BroadcastChannel>
       <Performance v-if="activeId == 'Performance'"></Performance>
+      <Battery v-if="activeId == 'Battery'"></Battery>
     </section>
   </div>
 </template>
@@ -33,6 +34,7 @@ import Resize from '@/views/brawser/Resize';
 import Capture from '@/views/brawser/Capture';
 import BroadcastChannel from '@/views/brawser/BroadcastChannel';
 import Performance from '@/views/brawser/Performance';
+import Battery from '@/views/brawser/Battery';
 export default {
   components: {
     webStorage,
@@ -46,7 +48,8 @@ export default {
     Resize,
     Capture,
     BroadcastChannel,
-    Performance
+    Performance,
+    Battery
   },
   data () {
     return {
@@ -62,9 +65,10 @@ export default {
         {name: 'Resize', id: 'Resize'},
         {name: 'Capture', id: 'Capture'},
         {name: 'BroadcastChannel', id: 'BroadcastChannel'},
-        {name: 'Performance', id: 'Performance'}
+        {name: 'Performance', id: 'Performance'},
+        {name: 'Battery', id: 'Battery'}
       ],
-      activeId: 'Performance'
+      activeId: 'Battery'
     }
   },
   created () {},
