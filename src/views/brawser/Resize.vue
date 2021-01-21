@@ -18,23 +18,31 @@ export default {
     }
   },
   created () {
-    this.init();
   },
   mounted () {
+    this.init();
   },
   methods: {
     init() {
+      const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+          if (entry.contentBoxSize) {
+            entry.target.style.borderRadius = entry.contentBoxSize[0].inlineSize/10 + 'px'
+          }
+        }
+      });
+
+      resizeObserver.observe(document.getElementById('btnId'));
     },
     inputChange(e) {
       this.resize(e)
     },
-    resize(e) {
-      console.log(e)
-      console.log(this.rangeValue)
+    resize(event) {
       const value = event.target.valueAsNumber;
 
       // setRangeValue(value);
       let dumbBtn = document.getElementById('btnId');
+
       dumbBtn.style.width = `${value}px`;
     }
   }

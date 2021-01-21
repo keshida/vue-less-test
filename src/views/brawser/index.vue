@@ -14,6 +14,9 @@
       <Fiction v-if="activeId == 'Fiction'"></Fiction>
       <Clipboard v-if="activeId == 'Clipboard'"></Clipboard>
       <Resize v-if="activeId == 'Resize'"></Resize>
+      <Capture v-if="activeId == 'Capture'"></Capture>
+      <BroadcastChannel v-if="activeId == 'BroadcastChannel'"></BroadcastChannel>
+      <Performance v-if="activeId == 'Performance'"></Performance>
     </section>
   </div>
 </template>
@@ -27,6 +30,9 @@ import htmlStyleChange from '@/views/brawser/htmlStyleChange';
 import Fiction from '@/views/brawser/Fiction';
 import Clipboard from '@/views/brawser/Clipboard';
 import Resize from '@/views/brawser/Resize';
+import Capture from '@/views/brawser/Capture';
+import BroadcastChannel from '@/views/brawser/BroadcastChannel';
+import Performance from '@/views/brawser/Performance';
 export default {
   components: {
     webStorage,
@@ -37,7 +43,10 @@ export default {
     htmlStyleChange,
     Fiction,
     Clipboard,
-    Resize 
+    Resize,
+    Capture,
+    BroadcastChannel,
+    Performance
   },
   data () {
     return {
@@ -50,9 +59,12 @@ export default {
         {name: 'htmlStyleChange', id: 'htmlStyleChange'},
         {name: 'Fiction', id: 'Fiction'},
         {name: 'Clipboard', id: 'Clipboard'},
-        {name: 'Clipboard', id: 'Resize'}
+        {name: 'Resize', id: 'Resize'},
+        {name: 'Capture', id: 'Capture'},
+        {name: 'BroadcastChannel', id: 'BroadcastChannel'},
+        {name: 'Performance', id: 'Performance'}
       ],
-      activeId: 'Resize'
+      activeId: 'Performance'
     }
   },
   created () {},

@@ -1,13 +1,15 @@
 <template>
   <div class="Clipboard_C pagePosition">
-    <div>{{ copyText }}</div>
-    <div>{{ clipboardText }}</div>
+    <input type="text" v-model="copyText">
+    <input type="text" v-model="clipboardText">
+    <button @click="performCopy">performCopy</button>
+    <button @click="performPaste">performPaste</button>
   </div>
 </template>
 <script>
 export default {
   /**
-   * clipboard功能旨在https上起作用
+   * clipboard功能在https上起作用
    */
   data () {
     return {
