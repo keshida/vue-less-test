@@ -35,7 +35,7 @@ export default new Router({
     },
     {
       path: '/jsScriptHome',
-      component: resolve => require(['@/views/jsScript/jsScriptHome'], resolve)
+      component: resolve => require(['@/views/jsScript/index.vue'], resolve)
     },
     {
       path: '/weaponHome',
