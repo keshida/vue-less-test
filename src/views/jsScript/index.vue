@@ -1,6 +1,7 @@
 <template>
   <div class="textSpecialEffectHome_C">
     <aside>
+      
       <div class="muneList_C" v-for="(item,index) in muneList" :key="index" v-on:click="viewTheCom(index)" v-bind:class="{active_C:indexed == index}">{{ item.name }}</div>
       <button class="muneBnt_C" v-on:click="goBack">返回</button>
     </aside>
