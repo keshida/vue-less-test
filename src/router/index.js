@@ -26,10 +26,6 @@ export default new Router({
       component: resolve => require(['@/views/brawser/index.vue'], resolve)
     },
     {
-      path: '/textSpecialEffectHome',
-      component: resolve => require(['@/views/textSpecialEffects/textSpecialEffectHome'], resolve)
-    },
-    {
       path: '/svgHome',
       component: resolve => require(['@/views/svgHome/svgHome'], resolve)
     },
