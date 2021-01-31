@@ -1947,6 +1947,10 @@
       { "date": "2021-01-21", "expRemark": "公交", "type": "trafficExp", "value": 2 },
       { "date": "2021-01-22", "expRemark": "公交", "type": "trafficExp", "value": 2 },
       { "date": "2021-01-22", "expRemark": "早餐", "type": "foodExp", "value": 4.5 },
+      { "date": "2021-01-24", "expRemark": "午餐", "type": "foodExp", "value": 18 },
+      { "date": "2021-01-24", "expRemark": "买菜", "type": "foodExp", "value": 97.3 },
+      { "date": "2021-01-25", "expRemark": "公交", "type": "trafficExp", "value": 2 },
+      { "date": "2021-01-26", "expRemark": "公交", "type": "trafficExp", "value": 2 },
     ]
   }
 }

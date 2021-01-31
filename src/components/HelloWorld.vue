@@ -29,7 +29,6 @@ export default {
         {name: 'csstest', path: '/csstest'},
         {name: '个人账单', path: '/consumptionHome'},
         {name: '浏览器监听测试', path: '/brawserHome'},
-        {name: '文字特效', path: '/textSpecialEffectHome'},
         {name: 'svg', path: '/svgHome'},
         {name: '相关js库', path: '/jsScriptHome'},
         {name: '武器', path: '/weaponHome'},
