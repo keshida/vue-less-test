@@ -15,6 +15,8 @@ export default {
   },
   methods: {
     init() {
+      const num1 = -25 >>> 3;
+      console.log(num1)
       console.log(obtainDate());
     }
   }
