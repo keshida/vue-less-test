@@ -44,6 +44,10 @@ export default new Router({
     {
       path: '/videoAudioHome',
       component: resolve => require(['@/views/videoAndAudio'], resolve)
+    },
+    {
+      path: '/game',
+      component: resolve => require(['@/views/game/index.vue'], resolve)
     }
   ]
 })

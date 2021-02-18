@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { obtainDate } from '@/utils/date.js';
+// import { obtainDate } from '@/utils/date.js';
 export default {
   data() {
     return {
@@ -15,9 +15,9 @@ export default {
   },
   methods: {
     init() {
-      const num1 = -25 >>> 3;
-      console.log(num1)
-      console.log(obtainDate());
+      // const num1 = -25 >>> 3;
+      // console.log(num1)
+      // console.log(obtainDate());
     }
   }
 };

@@ -33,7 +33,8 @@ export default {
         {name: '相关js库', path: '/jsScriptHome'},
         {name: '武器', path: '/weaponHome'},
         {name: 'canvas', path: '/canvasTest'},
-        {name: '视频音频', path: '/videoAudioHome'}
+        {name: '视频音频', path: '/videoAudioHome'},
+        {name: '游戏', path: '/game'}
       ]
     }
   },
